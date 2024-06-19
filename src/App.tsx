@@ -1,7 +1,9 @@
+import Todos from "./components/Todos";
+
 function App() {
   return (
     <>
-      <div>Todos</div>
+      <Todos items={[]} />
     </>
   );
 }
