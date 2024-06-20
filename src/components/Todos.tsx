@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Todo from "../data/todo.ts";
+import Todo from "../dataModel/todo.ts";
 import TodoItem from "./TodoItem.tsx";
 
 const Todos: FC<{ items: Todo[] }> = (props) => {

@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import NewTodo from "./components/NewTodo.tsx";
 import Todos from "./components/Todos";
-import Todo from "./data/todo.ts";
+import Todo from "./dataModel/todo.ts";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
