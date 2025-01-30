@@ -7,9 +7,12 @@
 .newTodoContainer {
   margin: 2rem auto;
   width: 40rem;
+  padding: 2rem;
+  border: 2px solid #201d0f;
+  border-radius: 2rem;
+  background-color: rgba(115, 239, 7, 0.187);
 }
 .createtodo {
-  width: 40rem;
   font-size: 80px;
   font-weight: 900;
 }
@@ -30,7 +33,7 @@
   font-size: 1.5rem;
   padding: 0.5rem;
   border-radius: 4px;
-  background-color: #f7f5ef;
+  background-color: #ffffff;
   border: none;
   border-bottom: 2px solid #494844;
   border-bottom-right-radius: 0;
@@ -42,8 +45,11 @@
 }
 .moreinfo {
   height: 20vh;
-  width: 18rem;
+  width: 12rem;
+  font: inherit;
+  padding: 1rem;
   margin-right: 2rem;
+  border-radius: 1rem;
 }
 .prioritylabel {
   margin-top: 0.5rem;
@@ -63,17 +69,20 @@
   padding: 0.5rem 1.5rem;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .form button:hover,
 .form button:active {
   background-color: #dfb600bd;
   border-color: #ebc002;
+  cursor: pointer;
 }
 
-@media only screen and (max-width: 415px) {
+@media only screen and (max-width: 712px) {
   .newTodoContainer {
     margin-left: 1rem;
+    margin-right: 1rem;
     margin-top: 2rem;
     width: auto;
   }
@@ -84,6 +93,7 @@
   }
   .formarea {
     display: flex;
+    flex-grow: 1;
     flex-wrap: wrap;
   }
   .newInput {
