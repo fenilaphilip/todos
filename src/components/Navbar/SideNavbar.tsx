@@ -1,12 +1,19 @@
 import classes from "../../styles/Navbar.module.css";
 
+import { NavLink } from "react-router-dom";
+
 const SideNavbar: React.FC = () => {
   return (
     <>
-      <div className={classes.options}>Create new Task</div>
-      <div className={classes.options}>View All Tasks</div>
-      <div className={classes.options}>Task scheduled today</div>
-      <div className={classes.options}>Info</div>
+      <div className={classes.options}>
+        <NavLink to="/create">Create new Task</NavLink>
+      </div>
+      <div className={classes.options}>
+        <NavLink to="/todos">View All Tasks</NavLink>
+      </div>
+      <div className={classes.options}>
+        <NavLink to="/">Task scheduled today</NavLink>
+      </div>
     </>
   );
 };
