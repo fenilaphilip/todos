@@ -4,15 +4,22 @@ import NewTodo from "./components/Create/NewTodo.tsx";
 // import Todos from "./components/Todos";
 import ThemeContextProvider from "./store/themeContext.tsx";
 import TodosContextProvider from "./store/todos-context.tsx";
+import "./index.css";
 
 function App() {
   return (
     <ThemeContextProvider>
       <TodosContextProvider>
         <TopNavbar />
-        <SideNavbar />
-        <NewTodo />
-        {/* <Todos /> */}
+        <div className="display">
+          <div className="sidebar">
+            <SideNavbar />
+          </div>
+          <div className="dashboard">
+            <NewTodo />
+            {/* <Todos /> */}
+          </div>
+        </div>
       </TodosContextProvider>
     </ThemeContextProvider>
   );

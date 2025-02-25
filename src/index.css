@@ -1,1 +1,14 @@
+.display {
+  display: grid;
+}
 
+.sidebar {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  background: #000;
+  color: white;
+}
+.dashboard {
+  grid-column-start: 2;
+  grid-column-end: 12;
+}

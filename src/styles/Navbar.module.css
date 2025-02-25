@@ -15,6 +15,20 @@
 .searchInput {
   display: block;
   margin: 5px;
+  margin-left: 20px;
   padding: 10px;
   height: 30px;
+}
+
+.options {
+  border: 1px solid aliceblue;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+  font-size: medium;
+}
+
+.options:hover {
+  color: green;
+  cursor: pointer;
 }

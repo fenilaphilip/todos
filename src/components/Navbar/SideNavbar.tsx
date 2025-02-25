@@ -1,10 +1,12 @@
+import classes from "../../styles/Navbar.module.css";
+
 const SideNavbar: React.FC = () => {
   return (
     <>
-      <div>Create new Task</div>
-      <div>View All Tasks</div>
-      <div>Task scheduled today</div>
-      <div>Info</div>
+      <div className={classes.options}>Create new Task</div>
+      <div className={classes.options}>View All Tasks</div>
+      <div className={classes.options}>Task scheduled today</div>
+      <div className={classes.options}>Info</div>
     </>
   );
 };
