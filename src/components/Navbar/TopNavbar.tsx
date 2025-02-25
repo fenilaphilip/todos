@@ -1,10 +1,12 @@
+import classes from "../../styles/Navbar.module.css";
+
 const TopNavbar: React.FC = () => {
   return (
-    <div className="flex flex-row m-3">
-      <h1 className="p-2 text-5xl">Todos</h1>
+    <div className={classes.topnav}>
+      <div className={classes.appname}>Todos</div>
       <input
         type="search"
-        className="block border border-gray-300 rounded-lg"
+        className={classes.searchInput}
         placeholder="Search task....."
       />
     </div>
