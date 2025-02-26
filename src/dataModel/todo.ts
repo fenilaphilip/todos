@@ -1,10 +1,17 @@
-class Todo{
-id: string;
-text: string;
-constructor(todotext: string){
-    this.id = new Date().toISOString();
-    this.text = todotext;
+
+enum Priority {
+    Low,
+    Medium,
+    High
 }
+
+interface Todo {
+    id: string;
+    caption: string;
+    description: string;
+    priority: Priority;
+    dueDate: Date;
+    completed: boolean;
 }
 
 export default Todo;

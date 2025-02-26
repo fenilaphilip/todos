@@ -18,8 +18,22 @@ function App() {
           </div>
           <div className="dashboard">
             <Routes>
-              <Route path="/" element={<NewTodo />} />
-              <Route path="/create" element={<NewTodo />} />
+              <Route
+                path="/"
+                element={
+                  <>
+                    <NewTodo /> <Todos />
+                  </>
+                }
+              />
+              <Route
+                path="/create"
+                element={
+                  <>
+                    <NewTodo /> <Todos />
+                  </>
+                }
+              />
               <Route path="/todos" element={<Todos />} />
             </Routes>
           </div>
