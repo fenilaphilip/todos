@@ -9,12 +9,8 @@
   width: 40rem;
   padding: 2rem;
   border: 2px solid #201d0f;
-  border-radius: 2rem;
-  background-color: rgba(115, 239, 7, 0.187);
-}
-.createtodo {
-  font-size: 80px;
-  font-weight: 900;
+  border-radius: 1rem;
+  background-color: rgb(247, 245, 239);
 }
 .formarea {
   display: flex;

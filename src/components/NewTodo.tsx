@@ -1,6 +1,7 @@
 import React, { useRef, useContext } from "react";
 import { TodosContext } from "../store/todos-context.tsx";
 import classes from "../styles/NewTodo.module.css";
+import { Priority } from "../dataModel/todo.ts";
 
 const NewTodo: React.FC = () => {
   const todoTextInputRef = useRef<HTMLInputElement>(null);
@@ -15,12 +16,17 @@ const NewTodo: React.FC = () => {
       return;
     }
 
-    todoCtx.addTodo(enteredText);
+    todoCtx.addTodo({
+      id: new Date().toISOString(),
+      caption: enteredText,
+      description: "",
+      priority: Priority.Medium,
+      completed: false,
+    });
   };
 
   return (
     <div className={classes.newTodoContainer}>
-      <div className={classes.createtodo}>Create To do</div>
       <form onSubmit={submitHandler} className={classes.form}>
         <label>Task name:</label>
         <input

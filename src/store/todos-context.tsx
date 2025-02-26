@@ -3,7 +3,7 @@ import Todo from "../dataModel/todo.ts";
 
 type TodosContextObject = {
   items: Todo[];
-  addTodo: (text: string) => void;
+  addTodo: (todo: Todo) => void;
   removeTodo: (id: string) => void;
 };
 
@@ -16,8 +16,7 @@ export const TodosContext = React.createContext<TodosContextObject>({
 const TodosContextProvider: React.FC<{ children: any }> = (props) => {
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  const addTodoHandler = (todoText: string) => {
-    const newTodo = new Todo(todoText);
+  const addTodoHandler = (newTodo: Todo) => {
     setTodos((prevTodos) => {
       return prevTodos.concat(newTodo);
     });
