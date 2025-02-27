@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
-import Todo from '../dataModel/todo';
+import Todo, { Priority } from '../dataModel/todo';
 
 const initialState: Todo[] = [{
     id: "1",
     caption: "Sample task",
     description: "",
     completed: false,
+    priority: Priority.Medium
 }];
 
 export const todoSlice = createSlice({

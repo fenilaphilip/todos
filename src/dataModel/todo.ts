@@ -9,7 +9,7 @@ interface Todo {
     id: string;
     caption: string;
     description: string;
-    priority?: Priority;
+    priority: Priority;
     dueDate?: Date;
     completed: boolean;
 }
