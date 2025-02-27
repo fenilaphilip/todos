@@ -1,8 +1,8 @@
-import { FC } from "react";
+import React from "react";
 import Todo from "../dataModel/todo";
 import classes from "../styles/TodoItem.module.css";
 
-const TodoItem: FC<{ todo: Todo; onRemoveTodo: () => void }> = ({
+const TodoItem: React.FC<{ todo: Todo; onRemoveTodo: () => void }> = ({
   todo,
   onRemoveTodo,
 }) => {

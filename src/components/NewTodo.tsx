@@ -1,12 +1,9 @@
-import React, { useRef, useContext } from "react";
-import { TodosContext } from "../store/todos-context.tsx";
+import React, { useRef } from "react";
 import classes from "../styles/NewTodo.module.css";
-import { Priority } from "../dataModel/todo.ts";
 
 const NewTodo: React.FC = () => {
   const todoTextInputRef = useRef<HTMLInputElement>(null);
 
-  const todoCtx = useContext(TodosContext);
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -15,14 +12,6 @@ const NewTodo: React.FC = () => {
       //throw an error
       return;
     }
-
-    todoCtx.addTodo({
-      id: new Date().toISOString(),
-      caption: enteredText,
-      description: "",
-      priority: Priority.Medium,
-      completed: false,
-    });
   };
 
   return (
