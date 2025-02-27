@@ -1,8 +1,11 @@
 import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
 import classes from "../styles/NewTodo.module.css";
+import { addTodo } from "../store/todoSlice";
 
 const NewTodo: React.FC = () => {
   const todoTextInputRef = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
@@ -12,6 +15,13 @@ const NewTodo: React.FC = () => {
       //throw an error
       return;
     }
+    const newtodo = {
+      id: new Date().toLocaleDateString(),
+      caption: enteredText,
+      description: "",
+      completed: false,
+    };
+    dispatch(addTodo(newtodo));
   };
 
   return (
