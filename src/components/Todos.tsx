@@ -9,7 +9,11 @@ const Todos: React.FC = () => {
   return (
     <ul className={classes.todos}>
       {todolist.map((todo) => {
-        return <TodoItem key={todo.id} todo={todo} />;
+        return (
+          <li>
+            <TodoItem key={todo.id} todo={todo} />
+          </li>
+        );
       })}
     </ul>
   );

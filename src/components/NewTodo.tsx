@@ -8,11 +8,10 @@ const initialTask: Todo = {
   id: new Date().toLocaleDateString(),
   caption: "",
   description: "",
-  dueDate: new Date(""),
+  dueDate: new Date(),
   completed: false,
   priority: Priority.Medium,
 };
-
 const NewTodo: React.FC = () => {
   const [task, setTask] = useState(initialTask);
   const priorityRef = useRef<HTMLInputElement>(null);

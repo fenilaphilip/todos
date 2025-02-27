@@ -6,3 +6,28 @@
   border: 2px solid #201d0f;
   border-radius: 1rem;
 }
+
+.dotForLow {
+  height: 20px;
+  width: 20px;
+  background-color: #0830e5;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dotForMedium {
+  padding: 2px;
+  height: 20px;
+  width: 20px;
+  background-color: #08e522;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dotForHigh {
+  height: 20px;
+  width: 20px;
+  background-color: #e5081a;
+  border-radius: 50%;
+  display: inline-block;
+}

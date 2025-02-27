@@ -2,10 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
 import Todo, { Priority } from '../dataModel/todo';
 
-const initialState: Todo[] = [{
-    id: "1",
+export const initialState: Todo[] = [{
+    id: new Date().toLocaleDateString(),
     caption: "Sample task",
-    description: "",
+    description: "happy coding",
+    dueDate: new Date('2025-03-06T00:00:00.000Z'),
     completed: false,
     priority: Priority.Medium
 }];
