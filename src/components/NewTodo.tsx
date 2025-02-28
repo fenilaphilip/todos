@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import classes from "../styles/NewTodo.module.css";
 import { addTodo } from "../store/todoSlice";
 import { Priority } from "../dataModel/todo";
+import uniqid from "uniqid";
 
 const NewTodo: React.FC = () => {
   const [priority, setPriority] = useState(Priority.Medium);
@@ -27,7 +28,7 @@ const NewTodo: React.FC = () => {
       return;
     }
     const newTask = {
-      id: new Date().toLocaleDateString(),
+      id: uniqid(),
       description: description,
       dueDate: dueDate,
       completed: false,

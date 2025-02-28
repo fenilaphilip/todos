@@ -9,9 +9,6 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
   const dispatch = useDispatch();
 
   let dotClass = classes.dotForLow;
-
-  console.log(`todo  ${JSON.stringify(todo)}`);
-
   if (todo.priority == Priority.Medium) {
     dotClass = classes.dotForMedium;
   } else if (todo.priority == Priority.High) {
@@ -26,7 +23,14 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
         <span>{todo.dueDate && todo.dueDate.toLocaleDateString()}</span>
       </p>
       <p>{todo.description}</p>
-      <button onClick={() => dispatch(deleteTodo(todo.id))}>Delete</button>
+      <button
+        onClick={() => {
+          console.log(todo.id);
+          dispatch(deleteTodo(todo.id));
+        }}
+      >
+        Delete
+      </button>
     </li>
   );
 };

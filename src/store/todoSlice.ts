@@ -14,7 +14,7 @@ export const todoSlice = createSlice({
         },
         deleteTodo: (state, action) => {
             console.debug(`delete got clicked`)
-            console.log(state, action.payload.id);
+            console.log(state, action.payload);
         }
     },
 
