@@ -1,6 +1,6 @@
 # Todos
 
-Todos application built using React, Redux Toolkit, and React Router. This powerful combination of technologies offers a seamless and intuitive user experience, allowing you to efficiently manage your tasks.
+Todos application built using React, Redux Toolkit [RTK], and React Router. This powerful combination of technologies offers a seamless and intuitive user experience, allowing you to efficiently manage your tasks.
 
 ## Features
 
@@ -13,12 +13,13 @@ Todos application built using React, Redux Toolkit, and React Router. This power
 
 ![Typescript](https://img.shields.io/badge/-Typescript-blue?logo=Typescript&logoColor=white&style=flat)
 ![React](https://img.shields.io/badge/-ReactJS-black?logo=react&logoColor=white&style=flat)
-![React Router](https://img.shields.io/badge/-React%20Router-black?logo=reactRouter&logoColor=blue&style=flat)
-![Redux](https://img.shields.io/badge/-Redux-white?logo=Redux&logoColor=violet&style=flat)
-![Redux Toolkit](https://img.shields.io/badge/-RTK-violet?logo=Redux&logoColor=white&style=flat)
+![React Router](https://img.shields.io/badge/-React%20Router-white?logo=reactRouter&logoColor=blue&style=flat)
+![Redux](https://img.shields.io/badge/-Redux-gold?logo=Redux&logoColor=black&style=flat)
+![Redux Toolkit](https://img.shields.io/badge/-Redux%20Toolkit-violet?logo=Redux&logoColor=white&style=flat)
 ![CSS3](https://img.shields.io/badge/-CSS3-blueviolet?logo=CSS3&logoColor=white&style=flat)
 ![HTML5](https://img.shields.io/badge/-HTML5-DC143C?logo=HTML5&logoColor=white&style=flat)
 ![Cypress](https://img.shields.io/badge/-Cypress-98FB98?logo=Cypress&logoColor=black&style=flat)
+![Material UI](https://img.shields.io/badge/-MUI-black?logo=MUI&logoColor=blue&style=flat)
 
 ## Getting started
 
