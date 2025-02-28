@@ -23,14 +23,7 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
         <span>{todo.dueDate && todo.dueDate.toLocaleDateString()}</span>
       </p>
       <p>{todo.description}</p>
-      <button
-        onClick={() => {
-          console.log(todo.id);
-          dispatch(deleteTodo(todo.id));
-        }}
-      >
-        Delete
-      </button>
+      <button onClick={() => dispatch(deleteTodo(todo.id))}>Delete</button>
     </li>
   );
 };

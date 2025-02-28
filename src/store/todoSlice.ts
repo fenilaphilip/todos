@@ -9,12 +9,11 @@ export const todoSlice = createSlice({
     initialState,
     reducers: {
         addTodo: (state, action: PayloadAction<Todo>) => {
-            console.log(`Adding todo ${JSON.stringify(action.payload)}`)
-            state.push(action.payload)
+            state.unshift(action.payload);
         },
         deleteTodo: (state, action) => {
-            console.debug(`delete got clicked`)
-            console.log(state, action.payload);
+            const remainingTodo = state.filter((todo) => (todo.id !== action.payload));
+            return remainingTodo;
         }
     },
 
