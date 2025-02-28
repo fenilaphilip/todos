@@ -1,7 +1,7 @@
 import SideNavbar from "./components/Navbar/SideNavbar.tsx";
 import TopNavbar from "./components/Navbar/TopNavbar.tsx";
-import NewTodo from "./components/NewTodo.tsx";
-import Todos from "./components/Todos";
+import NewTodo from "./components/CreateNewTodo/NewTodo.tsx";
+import Todos from "./components/ViewAllTasks/Todos.tsx";
 import { Routes, Route } from "react-router-dom";
 import "./index.css";
 
@@ -15,14 +15,7 @@ function App() {
         </div>
         <div className="dashboard">
           <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <NewTodo /> <Todos />
-                </>
-              }
-            />
+            <Route path="/" element={<Todos />} />
             <Route
               path="/create"
               element={

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import classes from "../styles/NewTodo.module.css";
-import { addTodo } from "../store/todoSlice";
-import { Priority } from "../dataModel/todo";
+import classes from "../../styles/NewTodo.module.css";
+import { addTodo } from "../../store/todoSlice";
+import { Priority } from "../../dataModel/todo";
 import uniqid from "uniqid";
 
 const NewTodo: React.FC = () => {
