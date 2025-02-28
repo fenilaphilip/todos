@@ -1,27 +1,33 @@
 import React from "react";
 import Todo from "../dataModel/todo";
 import classes from "../styles/TodoItem.module.css";
+import { useDispatch } from "react-redux";
+import { deleteTodo } from "../store/todoSlice";
+import { Priority } from "../dataModel/todo";
 
 const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
-  let dotClass;
-  if (todo.priority == 0) {
-    dotClass = classes.dotForLow;
-  } else if (todo.priority == 1) {
+  const dispatch = useDispatch();
+
+  let dotClass = classes.dotForLow;
+
+  console.log(`todo  ${JSON.stringify(todo)}`);
+
+  if (todo.priority == Priority.Medium) {
     dotClass = classes.dotForMedium;
-  } else {
+  } else if (todo.priority == Priority.High) {
     dotClass = classes.dotForHigh;
   }
 
   return (
-    <div className={classes.item}>
-      <div>
+    <li className={classes.item}>
+      <p>
         {todo.caption}
         <span className={dotClass}></span>
-        <span>{todo.dueDate.toLocaleDateString()}</span>
-      </div>
-
+        <span>{todo.dueDate && todo.dueDate.toLocaleDateString()}</span>
+      </p>
       <p>{todo.description}</p>
-    </div>
+      <button onClick={() => dispatch(deleteTodo(todo.id))}>Delete</button>
+    </li>
   );
 };
 

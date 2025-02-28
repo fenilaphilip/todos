@@ -1,56 +1,40 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import classes from "../styles/NewTodo.module.css";
 import { addTodo } from "../store/todoSlice";
-import Todo, { Priority } from "../dataModel/todo";
+import { Priority } from "../dataModel/todo";
 
-const initialTask: Todo = {
-  id: new Date().toLocaleDateString(),
-  caption: "",
-  description: "",
-  dueDate: new Date(),
-  completed: false,
-  priority: Priority.Medium,
-};
 const NewTodo: React.FC = () => {
-  const [task, setTask] = useState(initialTask);
-  const priorityRef = useRef<HTMLInputElement>(null);
+  const [priority, setPriority] = useState(Priority.Medium);
+  const [caption, setCaption] = useState("");
+  const [description, setDescription] = useState("");
+  const [dueDate, setDueDate] = useState<Date | undefined>(undefined);
+
   const dispatch = useDispatch();
 
-  const resetHandler = () => {};
+  const resetHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+    setPriority(Priority.Low);
+    setDescription("");
+    setCaption("");
+    setDueDate(undefined);
+  };
 
-  const submitHandler = (event: React.FormEvent) => {
-    event.preventDefault();
-
-    if (task.caption.trim().length === 0) {
+  const submitHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (caption.trim().length === 0) {
       alert("Please enter task name");
       return;
     }
-
-    const priorityUserSelected = priorityRef.current!.value;
-    console.log(`priority ${priorityUserSelected}`);
-
-    console.log(`Task ${JSON.stringify(task)}`);
-
-    if (priorityUserSelected == "Low") {
-      setTask({
-        ...task,
-        priority: Priority.Low,
-      });
-    } else if (priorityUserSelected == "Medium") {
-      setTask({
-        ...task,
-        priority: Priority.Medium,
-      });
-    } else {
-      setTask({
-        ...task,
-        priority: Priority.High,
-      });
-    }
-
-    dispatch(addTodo(task));
-    setTask(initialTask);
+    const newTask = {
+      id: new Date().toLocaleDateString(),
+      description: description,
+      dueDate: dueDate,
+      completed: false,
+      caption: caption,
+      priority: priority,
+    };
+    dispatch(addTodo(newTask));
   };
 
   return (
@@ -60,22 +44,20 @@ const NewTodo: React.FC = () => {
         <input
           type="text"
           id="newTaskInput"
-          value={task.caption}
+          value={caption}
           placeholder="What to do..........??"
           className={classes.newInput}
-          onChange={(e) => setTask({ ...task, caption: e.target.value })}
+          onChange={(e) => setCaption(e.target.value)}
         />
         <div className={classes.formarea}>
           <div>
             <label>More info:</label>
             <textarea
               id="inputMoreInfo"
-              value={task.description}
+              value={description}
               placeholder="Enter more details......."
               className={classes.moreinfo}
-              onChange={(e) =>
-                setTask({ ...task, description: e.target.value })
-              }
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
           <div>
@@ -85,7 +67,9 @@ const NewTodo: React.FC = () => {
                 type="radio"
                 id="lowPriority"
                 name="priority"
-                ref={priorityRef}
+                onChange={() => {
+                  setPriority(Priority.Low);
+                }}
                 value="Low"
               />
               <label htmlFor="lowPriority">Low</label>
@@ -93,7 +77,7 @@ const NewTodo: React.FC = () => {
                 type="radio"
                 id="mediumPriority"
                 name="priority"
-                ref={priorityRef}
+                onChange={() => setPriority(Priority.Medium)}
                 value="Medium"
               />
               <label htmlFor="medium">Medium</label>
@@ -101,7 +85,7 @@ const NewTodo: React.FC = () => {
                 type="radio"
                 id="highPriority"
                 name="priority"
-                ref={priorityRef}
+                onChange={() => setPriority(Priority.High)}
                 value="High"
               />
               <label htmlFor="high">High</label>
@@ -114,12 +98,12 @@ const NewTodo: React.FC = () => {
               id="deadlineInput"
               placeholder=""
               onChange={(e) => {
-                setTask({ ...task, dueDate: new Date(e.target.value) });
+                setDueDate(new Date(e.target.value));
               }}
             />
             <br />
             <button>Add Todo</button>
-            <button onReset={resetHandler}>Reset Todo</button>
+            <button onClick={resetHandler}>Reset Todo</button>
           </div>
         </div>
       </form>
