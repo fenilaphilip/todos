@@ -24,7 +24,6 @@ function App() {
                 </>
               }
             />
-            <Route path="/todos" element={<Todos />} />
           </Routes>
         </div>
       </div>
