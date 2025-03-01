@@ -1,12 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
 import Todo from '../dataModel/todo';
-
-export const initialState: Todo[] = [];
+import { loadTodoList } from './localStorage';
 
 export const todoSlice = createSlice({
     name: 'todos',
-    initialState,
+    initialState: loadTodoList(),
     reducers: {
         addTodo: (state, action: PayloadAction<Todo>) => {
             state.unshift(action.payload);

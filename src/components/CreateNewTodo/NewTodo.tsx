@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import classes from "../../styles/NewTodo.module.css";
 import { addTodo } from "../../store/todoSlice";
-import { Priority } from "../../dataModel/todo";
+import Todo, { Priority } from "../../dataModel/todo";
 import uniqid from "uniqid";
 
 const NewTodo: React.FC = () => {
@@ -27,7 +27,7 @@ const NewTodo: React.FC = () => {
       alert("Please enter task name");
       return;
     }
-    const newTask = {
+    const newTask: Todo = {
       id: uniqid(),
       description: description,
       dueDate: dueDate,
