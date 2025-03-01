@@ -20,7 +20,9 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
       <p>
         {todo.caption}
         <span className={dotClass}></span>
-        <span>{todo.dueDate && todo.dueDate.toLocaleDateString()}</span>
+        <span>
+          {todo.dueDate ? new Date(todo.dueDate).toLocaleDateString() : ""}
+        </span>
       </p>
       <p>{todo.description}</p>
       <button onClick={() => dispatch(deleteTodo(todo.id))}>Delete</button>
