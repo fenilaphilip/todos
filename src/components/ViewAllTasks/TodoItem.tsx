@@ -17,13 +17,11 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
 
   return (
     <li className={classes.item}>
-      <p>
-        {todo.caption}
-        <span className={dotClass}></span>
-        <span>
-          {todo.dueDate ? new Date(todo.dueDate).toLocaleDateString() : ""}
-        </span>
-      </p>
+      <span className={dotClass}></span>
+      <span className={classes.caption}>{todo.caption}</span>
+      <span className={classes.dueDate}>
+        {todo.dueDate ? new Date(todo.dueDate).toLocaleDateString() : ""}
+      </span>
       <p>{todo.description}</p>
       <button onClick={() => dispatch(deleteTodo(todo.id))}>Delete</button>
     </li>
