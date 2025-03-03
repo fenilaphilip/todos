@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const SideNavbar: React.FC = () => {
   return (
-    <div data-cy="SideNav">
+    <div data-cy="sideNav">
       <div className={classes.options}>
         <NavLink to="/create">Create new Task</NavLink>
       </div>
