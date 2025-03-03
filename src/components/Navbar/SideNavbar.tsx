@@ -9,10 +9,7 @@ const SideNavbar: React.FC = () => {
         <NavLink to="/create">Create new Task</NavLink>
       </div>
       <div className={classes.options}>
-        <NavLink to="/todos">View All Tasks</NavLink>
-      </div>
-      <div className={classes.options}>
-        <NavLink to="/">Task scheduled today</NavLink>
+        <NavLink to="/">View All Tasks</NavLink>
       </div>
     </>
   );

@@ -1,20 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
 import Todo from '../dataModel/todo';
-
-export const initialState: Todo[] = [];
+import { loadTodoList } from './localStorage';
 
 export const todoSlice = createSlice({
     name: 'todos',
-    initialState,
+    initialState: loadTodoList(),
     reducers: {
         addTodo: (state, action: PayloadAction<Todo>) => {
-            console.log(`Adding todo ${JSON.stringify(action.payload)}`)
-            state.push(action.payload)
+            state.unshift(action.payload);
         },
         deleteTodo: (state, action) => {
-            console.debug(`delete got clicked`)
-            console.log(state, action.payload.id);
+            const remainingTodo = state.filter((todo) => (todo.id !== action.payload));
+            return remainingTodo;
         }
     },
 
