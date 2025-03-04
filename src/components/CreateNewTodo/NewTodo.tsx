@@ -40,7 +40,11 @@ const NewTodo: React.FC = () => {
 
   return (
     <div className={classes.newTodoContainer}>
-      <form onSubmit={submitHandler} className={classes.form}>
+      <form
+        onSubmit={submitHandler}
+        className={classes.form}
+        data-cy="CreateTodoForm"
+      >
         <label>Task name:</label>
         <input
           type="text"

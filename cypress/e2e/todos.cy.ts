@@ -4,7 +4,7 @@ describe('Testing Todos app', () => {
   });
 
   context('TopNavbar', () => {
-    it('Contains App name', () => {
+    it(`Contains App name 'Todos'`, () => {
       cy.get('[data-cy="topNav"]').contains('Todos');
     })
   });
@@ -24,13 +24,13 @@ describe('Testing Todos app', () => {
         .and('equal', '/todos');
     })
 
-    it(`Directing to new url '/create'`, () => {
+    it(`Allows users to navigate to create page`, () => {
       cy.get('[data-cy="sideNav"]').children()
         .contains('Create new Task').click();
       cy.url().should('include', '/create');
     });
 
-    it(`Directing to new url '/todos'`, () => {
+    it(`Allows users to navigate to todos page`, () => {
       cy.get('[data-cy="sideNav"]').children()
         .contains('View All Tasks').click();
       cy.url().should('include', '/todos');
@@ -44,10 +44,12 @@ describe('Create Page', () => {
     cy.visit('/create');
   });
 
-  context('Accepting form inputs', () => {
-    it.only(`Caption todo`, () => {
-
+  context('Creating new Todo', () => {
+    it(`Accepts form inputs`, () => {
+      cy.get('[data-cy="CreateTodoForm"]').find("#newTaskInput")
+        .type('Watch cricket match with friends');
+      cy.get('[data-cy="CreateTodoForm"]').find("#inputMoreInfo")
+        .type('beer, pizza, popcorn');
     });
-
   });
 });
