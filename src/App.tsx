@@ -1,33 +1,34 @@
-import SideNavbar from "./components/Navbar/SideNavbar.tsx";
-import TopNavbar from "./components/Navbar/TopNavbar.tsx";
 import NewTodo from "./components/CreateNewTodo/NewTodo.tsx";
 import Todos from "./components/ViewAllTasks/Todos.tsx";
-import { Routes, Route } from "react-router-dom";
-import "./index.css";
+import { type Navigation, type Branding } from "@toolpad/core/AppProvider";
+import { ReactRouterAppProvider } from "@toolpad/core/react-router";
+import { DashboardLayout } from "@toolpad/core/DashboardLayout";
+import CreateSharpIcon from "@mui/icons-material/CreateSharp";
+import FormatListBulletedSharpIcon from "@mui/icons-material/FormatListBulletedSharp";
 
 function App() {
+  const BRAND: Branding = { logo: "", title: "TODOS" };
+  const NAVIGATION: Navigation = [
+    {
+      segment: "Create",
+      title: "Create",
+      icon: <CreateSharpIcon />,
+    },
+    {
+      segment: "Tasks",
+      title: "All Tasks",
+      icon: <FormatListBulletedSharpIcon />,
+    },
+  ];
+
   return (
     <>
-      <TopNavbar />
-      <div className="display">
-        <div className="sidebar">
-          <SideNavbar />
-        </div>
-        <div className="dashboard">
-          <Routes>
-            <Route path="/" element={<Todos />} />
-            <Route
-              path="/create"
-              element={
-                <>
-                  <NewTodo /> <Todos />
-                </>
-              }
-            />
-            <Route path="/todos" element={<Todos />} />
-          </Routes>
-        </div>
-      </div>
+      <ReactRouterAppProvider navigation={NAVIGATION} branding={BRAND}>
+        <DashboardLayout>
+          <NewTodo />
+          <Todos />
+        </DashboardLayout>
+      </ReactRouterAppProvider>
     </>
   );
 }
