@@ -1,21 +1,20 @@
-import NewTodo from "./components/CreateNewTodo/NewTodo.tsx";
-import Todos from "./components/ViewAllTasks/Todos.tsx";
 import { type Navigation, type Branding } from "@toolpad/core/AppProvider";
 import { ReactRouterAppProvider } from "@toolpad/core/react-router";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import CreateSharpIcon from "@mui/icons-material/CreateSharp";
 import FormatListBulletedSharpIcon from "@mui/icons-material/FormatListBulletedSharp";
+import { Outlet } from "react-router-dom";
 
 function App() {
   const BRAND: Branding = { logo: "", title: "TODOS" };
   const NAVIGATION: Navigation = [
     {
-      segment: "Create",
+      segment: "create",
       title: "Create",
       icon: <CreateSharpIcon />,
     },
     {
-      segment: "Tasks",
+      segment: "todos",
       title: "All Tasks",
       icon: <FormatListBulletedSharpIcon />,
     },
@@ -25,8 +24,7 @@ function App() {
     <>
       <ReactRouterAppProvider navigation={NAVIGATION} branding={BRAND}>
         <DashboardLayout>
-          <NewTodo />
-          <Todos />
+          <Outlet />
         </DashboardLayout>
       </ReactRouterAppProvider>
     </>
