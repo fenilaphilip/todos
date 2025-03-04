@@ -10,36 +10,44 @@ describe('Testing Todos app', () => {
   });
 
   context('SideNavbar', () => {
-    it('Contains create and view tasks', () => {
+    it(`Contains 'Create New Todo' element `, () => {
       cy.get('[data-cy="sideNav"]').children()
         .contains('Create new Task')
         .should('have.attr', 'href')
         .and('equal', '/create');
+    });
 
+    it(`Contains 'View All Tasks' element`, () => {
       cy.get('[data-cy="sideNav"]').children()
         .contains('View All Tasks')
         .should('have.attr', 'href')
         .and('equal', '/todos');
-    });
+    })
 
-    it(`Changing url's by selecting sideNavbar elements`, () => {
+    it(`Directing to new url '/create'`, () => {
       cy.get('[data-cy="sideNav"]').children()
         .contains('Create new Task').click();
-
       cy.url().should('include', '/create');
-      cy.url().then(url => {
-        cy.log(url);
-      });
+    });
 
+    it(`Directing to new url '/todos'`, () => {
       cy.get('[data-cy="sideNav"]').children()
         .contains('View All Tasks').click();
-
       cy.url().should('include', '/todos');
-      cy.url().then(url => {
-        cy.log(url);
-      });
+    })
+  });
+});
+
+
+describe('Create Page', () => {
+  beforeEach(() => {
+    cy.visit('/create');
+  });
+
+  context('Accepting form inputs', () => {
+    it.only(`Caption todo`, () => {
+
     });
 
   });
-
 });
