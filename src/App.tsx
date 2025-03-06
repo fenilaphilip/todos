@@ -1,7 +1,8 @@
 import { type Navigation, type Branding } from "@toolpad/core/AppProvider";
 import { ReactRouterAppProvider } from "@toolpad/core/react-router";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
-import FormatListBulletedSharpIcon from "@mui/icons-material/FormatListBulletedSharp";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { Outlet } from "react-router-dom";
 
 function App() {
@@ -10,7 +11,12 @@ function App() {
     {
       segment: "allTasks",
       title: "Tasks Bucket",
-      icon: <FormatListBulletedSharpIcon />,
+      icon: <AssignmentIcon />,
+    },
+    {
+      segment: "calenderView",
+      title: "Tasks Calender",
+      icon: <CalendarMonthIcon />,
     },
   ];
 

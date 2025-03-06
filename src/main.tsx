@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import { store } from "./store/todoStore.ts";
 import "./index.css";
 import TaskBucket from "./components/TaskBucket.tsx";
+import TaskCalender from "./components/TaskCalender.tsx";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/allTasks",
         Component: TaskBucket,
+      },
+      {
+        path: "/calenderView",
+        Component: TaskCalender,
       },
     ],
   },
