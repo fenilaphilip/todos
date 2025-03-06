@@ -4,9 +4,8 @@ import App from "./App.tsx";
 import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { store } from "./store/todoStore.ts";
-import NewTodo from "./components/NewTodo.tsx";
-import Todos from "./components/Todos.tsx";
 import "./index.css";
+import TaskBucket from "./components/TaskBucket.tsx";
 
 const router = createBrowserRouter([
   {
@@ -14,15 +13,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        Component: Todos,
+        Component: TaskBucket,
       },
       {
-        path: "/create",
-        Component: NewTodo,
-      },
-      {
-        path: "/todos",
-        Component: Todos,
+        path: "/allTasks",
+        Component: TaskBucket,
       },
     ],
   },
