@@ -13,6 +13,9 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Grid from "@mui/material/Grid2";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Todo from "../dataModel/todo";
 import { deleteTodo } from "../store/todoSlice";
 
@@ -39,7 +42,12 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
             <Grid size={{ xs: 12, sm: 12, md: 6 }}>
               <Grid container spacing={2}>
                 <Grid size={{ xs: 12, sm: 12, md: 6 }}>
-                  <TextField fullWidth label="datepicker" />
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      label="Schedule to"
+                      slotProps={{ textField: { fullWidth: true } }}
+                    />
+                  </LocalizationProvider>
                 </Grid>
                 <Grid size={{ xs: 12, sm: 12, md: 6 }}>
                   <TextField fullWidth label="Priority" select>
