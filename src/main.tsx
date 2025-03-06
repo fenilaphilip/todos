@@ -4,7 +4,6 @@ import App from "./App.tsx";
 import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { store } from "./store/todoStore.ts";
-import "./index.css";
 import TaskBucket from "./components/TaskBucket.tsx";
 import TaskCalender from "./components/TaskCalender.tsx";
 
