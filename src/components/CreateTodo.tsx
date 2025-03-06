@@ -1,8 +1,15 @@
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { Box, TextField, IconButton, InputAdornment } from "@mui/material";
+import {
+  Box,
+  TextField,
+  IconButton,
+  InputAdornment,
+  Button,
+} from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import AddIcon from "@mui/icons-material/Add";
-import Todo, { Priority } from "../dataModel/todo";
+import Todo, { Priority, Labels } from "../dataModel/todo";
 import { addTodo } from "../store/todoSlice";
 import uniqid from "uniqid";
 
@@ -25,32 +32,41 @@ const CreateTodo: React.FC = () => {
       dueDate: undefined,
       completed: false,
       caption: caption,
-      priority: Priority.Medium,
+      labels: Labels.Other,
+      priority: Priority.None,
     };
 
     dispatch(addTodo(newTask));
+
+    taskCaption.current!.value = "";
   };
 
   return (
     <>
-      <Box>
-        <TextField
-          fullWidth
-          placeholder="Enter a new task"
-          margin="normal"
-          inputRef={taskCaption}
-          slotProps={{
-            input: {
-              startAdornment: (
-                <InputAdornment position="start">
-                  <IconButton onClick={addTodoHandler}>
-                    <AddIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            },
-          }}
-        />
+      <Box marginTop={2}>
+        <Grid container spacing={2}>
+          <Grid size={{ xs: 12, sm: 10, md: 11 }}>
+            <TextField
+              fullWidth
+              placeholder="Enter a new task"
+              inputRef={taskCaption}
+              slotProps={{
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <IconButton onClick={addTodoHandler}>
+                        <AddIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                },
+              }}
+            />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 2, md: 1 }}>
+            <Button variant="outlined">Clear All Tasks</Button>
+          </Grid>
+        </Grid>
       </Box>
     </>
   );

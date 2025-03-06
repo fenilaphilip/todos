@@ -18,7 +18,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
-import Todo, { Priority } from "../dataModel/todo";
+import Todo, { Labels, Priority } from "../dataModel/todo";
 import { deleteTodo, editTodo } from "../store/todoSlice";
 
 const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
@@ -29,12 +29,13 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
     completed: todo.completed,
     caption: todo.caption,
     priority: todo.priority,
+    labels: todo.labels,
   });
 
   const dispatch = useDispatch();
 
   return (
-    <Box>
+    <Box marginTop={2}>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Checkbox />
@@ -96,7 +97,23 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
                   </TextField>
                 </Grid>
                 <Grid size={{ xs: 12, sm: 12, md: 12 }}>
-                  <TextField fullWidth label="LabelSelect" />
+                  <TextField
+                    fullWidth
+                    label="Labels"
+                    select
+                    value={todoUpdate.labels}
+                    onChange={(e) =>
+                      setTodoUpdate({
+                        ...todoUpdate,
+                        labels: parseInt(e.target.value),
+                      })
+                    }
+                  >
+                    <MenuItem value={Labels.Leisure}>Leisure</MenuItem>
+                    <MenuItem value={Labels.Personal}>Personal</MenuItem>
+                    <MenuItem value={Labels.Work}>Work</MenuItem>
+                    <MenuItem value={Labels.Other}>Other</MenuItem>
+                  </TextField>
                 </Grid>
                 <Grid size={{ xs: 12, sm: 12, md: 12 }}>
                   <Stack spacing={2} direction="row">
