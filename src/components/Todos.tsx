@@ -8,7 +8,7 @@ const Todos: React.FC = () => {
   return (
     <>
       {todolist.map((todo) => {
-        console.log(`todoList contains ${JSON.stringify(todo)}`);
+        // console.log(`todoList contains ${JSON.stringify(todo)}`);
         return <TodoItem key={todo.id} todo={todo} />;
       })}
     </>
