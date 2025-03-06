@@ -13,8 +13,8 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Grid from "@mui/material/Grid2";
-import Todo from "../../dataModel/todo";
-import { deleteTodo } from "../../store/todoSlice";
+import Todo from "../dataModel/todo";
+import { deleteTodo } from "../store/todoSlice";
 
 const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
   const dispatch = useDispatch();

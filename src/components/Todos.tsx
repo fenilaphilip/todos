@@ -1,5 +1,5 @@
 import React from "react";
-import type { RootState } from "../../store/todoStore";
+import type { RootState } from "../store/todoStore";
 import { useSelector } from "react-redux";
 import classes from "../../styles/Todos.module.css";
 import TodoItem from "./TodoItem";

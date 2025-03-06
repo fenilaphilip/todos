@@ -4,8 +4,8 @@ import App from "./App.tsx";
 import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { store } from "./store/todoStore.ts";
-import NewTodo from "./components/CreateNewTodo/NewTodo.tsx";
-import Todos from "./components/ViewAllTasks/Todos.tsx";
+import NewTodo from "./components/NewTodo.tsx";
+import Todos from "./components/Todos.tsx";
 import "./index.css";
 
 const router = createBrowserRouter([
