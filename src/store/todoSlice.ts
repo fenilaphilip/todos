@@ -8,15 +8,36 @@ export const todoSlice = createSlice({
     initialState: loadTodoList(),
     reducers: {
         addTodo: (state, action: PayloadAction<Todo>) => {
-            state.unshift(action.payload);
+            state.push(action.payload);
         },
         deleteTodo: (state, action) => {
-            const remainingTodo = state.filter((todo) => (todo.id !== action.payload));
-            return remainingTodo;
+            const remainingTodos = state.filter((todo) => (todo.id !== action.payload));
+            return remainingTodos;
+        },
+        editTodo: (state, action) => {
+            const updatedTodos = state.map((todo) => {
+                if (todo.id == action.payload.id) {
+
+                    return {
+                        ...todo,
+                        caption: action.payload.caption,
+                        description: action.payload.description,
+                        dueDate: action.payload.dueDate,
+                        priority: action.payload.priority,
+                        completed: action.payload.completed
+                    }
+
+                }
+
+                return todo;
+
+            });
+
+            return updatedTodos;
         }
     },
 
 });
 
-export const { addTodo, deleteTodo } = todoSlice.actions;
+export const { addTodo, deleteTodo, editTodo } = todoSlice.actions;
 export default todoSlice.reducer;
