@@ -1,3 +1,4 @@
+import { Dayjs } from "dayjs";
 
 export enum Priority {
     None,
@@ -11,7 +12,7 @@ interface Todo {
     caption: string;
     description: string;
     priority: Priority;
-    dueDate?: Date;
+    dueDate?: Dayjs | null;
     completed: boolean;
 }
 

@@ -17,6 +17,7 @@ import Grid from "@mui/material/Grid2";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
 import Todo, { Priority } from "../dataModel/todo";
 import { deleteTodo, editTodo } from "../store/todoSlice";
 
@@ -64,7 +65,13 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
                 <Grid size={{ xs: 12, sm: 12, md: 6 }}>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
-                      label="Schedule to"
+                      label="Due Date"
+                      value={
+                        todoUpdate.dueDate ? dayjs(todoUpdate.dueDate) : null
+                      }
+                      onChange={(newValue) =>
+                        setTodoUpdate({ ...todoUpdate, dueDate: newValue })
+                      }
                       slotProps={{ textField: { fullWidth: true } }}
                     />
                   </LocalizationProvider>
