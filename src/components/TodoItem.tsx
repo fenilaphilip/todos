@@ -32,13 +32,23 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
     priority: todo.priority,
     labels: todo.labels,
   });
+  const [accordionOpen, setAccordionOpen] = React.useState(false);
 
   const dispatch = useDispatch();
 
   return (
     <Box marginTop={2}>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+      <Accordion expanded={accordionOpen}>
+        <AccordionSummary
+          expandIcon={
+            <ExpandMoreIcon
+              onClick={(e) => {
+                setAccordionOpen(!accordionOpen);
+                e.stopPropagation();
+              }}
+            />
+          }
+        >
           <FormControlLabel
             control={
               <Checkbox
