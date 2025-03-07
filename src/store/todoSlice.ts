@@ -34,7 +34,7 @@ export const todoSlice = createSlice({
             });
 
             return updatedTodos;
-        }
+        },
     },
 
 });

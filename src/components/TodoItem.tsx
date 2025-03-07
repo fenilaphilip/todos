@@ -11,6 +11,7 @@ import {
   MenuItem,
   Button,
   Stack,
+  FormControlLabel,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Grid from "@mui/material/Grid2";
@@ -38,7 +39,21 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
     <Box marginTop={2}>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Checkbox />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={todoUpdate.completed}
+                onChange={() => {
+                  setTodoUpdate({
+                    ...todoUpdate,
+                    completed: !todoUpdate.completed,
+                  });
+                  dispatch(editTodo(todoUpdate));
+                }}
+              />
+            }
+            label=""
+          />
           <Input
             fullWidth
             value={todoUpdate.caption}
