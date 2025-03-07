@@ -10,7 +10,7 @@ import {
 import Grid from "@mui/material/Grid2";
 import AddIcon from "@mui/icons-material/Add";
 import Todo, { Priority, Labels } from "../dataModel/todo";
-import { addTodo } from "../store/todoSlice";
+import { addTodo, clearAllTodo } from "../store/todoSlice";
 import uniqid from "uniqid";
 
 const CreateTodo: React.FC = () => {
@@ -45,7 +45,7 @@ const CreateTodo: React.FC = () => {
     <>
       <Box marginTop={2}>
         <Grid container spacing={2}>
-          <Grid size={{ xs: 12, sm: 10, md: 11 }}>
+          <Grid size={{ xs: 12, sm: 9, md: 10 }}>
             <TextField
               fullWidth
               placeholder="Enter a new task"
@@ -63,8 +63,14 @@ const CreateTodo: React.FC = () => {
               }}
             />
           </Grid>
-          <Grid size={{ xs: 12, sm: 2, md: 1 }}>
-            <Button variant="outlined">Clear All Tasks</Button>
+          <Grid container size={{ xs: 12, sm: 3, md: 2 }}>
+            <Button
+              fullWidth
+              variant="outlined"
+              onClick={() => dispatch(clearAllTodo())}
+            >
+              Clear All Tasks
+            </Button>
           </Grid>
         </Grid>
       </Box>

@@ -12,6 +12,7 @@ import {
   Button,
   Stack,
   FormControlLabel,
+  IconButton,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Grid from "@mui/material/Grid2";
@@ -41,12 +42,14 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
       <Accordion expanded={accordionOpen}>
         <AccordionSummary
           expandIcon={
-            <ExpandMoreIcon
-              onClick={(e) => {
-                setAccordionOpen(!accordionOpen);
-                e.stopPropagation();
-              }}
-            />
+            <IconButton>
+              <ExpandMoreIcon
+                onClick={(e) => {
+                  setAccordionOpen(!accordionOpen);
+                  e.stopPropagation();
+                }}
+              />
+            </IconButton>
           }
         >
           <FormControlLabel
