@@ -31,17 +31,9 @@ export const todoSlice = createSlice({
             });
             return updatedTodos;
         },
-        clearAllTodo: (state, action) => {
-            switch (action.payload) {
-                case ("TaskBucket"):
-                    return state = [];
-                case ("LabelLeisure"):
-                    return state.filter((todo) => todo.labels !== Labels.Leisure);
-            }
-        }
     },
 
 });
 
-export const { addTodo, deleteTodo, editTodo, clearAllTodo } = todoSlice.actions;
+export const { addTodo, deleteTodo, editTodo } = todoSlice.actions;
 export default todoSlice.reducer;

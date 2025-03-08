@@ -10,10 +10,10 @@ import {
 import Grid from "@mui/material/Grid2";
 import AddIcon from "@mui/icons-material/Add";
 import Todo, { Priority, Labels } from "../dataModel/todo";
-import { addTodo, clearAllTodo } from "../store/todoSlice";
+import { addTodo } from "../store/todoSlice";
 import uniqid from "uniqid";
 
-const CreateTodo: React.FC<{ clearTaskFrom: string }> = ({ clearTaskFrom }) => {
+const CreateTodo: React.FC = () => {
   const taskCaption = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
 
@@ -68,13 +68,9 @@ const CreateTodo: React.FC<{ clearTaskFrom: string }> = ({ clearTaskFrom }) => {
             />
           </Grid>
           <Grid container size={{ xs: 12, sm: 3, md: 2 }}>
-            <Button
-              fullWidth
-              variant="outlined"
-              onClick={() => dispatch(clearAllTodo(clearTaskFrom))}
-            >
-              Clear All Tasks
-            </Button>
+            {/* <Button fullWidth variant="outlined">
+              Settings
+            </Button> */}
           </Grid>
         </Grid>
       </Box>

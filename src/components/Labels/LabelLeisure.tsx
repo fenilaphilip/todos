@@ -11,14 +11,13 @@ const LabelLeisure: React.FC = () => {
     (todo) => todo.labels === Labels.Leisure
   );
   console.log(`tasksLeisure ${leisureCatergoryTodo}`);
-  const clearTaskFrom = "LabelLeisure";
 
   return (
     <>
       {leisureCatergoryTodo.map((todo) => {
         return <TodoItem key={todo.id} todo={todo} />;
       })}
-      <CreateTodo clearTaskFrom={clearTaskFrom} />
+      <CreateTodo />
     </>
   );
 };
