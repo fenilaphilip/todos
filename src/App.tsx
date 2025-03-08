@@ -15,13 +15,16 @@ import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 import LowPriorityIcon from "@mui/icons-material/LowPriority";
 import CommitIcon from "@mui/icons-material/Commit";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
+import Box from "@mui/material/Box";
 
 export default function App() {
   return (
     <>
       <ReactRouterAppProvider navigation={NAVIGATION} branding={BRAND}>
         <DashboardLayout>
-          <Outlet />
+          <Box margin={2} marginTop={1} padding={3} paddingTop={1}>
+            <Outlet />
+          </Box>
         </DashboardLayout>
       </ReactRouterAppProvider>
     </>

@@ -5,7 +5,7 @@ import {
   TextField,
   IconButton,
   InputAdornment,
-  // Button,
+  Button,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import AddIcon from "@mui/icons-material/Add";
@@ -68,9 +68,9 @@ const CreateTodo: React.FC = () => {
             />
           </Grid>
           <Grid container size={{ xs: 12, sm: 3, md: 2 }}>
-            {/* <Button fullWidth variant="outlined">
-              Settings
-            </Button> */}
+            <Button fullWidth variant="text">
+              Done
+            </Button>
           </Grid>
         </Grid>
       </Box>

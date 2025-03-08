@@ -8,7 +8,7 @@ export const todoSlice = createSlice({
     initialState: loadTodoList(),
     reducers: {
         addTodo: (state, action: PayloadAction<Todo>) => {
-            state.push(action.payload);
+            state.unshift(action.payload);
         },
         deleteTodo: (state, action) => {
             const remainingTodos = state.filter((todo) => (todo.id !== action.payload));
