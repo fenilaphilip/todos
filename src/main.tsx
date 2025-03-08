@@ -7,6 +7,7 @@ import { store } from "./store/todoStore.ts";
 import TaskBucket from "./components/TaskBucket.tsx";
 import TaskCalender from "./components/TaskCalender.tsx";
 import TaskCompeleted from "./components/TaskCompeleted.tsx";
+import LabelLeisure from "./components/Labels/LabelLeisure.tsx";
 
 const router = createBrowserRouter([
   {
@@ -25,8 +26,12 @@ const router = createBrowserRouter([
         Component: TaskCalender,
       },
       {
-        path: "/taskCompleted",
+        path: "/completedTasks",
         Component: TaskCompeleted,
+      },
+      {
+        path: "/label/leisure",
+        Component: LabelLeisure,
       },
     ],
   },

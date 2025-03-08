@@ -32,28 +32,23 @@ const BRAND: Branding = { logo: "", title: "TODOS" };
 const NAVIGATION: Navigation = [
   {
     kind: "header",
-    title: "Tasks",
+    title: "Dashboard",
   },
   {
     segment: "allTasks",
-    title: "Bucket",
+    title: "Task Bucket",
     icon: <BallotIcon />,
+    pattern: "test-pattern",
   },
   {
     segment: "calenderView",
-    title: "Calender",
+    title: "Calender View",
     icon: <ViewTimelineIcon />,
   },
   {
-    segment: "taskCompleted",
-    title: "Completed",
+    segment: "completedTasks",
+    title: "Completed Tasks",
     icon: <CheckCircleIcon />,
-  },
-  {
-    kind: "page",
-  },
-  {
-    kind: "page",
   },
   {
     kind: "divider",

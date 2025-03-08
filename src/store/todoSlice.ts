@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
-import Todo from '../dataModel/todo';
+import Todo, { Labels } from '../dataModel/todo';
 import { loadTodoList } from './localStorage';
 
 export const todoSlice = createSlice({
@@ -31,8 +31,13 @@ export const todoSlice = createSlice({
             });
             return updatedTodos;
         },
-        clearAllTodo: (state) => {
-            return state = [];
+        clearAllTodo: (state, action) => {
+            switch (action.payload) {
+                case ("TaskBucket"):
+                    return state = [];
+                case ("LabelLeisure"):
+                    return state.filter((todo) => todo.labels !== Labels.Leisure);
+            }
         }
     },
 
