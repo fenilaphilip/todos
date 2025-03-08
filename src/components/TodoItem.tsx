@@ -68,6 +68,7 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
             label=""
           />
           <Input
+            className="todo-item-caption"
             fullWidth
             value={todoUpdate.caption}
             onChange={(e) =>

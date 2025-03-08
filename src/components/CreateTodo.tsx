@@ -13,7 +13,7 @@ import Todo, { Priority, Labels } from "../dataModel/todo";
 import { addTodo, clearAllTodo } from "../store/todoSlice";
 import uniqid from "uniqid";
 
-const CreateTodo: React.FC = () => {
+const CreateTodo: React.FC<{ clearTaskFrom: string }> = ({ clearTaskFrom }) => {
   const taskCaption = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
 
@@ -48,13 +48,17 @@ const CreateTodo: React.FC = () => {
           <Grid size={{ xs: 12, sm: 9, md: 10 }}>
             <TextField
               fullWidth
+              data-cy="create-todo-input-caption"
               placeholder="Enter a new task"
               inputRef={taskCaption}
               slotProps={{
                 input: {
                   startAdornment: (
                     <InputAdornment position="start">
-                      <IconButton onClick={addTodoHandler}>
+                      <IconButton
+                        onClick={addTodoHandler}
+                        data-cy="create-todo-button-add"
+                      >
                         <AddIcon />
                       </IconButton>
                     </InputAdornment>
@@ -67,7 +71,7 @@ const CreateTodo: React.FC = () => {
             <Button
               fullWidth
               variant="outlined"
-              onClick={() => dispatch(clearAllTodo())}
+              onClick={() => dispatch(clearAllTodo(clearTaskFrom))}
             >
               Clear All Tasks
             </Button>
