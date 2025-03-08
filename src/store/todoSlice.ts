@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
-import Todo, { Labels } from '../dataModel/todo';
+import Todo from '../dataModel/todo';
 import { loadTodoList } from './localStorage';
 
 export const todoSlice = createSlice({
@@ -22,6 +22,7 @@ export const todoSlice = createSlice({
                         caption: action.payload.caption,
                         description: action.payload.description,
                         dueDate: action.payload.dueDate,
+                        labels: action.payload.labels,
                         priority: action.payload.priority,
                         completed: action.payload.completed
                     }
