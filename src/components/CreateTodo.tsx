@@ -1,13 +1,6 @@
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
-import {
-  Box,
-  TextField,
-  IconButton,
-  InputAdornment,
-  Button,
-} from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import { TextField, IconButton, InputAdornment } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import Todo, { Priority, Labels } from "../dataModel/todo";
 import { addTodo } from "../store/todoSlice";
@@ -43,37 +36,26 @@ const CreateTodo: React.FC = () => {
 
   return (
     <>
-      <Box marginTop={2}>
-        <Grid container spacing={2}>
-          <Grid size={{ xs: 12, sm: 9, md: 10 }}>
-            <TextField
-              fullWidth
-              data-cy="create-todo-input-caption"
-              placeholder="Enter a new task"
-              inputRef={taskCaption}
-              slotProps={{
-                input: {
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <IconButton
-                        onClick={addTodoHandler}
-                        data-cy="create-todo-button-add"
-                      >
-                        <AddIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                },
-              }}
-            />
-          </Grid>
-          <Grid container size={{ xs: 12, sm: 3, md: 2 }}>
-            <Button fullWidth variant="text">
-              Done
-            </Button>
-          </Grid>
-        </Grid>
-      </Box>
+      <TextField
+        fullWidth
+        data-cy="create-todo-input-caption"
+        placeholder="Enter a new task"
+        inputRef={taskCaption}
+        slotProps={{
+          input: {
+            startAdornment: (
+              <InputAdornment position="start">
+                <IconButton
+                  onClick={addTodoHandler}
+                  data-cy="create-todo-button-add"
+                >
+                  <AddIcon />
+                </IconButton>
+              </InputAdornment>
+            ),
+          },
+        }}
+      />
     </>
   );
 };
