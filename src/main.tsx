@@ -7,7 +7,18 @@ import { store } from "./store/todoStore.ts";
 import TaskBucket from "./components/TaskBucket.tsx";
 import TaskCalender from "./components/TaskCalender.tsx";
 import TaskCompeleted from "./components/TaskCompeleted.tsx";
-import LabelLeisure from "./components/Labels/LabelLeisure.tsx";
+import {
+  LabelLeisure,
+  LabelOther,
+  LabelPersonal,
+  LabelWork,
+} from "./components/Labels.tsx";
+import {
+  HighPriority,
+  LowPriority,
+  MediumPriority,
+  NonePriority,
+} from "./components/Priority.tsx";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +43,34 @@ const router = createBrowserRouter([
       {
         path: "/label/leisure",
         Component: LabelLeisure,
+      },
+      {
+        path: "/label/personal",
+        Component: LabelPersonal,
+      },
+      {
+        path: "/label/work",
+        Component: LabelWork,
+      },
+      {
+        path: "/label/others",
+        Component: LabelOther,
+      },
+      {
+        path: "/priority/high",
+        Component: HighPriority,
+      },
+      {
+        path: "/priority/medium",
+        Component: MediumPriority,
+      },
+      {
+        path: "/priority/low",
+        Component: LowPriority,
+      },
+      {
+        path: "/priority/none",
+        Component: NonePriority,
       },
     ],
   },
