@@ -38,11 +38,11 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
   const dispatch = useDispatch();
 
   return (
-    <Box marginTop={2}>
+    <Box marginTop={2} className="todo-item">
       <Accordion expanded={accordionOpen}>
         <AccordionSummary
           expandIcon={
-            <IconButton>
+            <IconButton className="todo-item-expand">
               <ExpandMoreIcon
                 onClick={(e) => {
                   setAccordionOpen(!accordionOpen);
@@ -57,11 +57,12 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
               <Checkbox
                 checked={todoUpdate.completed}
                 onChange={() => {
-                  setTodoUpdate({
+                  const updatedTodo = {
                     ...todoUpdate,
                     completed: !todoUpdate.completed,
-                  });
-                  dispatch(editTodo(todoUpdate));
+                  };
+                  setTodoUpdate(updatedTodo);
+                  dispatch(editTodo(updatedTodo));
                 }}
               />
             }
@@ -110,6 +111,7 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
                   <TextField
                     fullWidth
                     label="Set Priority"
+                    className="todo-item-priority"
                     select
                     value={todoUpdate.priority}
                     onChange={(e) =>
@@ -120,9 +122,15 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
                     }
                   >
                     <MenuItem value={Priority.None}>None</MenuItem>
-                    <MenuItem value={Priority.Low}>Low</MenuItem>
-                    <MenuItem value={Priority.Medium}>Medium</MenuItem>
-                    <MenuItem value={Priority.High}>High</MenuItem>
+                    <MenuItem className="todo-ipl" value={Priority.Low}>
+                      Low
+                    </MenuItem>
+                    <MenuItem className="todo-ipm" value={Priority.Medium}>
+                      Medium
+                    </MenuItem>
+                    <MenuItem className="todo-iph" value={Priority.High}>
+                      High
+                    </MenuItem>
                   </TextField>
                 </Grid>
                 <Grid size={{ xs: 12, sm: 12, md: 12 }}>
@@ -148,6 +156,7 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
                   <Stack spacing={2} direction="row">
                     <Button
                       variant="outlined"
+                      className="todo-save"
                       onClick={() => dispatch(editTodo(todoUpdate))}
                     >
                       Save Changes
