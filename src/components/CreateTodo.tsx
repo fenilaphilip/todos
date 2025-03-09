@@ -5,6 +5,7 @@ import AddIcon from "@mui/icons-material/Add";
 import Todo, { Priority, Labels } from "../dataModel/todo";
 import { addTodo } from "../store/todoSlice";
 import uniqid from "uniqid";
+import useKey from "@rooks/use-key";
 
 const CreateTodo: React.FC<{ taskCreateLabel: Labels }> = ({
   taskCreateLabel = Labels.Other,
@@ -12,21 +13,25 @@ const CreateTodo: React.FC<{ taskCreateLabel: Labels }> = ({
   const taskCaption = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
 
-  const addTodoHandler = (e: React.FormEvent) => {
-    e.preventDefault();
+  useKey(["Enter"], windowEnter);
+  function windowEnter() {
+    addTodoHandler();
+  }
 
+  const addTodoHandler = () => {
     const caption = taskCaption.current!.value;
     if (caption.trim().length === 0) {
       alert("Please enter a task");
       return;
     }
+    const taskCalled = caption.charAt(0).toUpperCase() + caption.slice(1);
 
     const newTask: Todo = {
       id: uniqid(),
       description: "",
       dueDate: undefined,
       completed: false,
-      caption: caption,
+      caption: taskCalled,
       labels: taskCreateLabel,
       priority: Priority.None,
     };
