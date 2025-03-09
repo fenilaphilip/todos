@@ -6,7 +6,9 @@ import Todo, { Priority, Labels } from "../dataModel/todo";
 import { addTodo } from "../store/todoSlice";
 import uniqid from "uniqid";
 
-const CreateTodo: React.FC = () => {
+const CreateTodo: React.FC<{ taskCreateLabel: Labels }> = ({
+  taskCreateLabel = Labels.Other,
+}) => {
   const taskCaption = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
 
@@ -25,7 +27,7 @@ const CreateTodo: React.FC = () => {
       dueDate: undefined,
       completed: false,
       caption: caption,
-      labels: Labels.Other,
+      labels: taskCreateLabel,
       priority: Priority.None,
     };
 

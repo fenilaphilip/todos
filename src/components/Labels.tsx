@@ -17,6 +17,7 @@ export const LabelLeisure: React.FC = () => {
 
   return (
     <Dashboard
+      labelName={Labels.Leisure}
       completedtaskCount={completedtaskCount}
       undoneTasks={taskUncompleted}
       alltasks={leisureCatergoryTodo}
@@ -37,6 +38,7 @@ export const LabelPersonal: React.FC = () => {
 
   return (
     <Dashboard
+      labelName={Labels.Personal}
       completedtaskCount={completedtaskCount}
       undoneTasks={taskUncompleted}
       alltasks={personalCatergoryTodo}
@@ -56,6 +58,7 @@ export const LabelWork: React.FC = () => {
   return (
     <>
       <Dashboard
+        labelName={Labels.Work}
         completedtaskCount={completedtaskCount}
         undoneTasks={taskUncompleted}
         alltasks={workCatergoryTodo}
@@ -75,6 +78,7 @@ export const LabelOther: React.FC = () => {
   const completedtaskCount = otherCatergoryTodo.length - taskUncompleted.length;
   return (
     <Dashboard
+      labelName={Labels.Other}
       completedtaskCount={completedtaskCount}
       undoneTasks={taskUncompleted}
       alltasks={otherCatergoryTodo}

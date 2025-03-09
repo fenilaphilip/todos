@@ -4,21 +4,22 @@ import Grid from "@mui/material/Grid2";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import CreateTodo from "./CreateTodo";
-import Todo from "../dataModel/todo";
+import Todo, { Labels } from "../dataModel/todo";
 import TodoItem from "./TodoItem";
 
 const Dashboard: React.FC<{
+  labelName: Labels;
   completedtaskCount: number;
   undoneTasks: Todo[];
   alltasks: Todo[];
-}> = ({ completedtaskCount, undoneTasks, alltasks }) => {
+}> = ({ labelName, completedtaskCount, undoneTasks, alltasks }) => {
   const [hideCompletedTask, setHideCompletedTask] = useState(true);
 
   return (
     <>
       <Grid container spacing={2}>
         <Grid size={{ xs: 12, sm: 9, md: 10 }}>
-          <CreateTodo />
+          <CreateTodo taskCreateLabel={labelName} />
         </Grid>
         <Grid container size={{ xs: 12, sm: 3, md: 2 }}>
           <Button
