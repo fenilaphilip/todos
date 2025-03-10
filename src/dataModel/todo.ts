@@ -1,8 +1,16 @@
+import { Dayjs } from "dayjs";
 
 export enum Priority {
+    None,
     Low,
     Medium,
     High
+}
+export enum Labels {
+    Leisure,
+    Personal,
+    Work,
+    Other,
 }
 
 interface Todo {
@@ -10,7 +18,8 @@ interface Todo {
     caption: string;
     description: string;
     priority: Priority;
-    dueDate?: Date;
+    labels: Labels;
+    dueDate?: Dayjs | null;
     completed: boolean;
 }
 

@@ -11,12 +11,34 @@ export const todoSlice = createSlice({
             state.unshift(action.payload);
         },
         deleteTodo: (state, action) => {
-            const remainingTodo = state.filter((todo) => (todo.id !== action.payload));
-            return remainingTodo;
+            const remainingTodos = state.filter((todo) => (todo.id !== action.payload));
+            return remainingTodos;
+        },
+        editTodo: (state, action) => {
+            const updatedTodos = state.map((todo) => {
+                if (todo.id == action.payload.id) {
+                    return {
+                        ...todo,
+                        caption: action.payload.caption,
+                        description: action.payload.description,
+                        dueDate: action.payload.dueDate,
+                        labels: action.payload.labels,
+                        priority: action.payload.priority,
+                        completed: action.payload.completed
+                    }
+
+                }
+                return todo;
+            });
+            return updatedTodos;
+        },
+        clearCompleted: (state) => {
+            const updatedTodos = state.filter((todo) => todo.completed === false);
+            return updatedTodos;
         }
     },
 
 });
 
-export const { addTodo, deleteTodo } = todoSlice.actions;
+export const { addTodo, deleteTodo, editTodo, clearCompleted } = todoSlice.actions;
 export default todoSlice.reducer;
