@@ -98,7 +98,11 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
                     <DatePicker
                       label="Due Date"
                       value={
-                        todoUpdate.dueDate ? dayjs(todoUpdate.dueDate) : null
+                        todoUpdate.dueDate
+                          ? dayjs(
+                              dayjs(todoUpdate.dueDate).format("DD/MM/YYYY")
+                            )
+                          : null
                       }
                       onChange={(newValue) =>
                         setTodoUpdate({ ...todoUpdate, dueDate: newValue })
