@@ -21,6 +21,7 @@ Todos application built using React, Redux Toolkit, React Router and Material UI
 ![ReduxToolkit](https://img.shields.io/badge/-ReduxToolkit-violet?logo=Redux&logoColor=black&style=flat)
 ![Material UI](https://img.shields.io/badge/-Material%20UI-lightyellow?logo=MUI&logoColor=blue&style=flat)
 ![Cypress](https://img.shields.io/badge/-Cypress-98FB98?logo=Cypress&logoColor=black&style=flat)
+![Material UI](https://img.shields.io/badge/-MUI-black?logo=MUI&logoColor=blue&style=flat)
 
 ## Getting started
 
