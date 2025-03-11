@@ -13,7 +13,14 @@ export const HighPriority: React.FC = () => {
   return (
     <>
       {highPriorityTodo.map((todo) => {
-        return <TodoItem key={todo.id} todo={todo} />;
+        return (
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            showLabel={false}
+            showDuedate={true}
+          />
+        );
       })}
     </>
   );
@@ -28,7 +35,14 @@ export const MediumPriority: React.FC = () => {
   return (
     <>
       {mediumPriorityTodo.map((todo) => {
-        return <TodoItem key={todo.id} todo={todo} />;
+        return (
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            showLabel={false}
+            showDuedate={true}
+          />
+        );
       })}
     </>
   );
@@ -43,7 +57,14 @@ export const LowPriority: React.FC = () => {
   return (
     <>
       {lowPriorityTodo.map((todo) => {
-        return <TodoItem key={todo.id} todo={todo} />;
+        return (
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            showLabel={false}
+            showDuedate={true}
+          />
+        );
       })}
     </>
   );
@@ -58,7 +79,14 @@ export const NonePriority: React.FC = () => {
   return (
     <>
       {nonePriorityTodo.map((todo) => {
-        return <TodoItem key={todo.id} todo={todo} />;
+        return (
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            showLabel={false}
+            showDuedate={true}
+          />
+        );
       })}
     </>
   );

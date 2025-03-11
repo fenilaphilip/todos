@@ -14,6 +14,8 @@ export default function TaskBucket() {
       completedtaskCount={completedtaskCount}
       undoneTasks={taskUncompleted}
       alltasks={allTodos}
+      showLabel={true}
+      showDuedate={true}
     />
   );
 }

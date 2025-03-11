@@ -25,7 +25,14 @@ const TaskCompeleted: React.FC = () => {
         </Button>
       </Stack>
       {completedTasklist.map((todo) => {
-        return <TodoItem key={todo.id} todo={todo} />;
+        return (
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            showLabel={true}
+            showDuedate={false}
+          />
+        );
       })}
     </Box>
   );

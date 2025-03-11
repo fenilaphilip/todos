@@ -16,7 +16,12 @@ export default function TaskCalender() {
         return (
           <>
             {todo.dueDate ? dayjs(todo.dueDate).format("DD . MM . YYYY") : null}
-            <TodoItem key={todo.id} todo={todo} />
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              showLabel={true}
+              showDuedate={false}
+            />
           </>
         );
       })}
