@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../store/todoStore";
 import dayjs from "dayjs";
+import Todo from "../dataModel/todo";
+import { Stack, Typography } from "@mui/material";
 import TodoItem from "./TodoItem";
 
 export default function TaskCalender() {
@@ -10,19 +12,38 @@ export default function TaskCalender() {
     dayjs(a.dueDate).diff(dayjs(b.dueDate))
   );
 
+  let calenderTodos: {
+    [key: string]: Todo[];
+  } = {};
+
+  unDoneSortedByDate.forEach((toDo) => {
+    const date = dayjs(toDo.dueDate).format("DD.MM.YYYY");
+    if (calenderTodos[date]) {
+      calenderTodos[date].push(toDo);
+    } else {
+      calenderTodos[date] = [toDo];
+    }
+  });
+
+  // console.info(calenderTodos);
+
   return (
     <>
-      {unDoneSortedByDate.map((todo) => {
+      {Object.entries(calenderTodos).map(([key, value]) => {
         return (
-          <>
-            {todo.dueDate ? dayjs(todo.dueDate).format("DD . MM . YYYY") : null}
-            <TodoItem
-              key={todo.id}
-              todo={todo}
-              showLabel={true}
-              showDuedate={false}
-            />
-          </>
+          <Stack margin={2}>
+            <Typography variant="h5">{key}</Typography>
+            {value.map((todo) => {
+              return (
+                <TodoItem
+                  key={todo.id}
+                  todo={todo}
+                  showDuedate={false}
+                  showLabel={true}
+                />
+              );
+            })}
+          </Stack>
         );
       })}
     </>
