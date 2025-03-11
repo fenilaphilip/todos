@@ -21,6 +21,8 @@ export const LabelLeisure: React.FC = () => {
       completedtaskCount={completedtaskCount}
       undoneTasks={taskUncompleted}
       alltasks={leisureCatergoryTodo}
+      showLabel={false}
+      showDuedate={true}
     />
   );
 };
@@ -42,6 +44,8 @@ export const LabelPersonal: React.FC = () => {
       completedtaskCount={completedtaskCount}
       undoneTasks={taskUncompleted}
       alltasks={personalCatergoryTodo}
+      showLabel={false}
+      showDuedate={true}
     />
   );
 };
@@ -62,6 +66,8 @@ export const LabelWork: React.FC = () => {
         completedtaskCount={completedtaskCount}
         undoneTasks={taskUncompleted}
         alltasks={workCatergoryTodo}
+        showLabel={false}
+        showDuedate={true}
       />
     </>
   );
@@ -82,6 +88,8 @@ export const LabelOther: React.FC = () => {
       completedtaskCount={completedtaskCount}
       undoneTasks={taskUncompleted}
       alltasks={otherCatergoryTodo}
+      showLabel={false}
+      showDuedate={true}
     />
   );
 };

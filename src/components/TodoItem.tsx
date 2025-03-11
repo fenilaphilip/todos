@@ -13,6 +13,7 @@ import {
   Stack,
   FormControlLabel,
   IconButton,
+  Chip,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Grid from "@mui/material/Grid2";
@@ -23,7 +24,11 @@ import dayjs from "dayjs";
 import Todo, { Labels, Priority } from "../dataModel/todo";
 import { deleteTodo, editTodo } from "../store/todoSlice";
 
-const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
+const TodoItem: React.FC<{
+  todo: Todo;
+  showLabel: boolean;
+  showDuedate: boolean;
+}> = ({ todo, showLabel, showDuedate }) => {
   const [todoUpdate, setTodoUpdate] = useState<Todo>({
     id: todo.id,
     description: todo.description,
@@ -76,6 +81,24 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
               setTodoUpdate({ ...todoUpdate, caption: e.target.value })
             }
           />
+          {!accordionOpen && (
+            <Stack direction="row" spacing={1}>
+              {showLabel && (
+                <Chip
+                  label={Labels[todoUpdate.labels]}
+                  size="small"
+                  sx={{ display: { xs: "none", md: "block" }, pt: 0.5, pb: 1 }}
+                />
+              )}
+              {showDuedate && (
+                <Chip
+                  label={dayjs(todoUpdate.dueDate).format("DD.MM.YYYY")}
+                  size="small"
+                  sx={{ display: { xs: "none", md: "block" }, pt: 0.5, pb: 1 }}
+                />
+              )}
+            </Stack>
+          )}
         </AccordionSummary>
         <AccordionDetails>
           <Grid container spacing={2}>
@@ -97,9 +120,7 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => {
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       label="Due Date"
-                      value={
-                        todoUpdate.dueDate ? dayjs(todoUpdate.dueDate) : null
-                      }
+                      value={dayjs(dayjs(todoUpdate.dueDate))}
                       onChange={(newValue) =>
                         setTodoUpdate({ ...todoUpdate, dueDate: newValue })
                       }

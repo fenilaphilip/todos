@@ -12,7 +12,16 @@ const Dashboard: React.FC<{
   completedtaskCount: number;
   undoneTasks: Todo[];
   alltasks: Todo[];
-}> = ({ labelName, completedtaskCount, undoneTasks, alltasks }) => {
+  showLabel: boolean;
+  showDuedate: boolean;
+}> = ({
+  labelName,
+  completedtaskCount,
+  undoneTasks,
+  alltasks,
+  showLabel,
+  showDuedate,
+}) => {
   const [hideCompletedTask, setHideCompletedTask] = useState(true);
 
   return (
@@ -39,14 +48,28 @@ const Dashboard: React.FC<{
       {hideCompletedTask && (
         <div data-cy="todo-items">
           {undoneTasks.map((todo) => {
-            return <TodoItem key={todo.id} todo={todo} />;
+            return (
+              <TodoItem
+                key={todo.id}
+                todo={todo}
+                showLabel={showLabel}
+                showDuedate={showDuedate}
+              />
+            );
           })}
         </div>
       )}
       {!hideCompletedTask && (
         <div data-cy="todo-items">
           {alltasks.map((todo) => {
-            return <TodoItem key={todo.id} todo={todo} />;
+            return (
+              <TodoItem
+                key={todo.id}
+                todo={todo}
+                showLabel={showLabel}
+                showDuedate={showDuedate}
+              />
+            );
           })}
         </div>
       )}
