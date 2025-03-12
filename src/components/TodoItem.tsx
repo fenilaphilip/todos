@@ -12,7 +12,6 @@ import {
   Button,
   Stack,
   FormControlLabel,
-  IconButton,
   Chip,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -47,14 +46,13 @@ const TodoItem: React.FC<{
       <Accordion expanded={accordionOpen}>
         <AccordionSummary
           expandIcon={
-            <IconButton className="todo-item-expand">
-              <ExpandMoreIcon
-                onClick={(e) => {
-                  setAccordionOpen(!accordionOpen);
-                  e.stopPropagation();
-                }}
-              />
-            </IconButton>
+            <ExpandMoreIcon
+              className="todo-item-expand"
+              onClick={(e) => {
+                setAccordionOpen(!accordionOpen);
+                e.stopPropagation();
+              }}
+            />
           }
         >
           <FormControlLabel
@@ -82,7 +80,7 @@ const TodoItem: React.FC<{
             }
           />
           {!accordionOpen && (
-            <Stack direction="row" spacing={1}>
+            <Stack direction="row" spacing={1} marginTop={2}>
               {showLabel && (
                 <Chip
                   label={Labels[todoUpdate.labels]}
