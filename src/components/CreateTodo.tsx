@@ -14,7 +14,9 @@ const CreateTodo: React.FC<{ taskCreateLabel: Labels }> = ({
   const taskCaption = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
 
-  useKey(["Enter"], windowEnter);
+  useKey(["Enter"], windowEnter, {
+    target: taskCaption,
+  });
   function windowEnter() {
     addTodoHandler();
   }
