@@ -98,7 +98,7 @@ describe('Task Bucket - Default page, when app loads', () => {
     });
   });
 
-  context("Adding or updating details to a task by opening the 'Expand More Arrow'.", () => {
+  context("Can add details to when opens the 'Expand More Arrow'.", () => {
     it('Can add notes related to task', () => {
       cy.get('[data-cy="todo-items"]').children()
         .find(`.todo-item-caption > input[value="${task}"]`)
@@ -107,7 +107,6 @@ describe('Task Bucket - Default page, when app loads', () => {
           cy.get('.todo-item-expand').click();
           cy.get('.todo-item-notes').click()
             .type("red and white rose bouquet");
-          cy.get('.todo-save').click();
         });
       cy.reload();
       cy.get('[data-cy="todo-items"]').children()
@@ -127,7 +126,6 @@ describe('Task Bucket - Default page, when app loads', () => {
           cy.get('.todo-item-expand').click();
           cy.get('.todo-item-priority').click();
           cy.document().its('body').find('.todo-iph').click();
-          cy.get('.todo-save').click();
         });
 
       cy.reload();
@@ -148,7 +146,6 @@ describe('Task Bucket - Default page, when app loads', () => {
           cy.get('.todo-item-expand').click();
           cy.get('.todo-item-labels').click();
           cy.document().its('body').find('[data-value="2"]').click();
-          cy.get('.todo-save').click();
         });
 
       cy.reload();
@@ -160,5 +157,8 @@ describe('Task Bucket - Default page, when app loads', () => {
           cy.get('.todo-item-labels').contains('Work');
         });
     });
-  })
+    it(`Contains "Save Changes" and "Delete" Buttons`, () => {
+
+    })
+  });
 });
