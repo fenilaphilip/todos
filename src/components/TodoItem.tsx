@@ -75,9 +75,14 @@ const TodoItem: React.FC<{
             className="todo-item-caption"
             fullWidth
             value={todoUpdate.caption}
-            onChange={(e) =>
-              setTodoUpdate({ ...todoUpdate, caption: e.target.value })
-            }
+            onChange={(e) => {
+              const updatedTodo = {
+                ...todoUpdate,
+                caption: e.target.value,
+              };
+              setTodoUpdate(updatedTodo);
+              dispatch(editTodo(updatedTodo));
+            }}
           />
           {!accordionOpen && (
             <Stack direction="row" spacing={1} marginTop={2}>
@@ -104,12 +109,18 @@ const TodoItem: React.FC<{
               <TextField
                 fullWidth
                 label="Notes"
+                className="todo-item-notes"
                 multiline
                 rows={8}
                 value={todoUpdate.description}
-                onChange={(e) =>
-                  setTodoUpdate({ ...todoUpdate, description: e.target.value })
-                }
+                onChange={(e) => {
+                  const updatedTodo = {
+                    ...todoUpdate,
+                    description: e.target.value,
+                  };
+                  setTodoUpdate(updatedTodo);
+                  dispatch(editTodo(updatedTodo));
+                }}
               />
             </Grid>
             <Grid size={{ xs: 12, sm: 12, md: 6 }}>
@@ -119,9 +130,14 @@ const TodoItem: React.FC<{
                     <DatePicker
                       label="Due Date"
                       value={dayjs(dayjs(todoUpdate.dueDate))}
-                      onChange={(newValue) =>
-                        setTodoUpdate({ ...todoUpdate, dueDate: newValue })
-                      }
+                      onChange={(newValue) => {
+                        const updatedTodo = {
+                          ...todoUpdate,
+                          dueDate: newValue,
+                        };
+                        setTodoUpdate(updatedTodo);
+                        dispatch(editTodo(updatedTodo));
+                      }}
                       slotProps={{ textField: { fullWidth: true } }}
                     />
                   </LocalizationProvider>
@@ -133,12 +149,14 @@ const TodoItem: React.FC<{
                     className="todo-item-priority"
                     select
                     value={todoUpdate.priority}
-                    onChange={(e) =>
-                      setTodoUpdate({
+                    onChange={(e) => {
+                      const updatedTodo = {
                         ...todoUpdate,
                         priority: parseInt(e.target.value),
-                      })
-                    }
+                      };
+                      setTodoUpdate(updatedTodo);
+                      dispatch(editTodo(updatedTodo));
+                    }}
                   >
                     <MenuItem value={Priority.None}>None</MenuItem>
                     <MenuItem className="todo-ipl" value={Priority.Low}>
@@ -156,14 +174,17 @@ const TodoItem: React.FC<{
                   <TextField
                     fullWidth
                     label="Labels"
+                    className="todo-item-labels"
                     select
                     value={todoUpdate.labels}
-                    onChange={(e) =>
-                      setTodoUpdate({
+                    onChange={(e) => {
+                      const updatedTodo = {
                         ...todoUpdate,
                         labels: parseInt(e.target.value),
-                      })
-                    }
+                      };
+                      setTodoUpdate(updatedTodo);
+                      dispatch(editTodo(updatedTodo));
+                    }}
                   >
                     <MenuItem value={Labels.Leisure}>Leisure</MenuItem>
                     <MenuItem value={Labels.Personal}>Personal</MenuItem>
@@ -172,21 +193,13 @@ const TodoItem: React.FC<{
                   </TextField>
                 </Grid>
                 <Grid size={{ xs: 12, sm: 12, md: 12 }}>
-                  <Stack spacing={2} direction="row">
-                    <Button
-                      variant="outlined"
-                      className="todo-save"
-                      onClick={() => dispatch(editTodo(todoUpdate))}
-                    >
-                      Save Changes
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      onClick={() => dispatch(deleteTodo(todo.id))}
-                    >
-                      Delete
-                    </Button>
-                  </Stack>
+                  <Button
+                    variant="outlined"
+                    onClick={() => dispatch(deleteTodo(todo.id))}
+                    className="todo-delete"
+                  >
+                    Delete
+                  </Button>
                 </Grid>
               </Grid>
             </Grid>
