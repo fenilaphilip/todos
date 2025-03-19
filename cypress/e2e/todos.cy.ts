@@ -157,8 +157,17 @@ describe('Task Bucket - Default page, when app loads', () => {
           cy.get('.todo-item-labels').contains('Work');
         });
     });
-    it(`Contains "Save Changes" and "Delete" Buttons`, () => {
-
-    })
+    it.only(`Contains "Delete" Button - delete todo`, () => {
+      addTask('go to gym');
+      cy.get('[data-cy="todo-items"]').children()
+        .find(`.todo-item-caption > input[value="${task}"]`)
+        .parentsUntil('[data-cy="todo-items"]', '.todo-item')
+        .within(() => {
+          cy.get('.todo-item-expand').click();
+          cy.get('.todo-delete').click();
+        });
+      cy.get('[data-cy="todo-items"]').children()
+        .should('not.contain', `${task}`);
+    });
   });
 });

@@ -196,6 +196,7 @@ const TodoItem: React.FC<{
                   <Button
                     variant="outlined"
                     onClick={() => dispatch(deleteTodo(todo.id))}
+                    className="todo-delete"
                   >
                     Delete
                   </Button>
