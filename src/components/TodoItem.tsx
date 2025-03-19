@@ -75,9 +75,14 @@ const TodoItem: React.FC<{
             className="todo-item-caption"
             fullWidth
             value={todoUpdate.caption}
-            onChange={(e) =>
-              setTodoUpdate({ ...todoUpdate, caption: e.target.value })
-            }
+            onChange={(e) => {
+              const updatedTodo = {
+                ...todoUpdate,
+                caption: e.target.value,
+              };
+              setTodoUpdate(updatedTodo);
+              dispatch(editTodo(updatedTodo));
+            }}
           />
           {!accordionOpen && (
             <Stack direction="row" spacing={1} marginTop={2}>
@@ -104,6 +109,7 @@ const TodoItem: React.FC<{
               <TextField
                 fullWidth
                 label="Notes"
+                className="todo-item-notes"
                 multiline
                 rows={8}
                 value={todoUpdate.description}
@@ -156,6 +162,7 @@ const TodoItem: React.FC<{
                   <TextField
                     fullWidth
                     label="Labels"
+                    className="todo-item-labels"
                     select
                     value={todoUpdate.labels}
                     onChange={(e) =>
