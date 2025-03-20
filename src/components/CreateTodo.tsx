@@ -2,14 +2,14 @@ import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { TextField, IconButton, InputAdornment } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import Todo, { Priority, Labels } from "../dataModel/todo";
+import Todo, { Priority } from "../dataModel/todo";
 import { addTodo } from "../store/todoSlice";
 import uniqid from "uniqid";
 import useKey from "@rooks/use-key";
 import dayjs from "dayjs";
 
-const CreateTodo: React.FC<{ taskCreateLabel: Labels }> = ({
-  taskCreateLabel = Labels.Other,
+const CreateTodo: React.FC<{ taskCreateLabel?: string | null }> = ({
+  taskCreateLabel = null,
 }) => {
   const taskCaption = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();

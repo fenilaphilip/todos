@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../store/todoStore";
 import Dashboard from "./Dashboard";
-import { Labels } from "../dataModel/todo";
 
 export default function TaskBucket() {
   const allTodos = useSelector((state: RootState) => state);
@@ -10,7 +9,6 @@ export default function TaskBucket() {
 
   return (
     <Dashboard
-      labelName={Labels.Other}
       completedtaskCount={completedtaskCount}
       undoneTasks={taskUncompleted}
       alltasks={allTodos}

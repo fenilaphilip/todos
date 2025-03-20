@@ -6,19 +6,13 @@ export enum Priority {
     Medium,
     High
 }
-export enum Labels {
-    Leisure,
-    Personal,
-    Work,
-    Other,
-}
 
 interface Todo {
     id: string;
     caption: string;
     description: string;
     priority: Priority;
-    labels: Labels;
+    labels?: string | null;
     dueDate?: Dayjs | null;
     completed: boolean;
 }
