@@ -2,7 +2,7 @@
 
 Todos application built using React, Redux Toolkit, React Router and Material UI. These powerful combination of technologies offers a seamless and intuitive user experience, allowing you to efficiently manage your tasks.
 
-[![Live](https://img.shields.io/badge/-Live-blue?&style=flat)](https://todosplanner.netlify.app/))
+[![Live](https://img.shields.io/badge/-Live-blue?&style=flat)](https://todosplanner.netlify.app/)
 
 ## Features
 
