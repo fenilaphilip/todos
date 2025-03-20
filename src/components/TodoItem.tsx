@@ -20,7 +20,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
-import Todo, { Labels, Priority } from "../dataModel/todo";
+import Todo, { Priority } from "../dataModel/todo";
 import { deleteTodo, editTodo } from "../store/todoSlice";
 
 const TodoItem: React.FC<{
@@ -86,14 +86,14 @@ const TodoItem: React.FC<{
           />
           {!accordionOpen && (
             <Stack direction="row" spacing={1} marginTop={2}>
-              {showLabel && (
+              {showLabel && todoUpdate.labels !== null && (
                 <Chip
-                  label={Labels[todoUpdate.labels]}
+                  label={todoUpdate.labels}
                   size="small"
                   sx={{ display: { xs: "none", md: "block" }, pt: 0.5, pb: 1 }}
                 />
               )}
-              {showDuedate && (
+              {showDuedate && todoUpdate.dueDate !== null && (
                 <Chip
                   label={dayjs(todoUpdate.dueDate).format("DD.MM.YYYY")}
                   size="small"
@@ -129,7 +129,11 @@ const TodoItem: React.FC<{
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       label="Due Date"
-                      value={dayjs(dayjs(todoUpdate.dueDate))}
+                      value={
+                        todoUpdate.dueDate !== null
+                          ? dayjs(dayjs(todoUpdate.dueDate))
+                          : null
+                      }
                       onChange={(newValue) => {
                         const updatedTodo = {
                           ...todoUpdate,
@@ -158,7 +162,6 @@ const TodoItem: React.FC<{
                       dispatch(editTodo(updatedTodo));
                     }}
                   >
-                    <MenuItem value={Priority.None}>None</MenuItem>
                     <MenuItem className="todo-ipl" value={Priority.Low}>
                       Low
                     </MenuItem>
@@ -180,16 +183,16 @@ const TodoItem: React.FC<{
                     onChange={(e) => {
                       const updatedTodo = {
                         ...todoUpdate,
-                        labels: parseInt(e.target.value),
+                        labels: e.target.value,
                       };
                       setTodoUpdate(updatedTodo);
                       dispatch(editTodo(updatedTodo));
                     }}
                   >
-                    <MenuItem value={Labels.Leisure}>Leisure</MenuItem>
-                    <MenuItem value={Labels.Personal}>Personal</MenuItem>
-                    <MenuItem value={Labels.Work}>Work</MenuItem>
-                    <MenuItem value={Labels.Other}>Other</MenuItem>
+                    <MenuItem value="Leisure">Leisure</MenuItem>
+                    <MenuItem value="Personal">Personal</MenuItem>
+                    <MenuItem value="Work">Work</MenuItem>
+                    <MenuItem value="Other">Other</MenuItem>
                   </TextField>
                 </Grid>
                 <Grid size={{ xs: 12, sm: 12, md: 12 }}>

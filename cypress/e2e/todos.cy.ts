@@ -54,11 +54,17 @@ describe('Testing Todos app', () => {
 
     it(`Contains 'Labels' fliter includes 'Personal', 'Work', 'Leisure', 'Others'`, () => {
       cy.get('@navitems').contains('Labels').click()
-      // cy.get('@navitems').children()
-      //   .find('a[href="/label/leisure]').contains('Leisure');
+      cy.get('@navitems').parent().find('a[href="/label/personal"]').contains('Personal')
+      cy.get('@navitems').parent().find('a[href="/label/work"]').contains('Work')
+      cy.get('@navitems').parent().find('a[href="/label/leisure"]').contains('Leisure')
+      cy.get('@navitems').parent().find('a[href="/label/others"]').contains('Others')
     });
     it(`Contains priority fliter named 'Importance' includes 'High', 'Low', 'Medium', 'None'`, () => {
       cy.get('@navitems').contains('Importance').click()
+      cy.get('@navitems').parent().find('a[href="/priority/high"').contains('High Priority');
+      cy.get('@navitems').parent().find('a[href="/priority/medium"').contains('Medium Priority');
+      cy.get('@navitems').parent().find('a[href="/priority/low"').contains('Low Priority');
+      cy.get('@navitems').parent().find('a[href="/priority/none"').contains('None');
     });
   });
 });
@@ -145,7 +151,7 @@ describe('Task Bucket - Default page, when app loads', () => {
         .within(() => {
           cy.get('.todo-item-expand').click();
           cy.get('.todo-item-labels').click();
-          cy.document().its('body').find('[data-value="2"]').click();
+          cy.document().its('body').find('[data-value="Work"]').click();
         });
 
       cy.reload();
@@ -157,7 +163,7 @@ describe('Task Bucket - Default page, when app loads', () => {
           cy.get('.todo-item-labels').contains('Work');
         });
     });
-    it.only(`Contains "Delete" Button - delete todo`, () => {
+    it(`Contains "Delete" Button - delete todo`, () => {
       addTask('go to gym');
       cy.get('[data-cy="todo-items"]').children()
         .find(`.todo-item-caption > input[value="${task}"]`)
