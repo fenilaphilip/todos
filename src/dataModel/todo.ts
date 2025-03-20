@@ -11,7 +11,7 @@ interface Todo {
     id: string;
     caption: string;
     description: string;
-    priority: Priority;
+    priority?: Priority | null;
     labels?: string | null;
     dueDate?: Dayjs | null;
     completed: boolean;
