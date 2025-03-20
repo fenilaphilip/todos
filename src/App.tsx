@@ -66,7 +66,7 @@ const NAVIGATION: Navigation = [
     icon: <LabelIcon />,
     children: [
       {
-        segment: "Leisure",
+        segment: "leisure",
         title: "Leisure",
         icon: <HourglassEmptyIcon />,
       },
