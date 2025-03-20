@@ -162,7 +162,6 @@ const TodoItem: React.FC<{
                       dispatch(editTodo(updatedTodo));
                     }}
                   >
-                    <MenuItem value={Priority.None}>None</MenuItem>
                     <MenuItem className="todo-ipl" value={Priority.Low}>
                       Low
                     </MenuItem>

@@ -151,7 +151,7 @@ describe('Task Bucket - Default page, when app loads', () => {
         .within(() => {
           cy.get('.todo-item-expand').click();
           cy.get('.todo-item-labels').click();
-          cy.document().its('body').find('[data-value="2"]').click();
+          cy.document().its('body').find('[data-value="Work"]').click();
         });
 
       cy.reload();

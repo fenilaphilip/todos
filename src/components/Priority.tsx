@@ -73,7 +73,7 @@ export const LowPriority: React.FC = () => {
 export const NonePriority: React.FC = () => {
   const todolist = useSelector((state: RootState) => state);
   const nonePriorityTodo = todolist.filter(
-    (todo) => todo.priority === Priority.None && todo.completed === false
+    (todo) => todo.priority === null && todo.completed === false
   );
 
   return (
