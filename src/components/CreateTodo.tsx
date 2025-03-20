@@ -6,7 +6,6 @@ import Todo from "../dataModel/todo";
 import { addTodo } from "../store/todoSlice";
 import uniqid from "uniqid";
 import useKey from "@rooks/use-key";
-import dayjs from "dayjs";
 
 const CreateTodo: React.FC<{ taskCreateLabel?: string | null }> = ({
   taskCreateLabel = null,
@@ -32,7 +31,7 @@ const CreateTodo: React.FC<{ taskCreateLabel?: string | null }> = ({
     const newTask: Todo = {
       id: uniqid(),
       description: "",
-      dueDate: dayjs().add(2, "day"),
+      dueDate: null,
       completed: false,
       caption: taskCalled,
       labels: taskCreateLabel,

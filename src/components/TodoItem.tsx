@@ -93,7 +93,7 @@ const TodoItem: React.FC<{
                   sx={{ display: { xs: "none", md: "block" }, pt: 0.5, pb: 1 }}
                 />
               )}
-              {showDuedate && (
+              {showDuedate && todoUpdate.dueDate !== null && (
                 <Chip
                   label={dayjs(todoUpdate.dueDate).format("DD.MM.YYYY")}
                   size="small"
@@ -129,7 +129,11 @@ const TodoItem: React.FC<{
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       label="Due Date"
-                      value={dayjs(dayjs(todoUpdate.dueDate))}
+                      value={
+                        todoUpdate.dueDate !== null
+                          ? dayjs(dayjs(todoUpdate.dueDate))
+                          : null
+                      }
                       onChange={(newValue) => {
                         const updatedTodo = {
                           ...todoUpdate,
