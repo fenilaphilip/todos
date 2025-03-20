@@ -29,11 +29,14 @@ export default function TaskCalender() {
 
   return (
     <>
+      {todoList.length === 0 && (
+        <Typography variant="h6">Your Task Bucket is empty!</Typography>
+      )}
       {Object.entries(calenderTodos).map(([key, value]) => {
         return (
           <Stack margin={2}>
             <Typography variant="h5">
-              {key !== "Invalid Date" ? key : "Unscheduled Tasks"}
+              {key !== "Invalid Date" ? key : "Unscheduled"}
             </Typography>
             {value.map((todo) => {
               return (

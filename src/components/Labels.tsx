@@ -16,7 +16,7 @@ export const LabelLeisure: React.FC = () => {
 
   return (
     <Dashboard
-      labelName="leisure"
+      labelName="Leisure"
       completedtaskCount={completedtaskCount}
       undoneTasks={taskUncompleted}
       alltasks={leisureCatergoryTodo}
