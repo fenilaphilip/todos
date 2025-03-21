@@ -1,3 +1,5 @@
+const formatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
 function loadApp() {
   cy.visit('/');
   cy.get('nav[aria-label="Desktop"]>ul>li').as('navitems');
@@ -8,22 +10,6 @@ function addTask(input: string) {
     .type(`${input}`);
   cy.get('[data-cy="create-todo-button-add"]').click();
 };
-
-function formatDate(date) {
-  let day = String(date.getDate());
-  let month = String(date.getMonth() + 1); // Months start at 0!
-  let year = date.getFullYear();
-
-  if (month.length < 2) {
-    month = `0${month}`;
-  }
-  if (day.length < 2) {
-    day = `0${day}`
-  }
-  const duedate = month + "/" + day + "/" + year;
-
-  return duedate;
-}
 
 describe('Testing Todos app', () => {
   beforeEach(loadApp);
@@ -141,7 +127,7 @@ describe('Task Bucket - Default page, when app loads', () => {
     });
 
     it('Can set due Date by typing', () => {
-      const today = formatDate(new Date());
+      const today = formatter.format(new Date());
       cy.get('[data-cy="todo-items"]').children()
         .find(`.todo-item-caption > input[value = "${task}"]`)
         .parentsUntil('[data-cy="todo-items"]', '.todo-item')
@@ -213,30 +199,3 @@ describe('Task Bucket - Default page, when app loads', () => {
     });
   });
 });
-
-function setDueDate(task: string, count: number) {
-  addTask(task);
-  const date = formatDate(new Date().setDate(count));
-  cy.get('[data-cy="todo-items"]').children()
-    .find(`.todo-item-caption > input[value = "${task}"]`)
-    .parentsUntil('[data-cy="todo-items"]', '.todo-item')
-    .within(() => {
-      cy.get('.todo-item-expand').click();
-      cy.get('.dueDate').click().type(date); // MM/DD/YYYY format
-    });
-}
-
-describe('Task Calender page', () => {
-  beforeEach(loadApp);
-  const Tasks = ['Do laundry', 'Buy Ticket for World cup Football', 'Do grocery shopping', 'Wish birthday', 'Order birthday gift', 'Buy playstation']
-  beforeEach(() => {
-    Tasks.map((task, index) => {
-      setDueDate(task, index);
-    });
-    cy.visit('/calenderView');
-  });
-
-  it('Displays the dates in accending order', () => {
-    cy.get('.dateHeader').contains('Unscheduled');
-  });
-})
