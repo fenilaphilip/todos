@@ -9,10 +9,9 @@ function addTask(input: string) {
   cy.get('[data-cy="create-todo-button-add"]').click();
 };
 
-function getTodayDate() {
-  const date = new Date();
+function formatDate(date) {
   let day = String(date.getDate());
-  let month = String(date.getMonth() + 1);
+  let month = String(date.getMonth() + 1); // Months start at 0!
   let year = date.getFullYear();
 
   if (month.length < 2) {
@@ -21,20 +20,9 @@ function getTodayDate() {
   if (day.length < 2) {
     day = `0${day}`
   }
-  const today = month + "/" + day + "/" + year;
+  const duedate = month + "/" + day + "/" + year;
 
-  return today;
-}
-
-function setDate(task: string, date: string) {
-  addTask(task);
-  cy.get('[data-cy="todo-items"]').children()
-    .find(`.todo-item-caption > input[value = "${task}"]`)
-    .parentsUntil('[data-cy="todo-items"]', '.todo-item')
-    .within(() => {
-      cy.get('.todo-item-expand').click();
-      cy.get('.dueDate').click().type(date); // MM/DD/YYYY format
-    });
+  return duedate;
 }
 
 describe('Testing Todos app', () => {
@@ -153,7 +141,7 @@ describe('Task Bucket - Default page, when app loads', () => {
     });
 
     it('Can set due Date by typing', () => {
-      const today = getTodayDate();
+      const today = formatDate(new Date());
       cy.get('[data-cy="todo-items"]').children()
         .find(`.todo-item-caption > input[value = "${task}"]`)
         .parentsUntil('[data-cy="todo-items"]', '.todo-item')
@@ -204,7 +192,7 @@ describe('Task Bucket - Default page, when app loads', () => {
 
       cy.reload();
       cy.get('[data-cy="todo-items"]').children()
-        .find(`.todo - item - caption > input[value = "${task}"]`)
+        .find(`.todo-item-caption > input[value = "${task}"]`)
         .parentsUntil('[data-cy="todo-items"]', '.todo-item')
         .within(() => {
           cy.get('.todo-item-expand').click();
@@ -226,15 +214,25 @@ describe('Task Bucket - Default page, when app loads', () => {
   });
 });
 
+function setDueDate(task: string, count: number) {
+  addTask(task);
+  const date = formatDate(new Date().setDate(count));
+  cy.get('[data-cy="todo-items"]').children()
+    .find(`.todo-item-caption > input[value = "${task}"]`)
+    .parentsUntil('[data-cy="todo-items"]', '.todo-item')
+    .within(() => {
+      cy.get('.todo-item-expand').click();
+      cy.get('.dueDate').click().type(date); // MM/DD/YYYY format
+    });
+}
+
 describe('Task Calender page', () => {
   beforeEach(loadApp);
+  const Tasks = ['Do laundry', 'Buy Ticket for World cup Football', 'Do grocery shopping', 'Wish birthday', 'Order birthday gift', 'Buy playstation']
   beforeEach(() => {
-    setDate('Do laundry', ' ');
-    setDate('Buy Ticket for World cup Football', '11/24/2225');
-    setDate('Do grocery shopping', '4/4/2225');
-    setDate('Wish birthday', '4/4/2225');
-    setDate('Order birthday gift', "4/5/2225");
-    setDate('Buy playstation', " ")
+    Tasks.map((task, index) => {
+      setDueDate(task, index);
+    });
     cy.visit('/calenderView');
   });
 
