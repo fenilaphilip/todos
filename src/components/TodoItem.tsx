@@ -129,6 +129,7 @@ const TodoItem: React.FC<{
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                       label="Due Date"
+                      className="dueDate"
                       value={
                         todoUpdate.dueDate !== null
                           ? dayjs(dayjs(todoUpdate.dueDate))

@@ -34,8 +34,8 @@ export default function TaskCalender() {
       )}
       {Object.entries(calenderTodos).map(([key, value]) => {
         return (
-          <Stack margin={2}>
-            <Typography variant="h5">
+          <Stack margin={2} key={key}>
+            <Typography variant="h5" className="dateHeader">
               {key !== "Invalid Date" ? key : "Unscheduled"}
             </Typography>
             {value.map((todo) => {
