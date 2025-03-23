@@ -1,7 +1,10 @@
-import * as dayjs from 'dayjs';
 
 export function loadApp() {
     cy.visit('/');
+}
+
+export function addTasks(input: string[]) {
+    input.forEach(addTask);
 }
 
 export function addTask(input: string) {
@@ -10,9 +13,7 @@ export function addTask(input: string) {
     cy.get('[data-cy="create-todo-button-add"]').click();
 };
 
-export function setDueDate(task: string, addvalue: number) {
-    addTask(task);
-    const date = dayjs().add(addvalue, "day").format('MM/DD/YYYY');
+export function setDueDate(task: string, date: string) {
     cy.get('[data-cy="todo-items"]').children()
         .find(`.todo-item-caption > input[value = "${task}"]`)
         .parentsUntil('[data-cy="todo-items"]', '.todo-item')

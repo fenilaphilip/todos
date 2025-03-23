@@ -17,7 +17,7 @@ export default function TaskCalender() {
   } = {};
 
   unDoneSortedByDate.forEach((toDo) => {
-    const date = dayjs(toDo.dueDate).format("DD.MM.YYYY");
+    const date = dayjs(toDo.dueDate).format("DD-MM-YYYY");
     if (calenderTodos[date]) {
       calenderTodos[date].push(toDo);
     } else {
@@ -34,8 +34,8 @@ export default function TaskCalender() {
       )}
       {Object.entries(calenderTodos).map(([key, value]) => {
         return (
-          <Stack margin={2} key={key}>
-            <Typography variant="h5" className="dateHeader">
+          <Stack margin={2} key={key} className={`date-${key} dateGroup`}>
+            <Typography variant="h5">
               {key !== "Invalid Date" ? key : "Unscheduled"}
             </Typography>
             {value.map((todo) => {
