@@ -9,10 +9,10 @@ import {
   LabelPersonal,
   LabelWork,
 } from "./components/Labels.tsx";
-import { HighPriority } from "./components/priority/HighPriority.tsx";
-import { MediumPriority } from "./components/priority/MediumPriority.tsx";
-import { LowPriority } from "./components/priority/LowPriority.tsx";
-import { NonePriority } from "./components/priority/NonePriority.tsx";
+import { HighPriorityTasks } from "./components/priority/HighPriority.tsx";
+import { MediumPriorityTasks } from "./components/priority/MediumPriority.tsx";
+import { LowPriorityTasks } from "./components/priority/LowPriority.tsx";
+import { NonePriorityTasks } from "./components/priority/NonePriority.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -52,19 +52,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/priority/high",
-        Component: HighPriority,
+        Component: HighPriorityTasks,
       },
       {
         path: "/priority/medium",
-        Component: MediumPriority,
+        Component: MediumPriorityTasks,
       },
       {
         path: "/priority/low",
-        Component: LowPriority,
+        Component: LowPriorityTasks,
       },
       {
         path: "/priority/none",
-        Component: NonePriority,
+        Component: NonePriorityTasks,
       },
     ],
   },

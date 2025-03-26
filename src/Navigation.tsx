@@ -12,7 +12,10 @@ import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 import LowPriorityIcon from "@mui/icons-material/LowPriority";
 import CommitIcon from "@mui/icons-material/Commit";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
-import { Chip } from "@mui/material";
+import { HighPriorityTaskCount } from "./components/priority/HighPriority";
+import { MediumPriorityTaskCount } from "./components/priority/MediumPriority";
+import { LowPriorityTaskCount } from "./components/priority/LowPriority";
+import { NonePriorityTaskCount } from "./components/priority/NonePriority";
 
 export const NAVIGATION: Navigation = [
   {
@@ -78,25 +81,25 @@ export const NAVIGATION: Navigation = [
         segment: "high",
         title: "High Priority",
         icon: <PriorityHighIcon />,
-        action: <Chip label={7} color="primary" size="small" />,
+        action: <HighPriorityTaskCount />,
       },
       {
         segment: "medium",
         title: "Medium Priority",
         icon: <StarHalfIcon />,
-        action: <Chip label={7} color="primary" size="small" />,
+        action: <MediumPriorityTaskCount />,
       },
       {
         segment: "low",
         title: "Low Priority",
         icon: <LowPriorityIcon />,
-        action: <Chip label={7} color="primary" size="small" />,
+        action: <LowPriorityTaskCount />,
       },
       {
         segment: "none",
         title: "None",
         icon: <CommitIcon />,
-        action: <Chip label={7} color="primary" size="small" />,
+        action: <NonePriorityTaskCount />,
       },
     ],
   },
