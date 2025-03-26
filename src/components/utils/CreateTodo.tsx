@@ -2,8 +2,8 @@ import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { TextField, IconButton, InputAdornment } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import Todo from "../dataModel/todo";
-import { addTodo } from "../store/todoSlice";
+import Todo from "../../dataModel/todo";
+import { addTodo } from "../../store/todoSlice";
 import uniqid from "uniqid";
 import useKey from "@rooks/use-key";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import type { RootState } from "../../store/todoStore";
 import { useSelector } from "react-redux";
-import TodoItem from "./../TodoItem";
+import TodoItem from "./../utils/TodoItem";
 import { Typography } from "@mui/material";
 import { Priority } from "../../dataModel/todo";
 

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../store/todoStore";
-import Dashboard from "./Dashboard";
+import Dashboard from "./utils/Dashboard";
 
 export default function TaskBucket() {
   const allTodos = useSelector((state: RootState) => state);

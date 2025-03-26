@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid2";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import CreateTodo from "./CreateTodo";
-import Todo from "../dataModel/todo";
+import Todo from "../../dataModel/todo";
 import TodoItem from "./TodoItem";
 
 const Dashboard: React.FC<{

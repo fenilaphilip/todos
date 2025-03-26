@@ -3,7 +3,7 @@ import type { RootState } from "../store/todoStore";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { clearCompleted } from "../store/todoSlice";
-import TodoItem from "./TodoItem";
+import TodoItem from "./utils/TodoItem";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
