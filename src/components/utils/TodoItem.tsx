@@ -20,8 +20,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
-import Todo, { Priority } from "../dataModel/todo";
-import { deleteTodo, editTodo } from "../store/todoSlice";
+import Todo, { Priority } from "../../dataModel/todo";
+import { deleteTodo, editTodo } from "../../store/todoSlice";
 
 const TodoItem: React.FC<{
   todo: Todo;

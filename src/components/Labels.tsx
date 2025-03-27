@@ -1,7 +1,7 @@
 import React from "react";
 import type { RootState } from "../store/todoStore";
 import { useSelector } from "react-redux";
-import Dashboard from "./Dashboard";
+import Dashboard from "./utils/Dashboard";
 
 export const LabelLeisure: React.FC = () => {
   const todolist = useSelector((state: RootState) => state);
