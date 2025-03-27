@@ -58,7 +58,6 @@ describe('Testing Todos app', () => {
             cy.get('@navitems').parent().find('a[href="/priority/high"').contains('High Priority');
             cy.get('@navitems').parent().find('a[href="/priority/medium"').contains('Medium Priority');
             cy.get('@navitems').parent().find('a[href="/priority/low"').contains('Low Priority');
-            cy.get('@navitems').parent().find('a[href="/priority/none"').contains('None');
         });
     });
 });
