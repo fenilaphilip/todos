@@ -10,12 +10,10 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import StarIcon from "@mui/icons-material/Star";
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 import LowPriorityIcon from "@mui/icons-material/LowPriority";
-import CommitIcon from "@mui/icons-material/Commit";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 import { HighPriorityTaskCount } from "./components/priority/HighPriority";
 import { MediumPriorityTaskCount } from "./components/priority/MediumPriority";
 import { LowPriorityTaskCount } from "./components/priority/LowPriority";
-import { NonePriorityTaskCount } from "./components/priority/NonePriority";
 
 export const NAVIGATION: Navigation = [
   {
@@ -94,12 +92,6 @@ export const NAVIGATION: Navigation = [
         title: "Low Priority",
         icon: <LowPriorityIcon />,
         action: <LowPriorityTaskCount />,
-      },
-      {
-        segment: "none",
-        title: "None",
-        icon: <CommitIcon />,
-        action: <NonePriorityTaskCount />,
       },
     ],
   },

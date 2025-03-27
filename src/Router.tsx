@@ -12,7 +12,6 @@ import {
 import { HighPriorityTasks } from "./components/priority/HighPriority.tsx";
 import { MediumPriorityTasks } from "./components/priority/MediumPriority.tsx";
 import { LowPriorityTasks } from "./components/priority/LowPriority.tsx";
-import { NonePriorityTasks } from "./components/priority/NonePriority.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -61,10 +60,6 @@ export const router = createBrowserRouter([
       {
         path: "/priority/low",
         Component: LowPriorityTasks,
-      },
-      {
-        path: "/priority/none",
-        Component: NonePriorityTasks,
       },
     ],
   },
