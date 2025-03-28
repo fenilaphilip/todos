@@ -89,13 +89,21 @@ const TodoItem: React.FC<{
           />
           {!accordionOpen && (
             <Stack direction="row" spacing={1} marginTop={2}>
-              {showLabel && todoUpdate.labels !== null && (
-                <Chip
-                  label={todoUpdate.labels}
-                  size="small"
-                  sx={{ display: { xs: "none", md: "block" }, pt: 0.5, pb: 1 }}
-                />
-              )}
+              {showLabel &&
+                todoUpdate.labels?.length !== 0 &&
+                todoUpdate.labels?.map((label) => {
+                  return (
+                    <Chip
+                      label={label}
+                      size="small"
+                      sx={{
+                        display: { xs: "none", md: "block" },
+                        pt: 0.5,
+                        pb: 1,
+                      }}
+                    />
+                  );
+                })}
               {showDuedate && todoUpdate.dueDate !== null && (
                 <Chip
                   label={dayjs(todoUpdate.dueDate).format("DD.MM.YYYY")}

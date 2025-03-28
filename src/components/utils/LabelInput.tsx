@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { editTodo } from "../../store/todoSlice";
 import {
@@ -24,17 +24,21 @@ const LabelInput: React.FC<{
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    const UpdateTodo = {
+      ...todoUpdate,
+      labels: labels,
+    };
+
+    setTodoUpdate(UpdateTodo);
+    dispatch(editTodo(todoUpdate));
+  }, [labels]);
+
   const handleLabelChange = (event: SelectChangeEvent<typeof labels>) => {
     const {
       target: { value },
     } = event;
     setLabels(typeof value === "string" ? value.split(",") : value);
-    const UpdateTodo = {
-      ...todoUpdate,
-      labels: labels,
-    };
-    setTodoUpdate(UpdateTodo);
-    dispatch(editTodo(todoUpdate));
   };
 
   return (
