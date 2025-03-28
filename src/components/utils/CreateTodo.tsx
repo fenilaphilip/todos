@@ -7,8 +7,8 @@ import { addTodo } from "../../store/todoSlice";
 import uniqid from "uniqid";
 import useKey from "@rooks/use-key";
 
-const CreateTodo: React.FC<{ taskCreateLabel?: string | null }> = ({
-  taskCreateLabel = null,
+const CreateTodo: React.FC<{ taskCreateLabel?: string }> = ({
+  taskCreateLabel,
 }) => {
   const taskCaption = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
@@ -28,13 +28,15 @@ const CreateTodo: React.FC<{ taskCreateLabel?: string | null }> = ({
     }
     const taskCalled = caption.charAt(0).toUpperCase() + caption.slice(1);
 
+    const labelUpdate = taskCreateLabel ? [taskCreateLabel] : [];
+
     const newTask: Todo = {
       id: uniqid(),
       description: "",
       dueDate: null,
       completed: false,
       caption: taskCalled,
-      labels: taskCreateLabel,
+      labels: labelUpdate,
       priority: null,
     };
 
