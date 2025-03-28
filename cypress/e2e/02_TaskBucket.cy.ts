@@ -97,7 +97,7 @@ describe('Task Bucket - Default page, when app loads', () => {
         });
     });
 
-    it('User can update label', () => {
+    it.only('User can update label', () => {
       cy.get('[data-cy="todo-items"]').children()
         .find(`.todo-item-caption > input[value="${task}"]`)
         .parentsUntil('[data-cy="todo-items"]', '.todo-item')

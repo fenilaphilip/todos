@@ -8,7 +8,7 @@ import Todo from "../../dataModel/todo";
 import TodoItem from "./TodoItem";
 
 const Dashboard: React.FC<{
-  labelName?: string | null;
+  labelName?: string;
   completedtaskCount: number;
   undoneTasks: Todo[];
   alltasks: Todo[];

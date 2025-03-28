@@ -24,16 +24,6 @@ const LabelInput: React.FC<{
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const UpdateTodo = {
-      ...todoUpdate,
-      labels: labels,
-    };
-
-    setTodoUpdate(UpdateTodo);
-    dispatch(editTodo(todoUpdate));
-  }, [labels]);
-
   const handleLabelChange = (event: SelectChangeEvent<typeof labels>) => {
     const {
       target: { value },
@@ -41,10 +31,21 @@ const LabelInput: React.FC<{
     setLabels(typeof value === "string" ? value.split(",") : value);
   };
 
+  useEffect(() => {
+    const UpdateTodo = {
+      ...todoUpdate,
+      labels: labels,
+    };
+    setTodoUpdate(UpdateTodo);
+    dispatch(editTodo(UpdateTodo));
+    console.debug(`from label input`, UpdateTodo);
+  }, [labels]);
+
   return (
     <FormControl fullWidth>
       <InputLabel id="multiple-checkbox-label">Labels</InputLabel>
       <Select
+        className="todo-item-labels"
         labelId="multiple-checkbox-label"
         multiple
         value={labels}
