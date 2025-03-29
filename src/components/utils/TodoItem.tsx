@@ -14,6 +14,7 @@ import {
   FormControlLabel,
   Chip,
 } from "@mui/material";
+
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Grid from "@mui/material/Grid2";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -22,12 +23,15 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import Todo, { Priority } from "../../dataModel/todo";
 import { deleteTodo, editTodo } from "../../store/todoSlice";
+import LabelInput from "./LabelInput";
 
 const TodoItem: React.FC<{
   todo: Todo;
   showLabel: boolean;
   showDuedate: boolean;
 }> = ({ todo, showLabel, showDuedate }) => {
+  const [accordionOpen, setAccordionOpen] = React.useState(false);
+
   const [todoUpdate, setTodoUpdate] = useState<Todo>({
     id: todo.id,
     description: todo.description,
@@ -37,7 +41,6 @@ const TodoItem: React.FC<{
     priority: todo.priority,
     labels: todo.labels,
   });
-  const [accordionOpen, setAccordionOpen] = React.useState(false);
 
   const dispatch = useDispatch();
 
@@ -86,13 +89,21 @@ const TodoItem: React.FC<{
           />
           {!accordionOpen && (
             <Stack direction="row" spacing={1} marginTop={2}>
-              {showLabel && todoUpdate.labels !== null && (
-                <Chip
-                  label={todoUpdate.labels}
-                  size="small"
-                  sx={{ display: { xs: "none", md: "block" }, pt: 0.5, pb: 1 }}
-                />
-              )}
+              {showLabel &&
+                todoUpdate.labels?.length !== 0 &&
+                todoUpdate.labels?.map((label) => {
+                  return (
+                    <Chip
+                      label={label}
+                      size="small"
+                      sx={{
+                        display: { xs: "none", md: "block" },
+                        pt: 0.5,
+                        pb: 1,
+                      }}
+                    />
+                  );
+                })}
               {showDuedate && todoUpdate.dueDate !== null && (
                 <Chip
                   label={dayjs(todoUpdate.dueDate).format("DD.MM.YYYY")}
@@ -175,26 +186,10 @@ const TodoItem: React.FC<{
                   </TextField>
                 </Grid>
                 <Grid size={{ xs: 12, sm: 12, md: 12 }}>
-                  <TextField
-                    fullWidth
-                    label="Labels"
-                    className="todo-item-labels"
-                    select
-                    value={todoUpdate.labels}
-                    onChange={(e) => {
-                      const updatedTodo = {
-                        ...todoUpdate,
-                        labels: e.target.value,
-                      };
-                      setTodoUpdate(updatedTodo);
-                      dispatch(editTodo(updatedTodo));
-                    }}
-                  >
-                    <MenuItem value="Leisure">Leisure</MenuItem>
-                    <MenuItem value="Personal">Personal</MenuItem>
-                    <MenuItem value="Work">Work</MenuItem>
-                    <MenuItem value="Other">Other</MenuItem>
-                  </TextField>
+                  <LabelInput
+                    todoUpdate={todoUpdate}
+                    setTodoUpdate={setTodoUpdate}
+                  />
                 </Grid>
                 <Grid size={{ xs: 12, sm: 12, md: 12 }}>
                   <Button

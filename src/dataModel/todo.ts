@@ -10,8 +10,8 @@ interface Todo {
     id: string;
     caption: string;
     description: string;
-    priority?: Priority | null;
-    labels?: string | null;
+    priority: Priority;
+    labels?: string[];
     dueDate?: Dayjs | null;
     completed: boolean;
 }

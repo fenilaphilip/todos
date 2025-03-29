@@ -5,8 +5,8 @@ import Dashboard from "./utils/Dashboard";
 
 export const LabelLeisure: React.FC = () => {
   const todolist = useSelector((state: RootState) => state);
-  const leisureCatergoryTodo = todolist.filter(
-    (todo) => todo.labels === "Leisure"
+  const leisureCatergoryTodo = todolist.filter((todo) =>
+    todo.labels?.includes("Leisure")
   );
   const taskUncompleted = leisureCatergoryTodo.filter(
     (todo) => todo.completed === false
@@ -28,8 +28,8 @@ export const LabelLeisure: React.FC = () => {
 
 export const LabelPersonal: React.FC = () => {
   const todolist = useSelector((state: RootState) => state);
-  const personalCatergoryTodo = todolist.filter(
-    (todo) => todo.labels === "Personal"
+  const personalCatergoryTodo = todolist.filter((todo) =>
+    todo.labels?.includes("Personal")
   );
   const taskUncompleted = personalCatergoryTodo.filter(
     (todo) => todo.completed === false
@@ -51,7 +51,9 @@ export const LabelPersonal: React.FC = () => {
 
 export const LabelWork: React.FC = () => {
   const todolist = useSelector((state: RootState) => state);
-  const workCatergoryTodo = todolist.filter((todo) => todo.labels === "Work");
+  const workCatergoryTodo = todolist.filter((todo) =>
+    todo.labels?.includes("Work")
+  );
   const taskUncompleted = workCatergoryTodo.filter(
     (todo) => todo.completed === false
   );
@@ -72,7 +74,9 @@ export const LabelWork: React.FC = () => {
 
 export const LabelOther: React.FC = () => {
   const todolist = useSelector((state: RootState) => state);
-  const otherCatergoryTodo = todolist.filter((todo) => todo.labels === "Other");
+  const otherCatergoryTodo = todolist.filter((todo) =>
+    todo.labels?.includes("Others")
+  );
   const taskUncompleted = otherCatergoryTodo.filter(
     (todo) => todo.completed === false
   );
