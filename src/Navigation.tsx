@@ -11,6 +11,10 @@ import StarIcon from "@mui/icons-material/Star";
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 import LowPriorityIcon from "@mui/icons-material/LowPriority";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
+import { LeisureActiveTaskCount } from "./components/labels/Leisure";
+import { PersonalActiveTaskCount } from "./components/labels/Personal";
+import { WorkActiveTaskCount } from "./components/labels/Work";
+import { OthersActiveTaskCount } from "./components/labels/Others";
 import { HighPriorityTaskCount } from "./components/priority/HighPriority";
 import { MediumPriorityTaskCount } from "./components/priority/MediumPriority";
 import { LowPriorityTaskCount } from "./components/priority/LowPriority";
@@ -52,21 +56,25 @@ export const NAVIGATION: Navigation = [
         segment: "leisure",
         title: "Leisure",
         icon: <HourglassEmptyIcon />,
+        action: <LeisureActiveTaskCount />,
       },
       {
         segment: "personal",
         title: "Personal",
         icon: <EngineeringIcon />,
+        action: <PersonalActiveTaskCount />,
       },
       {
         segment: "work",
         title: "Work",
         icon: <WorkIcon />,
+        action: <WorkActiveTaskCount />,
       },
       {
         segment: "others",
         title: "Others",
         icon: <UpcomingIcon />,
+        action: <OthersActiveTaskCount />,
       },
     ],
   },
