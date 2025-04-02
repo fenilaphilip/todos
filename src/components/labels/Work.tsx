@@ -10,7 +10,7 @@ export const LabelWork: React.FC = () => {
     todo.labels?.includes("Work")
   );
   const taskUncompleted = workCatergoryTodo.filter(
-    (todo) => todo.completed === false
+    (todo: { completed: boolean }) => todo.completed === false
   );
   const completedtaskCount = workCatergoryTodo.length - taskUncompleted.length;
   return (
