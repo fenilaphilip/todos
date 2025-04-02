@@ -4,6 +4,7 @@ import ViewTimelineIcon from "@mui/icons-material/ViewTimeline";
 import LabelIcon from "@mui/icons-material/Label";
 import EngineeringIcon from "@mui/icons-material/Engineering";
 import WorkIcon from "@mui/icons-material/Work";
+import SettingsIcon from "@mui/icons-material/Settings";
 import UpcomingIcon from "@mui/icons-material/Upcoming";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -39,6 +40,11 @@ export const NAVIGATION: Navigation = [
     segment: "completedTasks",
     title: "Completed Tasks",
     icon: <CheckCircleIcon />,
+  },
+  {
+    segment: "settings",
+    title: "Settings",
+    icon: <SettingsIcon />,
   },
   {
     kind: "divider",

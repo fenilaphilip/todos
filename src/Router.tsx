@@ -10,6 +10,7 @@ import { LabelOthers } from "./components/labels/Others.tsx";
 import { HighPriorityTasks } from "./components/priority/HighPriority.tsx";
 import { MediumPriorityTasks } from "./components/priority/MediumPriority.tsx";
 import { LowPriorityTasks } from "./components/priority/LowPriority.tsx";
+import Settings from "./components/settings/Settings.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: "/completedTasks",
         Component: TaskCompeleted,
+      },
+      {
+        path: "/settings",
+        Component: Settings,
       },
       {
         path: "/label/leisure",
