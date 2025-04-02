@@ -33,7 +33,7 @@ const Settings: React.FC = () => {
           <ListItemText
             sx={{
               display: "flex",
-              flexDirection: "column",
+              flexDirection: "row",
               alignItems: "flex-start",
               width: "100%",
             }}

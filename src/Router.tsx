@@ -10,7 +10,7 @@ import { LabelOthers } from "./components/labels/Others.tsx";
 import { HighPriorityTasks } from "./components/priority/HighPriority.tsx";
 import { MediumPriorityTasks } from "./components/priority/MediumPriority.tsx";
 import { LowPriorityTasks } from "./components/priority/LowPriority.tsx";
-import Settings from "./components/settings/Settings.tsx";
+import Settings from "./components/Settings.tsx";
 
 export const router = createBrowserRouter([
   {
