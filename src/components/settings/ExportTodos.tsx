@@ -1,7 +1,7 @@
 import React from "react";
 import type { RootState } from "../../store/todoStore";
 import { useSelector } from "react-redux";
-import { Avatar, Box, Button, Paper, Stack, Typography } from "@mui/material";
+import { Box, Button, Paper, Stack, Typography } from "@mui/material";
 import IosShareIcon from "@mui/icons-material/IosShare";
 
 const ExportTodos: React.FC = () => {

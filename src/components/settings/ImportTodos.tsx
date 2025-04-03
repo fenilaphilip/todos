@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Box, Button, Paper, Stack, Typography } from "@mui/material";
+import { Box, Button, Paper, Stack, Typography } from "@mui/material";
 import SystemUpdateAltIcon from "@mui/icons-material/SystemUpdateAlt";
 
 const ImportTodos: React.FC = () => {
