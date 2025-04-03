@@ -1,7 +1,7 @@
 import React from "react";
 import type { RootState } from "../../store/todoStore";
 import { useSelector } from "react-redux";
-import { Box, Button } from "@mui/material";
+import { Avatar, Box, Button, Paper, Stack, Typography } from "@mui/material";
 import IosShareIcon from "@mui/icons-material/IosShare";
 
 const ExportTodos: React.FC = () => {
@@ -20,9 +20,14 @@ const ExportTodos: React.FC = () => {
 
   return (
     <Box>
-      <Button variant="outlined" onClick={handleExport}>
-        Export Todos <IosShareIcon />
-      </Button>
+      <Paper elevation={2}>
+        <Button variant="outlined" onClick={handleExport}>
+          <Stack direction="row" gap={2} padding={1}>
+            <Typography> Export Todos </Typography>
+            <IosShareIcon />
+          </Stack>
+        </Button>
+      </Paper>
     </Box>
   );
 };

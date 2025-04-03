@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Box, Typography } from "@mui/material";
+import { Avatar, Box, Button, Paper, Stack, Typography } from "@mui/material";
 import SystemUpdateAltIcon from "@mui/icons-material/SystemUpdateAlt";
 
 const ImportTodos: React.FC = () => {
@@ -8,11 +8,16 @@ const ImportTodos: React.FC = () => {
   }
 
   return (
-    <Box onClick={handleImport} margin={2}>
-      <Avatar>
-        <SystemUpdateAltIcon />
-      </Avatar>
-      <Typography paddingTop={2}>Import</Typography>
+    <Box>
+      <Paper elevation={2}>
+        <Button variant="outlined" onClick={handleImport}>
+          <Stack direction="row" gap={2} padding={1}>
+            <Typography> Import Todos </Typography>
+
+            <SystemUpdateAltIcon />
+          </Stack>
+        </Button>
+      </Paper>
     </Box>
   );
 };
