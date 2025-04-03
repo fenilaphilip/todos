@@ -14,6 +14,9 @@ const Settings: React.FC = () => {
             <ImportTodos />
           </Stack>
         </SettingsSection>
+        <SettingsSection heading="Edit labels">
+          <></>
+        </SettingsSection>
       </Stack>
     </Container>
   );

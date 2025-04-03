@@ -7,9 +7,9 @@ export const store = configureStore({
 });
 
 store.subscribe(() => {
-    const todoList = store.getState();
-    // console.debug(`Inside subscribe state=${JSON.stringify(todoList)}`);
-    storeTodoList(todoList);
+    const data = store.getState();
+    console.debug(`Inside subscribe state=${JSON.stringify(data)}`);
+    storeTodoList(data);
 })
 
 export type RootState = ReturnType<typeof store.getState>

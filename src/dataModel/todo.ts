@@ -17,3 +17,8 @@ interface Todo {
 }
 
 export default Todo;
+
+export interface StorageModel {
+    todos: Todo[],
+    labels: string[]
+}

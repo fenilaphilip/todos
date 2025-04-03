@@ -96,6 +96,7 @@ const TodoItem: React.FC<{
                   todoUpdate.labels?.map((label) => {
                     return (
                       <Chip
+                        key={label}
                         label={label}
                         size="small"
                         sx={{

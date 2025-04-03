@@ -11,8 +11,7 @@ import {
 } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Todo from "../../dataModel/todo";
-
-const LabelsArray: string[] = ["Personal", "Work", "Leisure", "Others"];
+import { loadLabels } from "../../store/localStorage";
 
 const LabelInput: React.FC<{
   todoUpdate: Todo;
@@ -55,7 +54,7 @@ const LabelInput: React.FC<{
           return selected.join(", ");
         }}
       >
-        {LabelsArray.map((name) => (
+        {loadLabels().map((name) => (
           <MenuItem key={name} value={name}>
             <Checkbox checked={labels.includes(name)} />
             <ListItemText primary={name} />
