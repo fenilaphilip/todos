@@ -38,7 +38,7 @@ const LabelInput: React.FC<{
     };
     setTodoUpdate(UpdateTodo);
     dispatch(editTodo(UpdateTodo));
-    console.debug(`from label input`, UpdateTodo);
+    // console.debug(`from label input`, UpdateTodo);
   }, [labels]);
 
   return (
