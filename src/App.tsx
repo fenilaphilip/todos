@@ -3,7 +3,7 @@ import { ReactRouterAppProvider } from "@toolpad/core/react-router";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { Outlet } from "react-router-dom";
 import Box from "@mui/material/Box";
-import { NAVIGATION } from "./Navigation";
+import NAVIGATION from "./Navigation";
 
 const BRAND: Branding = { logo: "", title: "TODOS" };
 
