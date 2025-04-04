@@ -1,15 +1,19 @@
-import { configureStore } from '@reduxjs/toolkit';
-import todoReducer from "./todoSlice"
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import todoReducer from "./reducers/todoSlice"
 import { storeTodoList } from './localStorage';
+import labelReducer from "./reducers/labelSlice"
 
 export const store = configureStore({
-    reducer: todoReducer,
+    reducer: combineReducers({
+        todoReducer,
+        labelReducer,
+    }),
 });
 
 store.subscribe(() => {
     const data = store.getState();
     console.debug(`Inside subscribe state=${JSON.stringify(data)}`);
-    storeTodoList(data);
+    storeTodoList(data.todoReducer);
 })
 
 export type RootState = ReturnType<typeof store.getState>
