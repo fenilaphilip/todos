@@ -1,4 +1,3 @@
-import React from "react";
 import type { RootState } from "../store/todoStore";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -7,7 +6,7 @@ import TodoItem from "./utils/TodoItem";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const TaskCompeleted: React.FC = () => {
+export default function TaskCompeleted() {
   const todolist = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
   const completedTasklist = todolist.filter((todo) => todo.completed == true);
@@ -46,6 +45,4 @@ const TaskCompeleted: React.FC = () => {
       )}
     </Box>
   );
-};
-
-export default TaskCompeleted;
+}

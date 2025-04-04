@@ -1,10 +1,9 @@
-import React from "react";
 import SettingsSection from "./utils/SettingsSection";
 import { Stack, Container } from "@mui/material";
 import ExportTodos from "./settings/ExportTodos";
 import ImportTodos from "./settings/ImportTodos";
 
-const Settings: React.FC = () => {
+export default function Settings() {
   return (
     <Container maxWidth="md">
       <Stack direction="column" gap={2}>
@@ -15,11 +14,9 @@ const Settings: React.FC = () => {
           </Stack>
         </SettingsSection>
         <SettingsSection heading="Edit labels">
-          <></>
+          <>coming soon</>
         </SettingsSection>
       </Stack>
     </Container>
   );
-};
-
-export default Settings;
+}
