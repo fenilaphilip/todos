@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { editTodo } from "../../store/todoSlice";
+import { editTodo } from "../../store/reducers/todoSlice";
 import {
   InputLabel,
   OutlinedInput,

@@ -1,10 +1,13 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/todoStore";
 import Dashboard from ".././utils/Dashboard";
+import Todo from "../../dataModel/todo";
 
 export default function TaskBucket() {
-  const allTodos = useSelector((state: RootState) => state);
-  const taskUncompleted = allTodos.filter((todo) => todo.completed === false);
+  const allTodos = useSelector((state: RootState) => state.todoReducer);
+  const taskUncompleted = allTodos.filter(
+    (todo: Todo) => todo.completed === false
+  );
   const completedtaskCount = allTodos.length - taskUncompleted.length;
 
   return (

@@ -5,7 +5,7 @@ import { Box, Button, Paper, Stack, Typography } from "@mui/material";
 import IosShareIcon from "@mui/icons-material/IosShare";
 
 const ExportTodos: React.FC = () => {
-  const todolist = useSelector((state: RootState) => state);
+  const todolist = useSelector((state: RootState) => state.todoReducer);
 
   function handleExport() {
     const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(

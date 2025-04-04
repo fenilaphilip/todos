@@ -15,7 +15,6 @@ import {
   Chip,
   Paper,
 } from "@mui/material";
-
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Grid from "@mui/material/Grid2";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -23,7 +22,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import Todo, { Priority } from "../../dataModel/todo";
-import { deleteTodo, editTodo } from "../../store/todoSlice";
+import { deleteTodo, editTodo } from "../../store/reducers/todoSlice";
 import LabelInput from "./LabelInput";
 
 const TodoItem: React.FC<{

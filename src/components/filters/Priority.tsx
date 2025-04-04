@@ -6,7 +6,7 @@ import { Chip, Typography } from "@mui/material";
 import { Priority } from "../../dataModel/todo";
 
 export const PriorityTaskCount: React.FC<{ level: string }> = ({ level }) => {
-  const todolist = useSelector((state: RootState) => state);
+  const todolist = useSelector((state: RootState) => state.todoReducer);
 
   let priority: Priority;
   if (level === "High") priority = Priority.High;
@@ -21,7 +21,7 @@ export const PriorityTaskCount: React.FC<{ level: string }> = ({ level }) => {
 };
 
 export default function PriorityLevel(level: string) {
-  const todolist = useSelector((state: RootState) => state);
+  const todolist = useSelector((state: RootState) => state.todoReducer);
 
   let priority: Priority;
   if (level === "High") priority = Priority.High;

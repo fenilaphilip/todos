@@ -7,7 +7,7 @@ import { Chip } from "@mui/material";
 export const ActiveTaskCount: React.FC<{ labelName: string }> = ({
   labelName,
 }) => {
-  const todolist = useSelector((state: RootState) => state);
+  const todolist = useSelector((state: RootState) => state.todoReducer);
   const catergoryTodo = todolist.filter((todo) =>
     todo.labels?.includes(`${labelName}`)
   );
@@ -19,7 +19,7 @@ export const ActiveTaskCount: React.FC<{ labelName: string }> = ({
 };
 
 export const Labels: React.FC<{ labelName: string }> = ({ labelName }) => {
-  const todolist = useSelector((state: RootState) => state);
+  const todolist = useSelector((state: RootState) => state.todoReducer);
   const catergoryTodo = todolist.filter((todo) =>
     todo.labels?.includes(`${labelName}`)
   );

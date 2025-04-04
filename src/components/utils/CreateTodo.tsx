@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { TextField, IconButton, InputAdornment, Paper } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import Todo, { Priority } from "../../dataModel/todo";
-import { addTodo } from "../../store/todoSlice";
+import { addTodo } from "../../store/reducers/todoSlice";
 import uniqid from "uniqid";
 import useKey from "@rooks/use-key";
 
