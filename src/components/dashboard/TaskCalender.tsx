@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../store/todoStore";
+import { RootState } from "../../store/todoStore";
 import dayjs from "dayjs";
-import Todo from "../dataModel/todo";
+import Todo from "../../dataModel/todo";
 import { Stack, Typography } from "@mui/material";
-import TodoItem from "./utils/TodoItem";
+import TodoItem from "./../utils/TodoItem";
 
 export default function TaskCalender() {
   const todoList = useSelector((state: RootState) => state);

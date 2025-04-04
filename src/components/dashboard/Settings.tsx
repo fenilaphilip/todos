@@ -1,7 +1,7 @@
-import SettingsSection from "./utils/SettingsSection";
+import SettingsSection from "./../utils/SettingsSection";
 import { Stack, Container } from "@mui/material";
-import ExportTodos from "./settings/ExportTodos";
-import ImportTodos from "./settings/ImportTodos";
+import ExportTodos from "./../settings/ExportTodos";
+import ImportTodos from "./../settings/ImportTodos";
 
 export default function Settings() {
   return (
