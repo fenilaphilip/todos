@@ -13,6 +13,5 @@ export const labelSlice = createSlice({
     }
 });
 
-
 export const { addNewLabel } = labelSlice.actions;
 export default labelSlice.reducer;

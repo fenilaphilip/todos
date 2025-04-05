@@ -5,16 +5,18 @@ import LabelIcon from "@mui/icons-material/Label";
 import SettingsIcon from "@mui/icons-material/Settings";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import StarIcon from "@mui/icons-material/Star";
-import { ActiveTaskCount } from "./components/filters/Labels";
 import { loadLabels } from "./store/localStorage";
-import { PriorityTaskCount } from "./components/filters/Priority";
+import {
+  LabelsActiveTaskCount,
+  PriorityActiveTaskCount,
+} from "./components/filters/ActiveTaskCount";
 
 function labelNav() {
   const labelsArrayForNav = loadLabels().map((label) => {
     return {
       segment: label,
       title: label,
-      action: <ActiveTaskCount labelName={label} />,
+      action: <LabelsActiveTaskCount labelName={label} />,
     };
   });
   return labelsArrayForNav;
@@ -26,7 +28,7 @@ function priorityNav() {
     return {
       segment: level,
       title: level,
-      action: <PriorityTaskCount level={level} />,
+      action: <PriorityActiveTaskCount level={level} />,
     };
   });
   return priorityArrayForNav;

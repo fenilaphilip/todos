@@ -12,7 +12,7 @@ const ImportTodos: React.FC = () => {
       <Paper elevation={2}>
         <Button variant="outlined" onClick={handleImport}>
           <Stack direction="row" gap={2} padding={1}>
-            <Typography> Import Todos </Typography>
+            <Typography> Import </Typography>
 
             <SystemUpdateAltIcon />
           </Stack>

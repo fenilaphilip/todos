@@ -1,32 +1,18 @@
-import React from "react";
 import type { RootState } from "../../store/todoStore";
 import { useSelector } from "react-redux";
 import TodoItem from "./../utils/TodoItem";
-import { Chip, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { Priority } from "../../dataModel/todo";
+import { useParams } from "react-router-dom";
 
-export const PriorityTaskCount: React.FC<{ level: string }> = ({ level }) => {
+export default function PriorityLevel() {
   const todolist = useSelector((state: RootState) => state.todoReducer);
+  const { priorityLevel } = useParams();
 
   let priority: Priority;
-  if (level === "High") priority = Priority.High;
-  else if (level === "Medium") priority = Priority.Medium;
-  else if (level === "Low") priority = Priority.Low;
-
-  const priorityTodo = todolist.filter(
-    (todo) => todo.priority === priority && todo.completed === false
-  );
-
-  return <Chip label={priorityTodo.length} size="small" color="primary" />;
-};
-
-export default function PriorityLevel(level: string) {
-  const todolist = useSelector((state: RootState) => state.todoReducer);
-
-  let priority: Priority;
-  if (level === "High") priority = Priority.High;
-  else if (level === "Medium") priority = Priority.Medium;
-  else if (level === "Low") priority = Priority.Low;
+  if (priorityLevel === "High") priority = Priority.High;
+  else if (priorityLevel === "Medium") priority = Priority.Medium;
+  else if (priorityLevel === "Low") priority = Priority.Low;
 
   const priorityTodo = todolist.filter(
     (todo) => todo.priority === priority && todo.completed === false
@@ -39,7 +25,7 @@ export default function PriorityLevel(level: string) {
       )}
       {todolist.length !== 0 && priorityTaskCount === 0 && (
         <Typography variant="h6">
-          There is nothing assigned to {level} priority !
+          There is nothing assigned to {priorityLevel} priority !
         </Typography>
       )}
       {priorityTaskCount !== 0 &&

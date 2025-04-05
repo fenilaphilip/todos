@@ -23,7 +23,7 @@ const ExportTodos: React.FC = () => {
       <Paper elevation={2}>
         <Button variant="outlined" onClick={handleExport}>
           <Stack direction="row" gap={2} padding={1}>
-            <Typography> Export Todos </Typography>
+            <Typography> Export</Typography>
             <IosShareIcon />
           </Stack>
         </Button>
