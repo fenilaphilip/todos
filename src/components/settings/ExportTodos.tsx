@@ -5,15 +5,15 @@ import { Box, Button, Paper, Stack, Typography } from "@mui/material";
 import IosShareIcon from "@mui/icons-material/IosShare";
 
 const ExportTodos: React.FC = () => {
-  const todolist = useSelector((state: RootState) => state.todoReducer);
+  const todos = useSelector((state: RootState) => state);
 
   function handleExport() {
     const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
-      JSON.stringify(todolist)
+      JSON.stringify(todos)
     )}`;
     const link = document.createElement("a");
     link.href = jsonString;
-    link.download = "todolist.json";
+    link.download = "todos.json";
 
     link.click();
   }

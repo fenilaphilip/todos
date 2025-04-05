@@ -23,7 +23,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 
 const EditLabels: React.FC = () => {
-  const labelsArray = useSelector((state: RootState) => state.labelReducer);
+  const labelsArray = useSelector((state: RootState) => state.LABELS);
   const newlabel = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
 

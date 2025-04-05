@@ -6,7 +6,7 @@ import { Priority } from "../../dataModel/todo";
 import { useParams } from "react-router-dom";
 
 export default function PriorityLevel() {
-  const todolist = useSelector((state: RootState) => state.todoReducer);
+  const todolist = useSelector((state: RootState) => state.TODOS);
   const { priorityLevel } = useParams();
 
   let priority: Priority;

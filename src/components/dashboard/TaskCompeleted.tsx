@@ -8,7 +8,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Todo from "../../dataModel/todo";
 
 export default function TaskCompeleted() {
-  const todolist = useSelector((state: RootState) => state.todoReducer);
+  const todolist = useSelector((state: RootState) => state.TODOS);
   const dispatch = useDispatch();
   const completedTasklist = todolist.filter(
     (todo: Todo) => todo.completed == true

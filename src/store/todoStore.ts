@@ -5,16 +5,16 @@ import labelReducer from "./reducers/labelSlice"
 
 export const store = configureStore({
     reducer: combineReducers({
-        todoReducer,
-        labelReducer,
+        TODOS: todoReducer,
+        LABELS: labelReducer,
     }),
 });
 
 store.subscribe(() => {
     const data = store.getState();
     console.debug(`Inside subscribe state=${JSON.stringify(data)}`);
-    storeTodoList(data.todoReducer);
-    storeLabels(data.labelReducer);
+    storeTodoList(data.TODOS);
+    storeLabels(data.LABELS);
 })
 
 export type RootState = ReturnType<typeof store.getState>
