@@ -1,11 +1,11 @@
 import React from "react";
 import type { RootState } from "../../store/todoStore";
 import { useSelector } from "react-redux";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Paper, Stack, Typography } from "@mui/material";
 import IosShareIcon from "@mui/icons-material/IosShare";
 
 const ExportTodos: React.FC = () => {
-  const todolist = useSelector((state: RootState) => state);
+  const todolist = useSelector((state: RootState) => state.todoReducer);
 
   function handleExport() {
     const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
@@ -20,9 +20,14 @@ const ExportTodos: React.FC = () => {
 
   return (
     <Box>
-      <Button variant="outlined" onClick={handleExport}>
-        Export Todos <IosShareIcon />
-      </Button>
+      <Paper elevation={2}>
+        <Button variant="outlined" onClick={handleExport}>
+          <Stack direction="row" gap={2} padding={1}>
+            <Typography> Export</Typography>
+            <IosShareIcon />
+          </Stack>
+        </Button>
+      </Paper>
     </Box>
   );
 };

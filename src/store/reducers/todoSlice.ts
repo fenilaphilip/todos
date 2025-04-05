@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
-import Todo from '../dataModel/todo';
-import { loadTodoList } from './localStorage';
+import Todo from '../../dataModel/todo';
+import { loadTodoList } from './../localStorage';
 
 export const todoSlice = createSlice({
     name: 'todos',

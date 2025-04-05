@@ -1,14 +1,16 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../store/todoStore";
+import { RootState } from "../../store/todoStore";
 import dayjs from "dayjs";
-import Todo from "../dataModel/todo";
+import Todo from "../../dataModel/todo";
 import { Stack, Typography } from "@mui/material";
-import TodoItem from "./utils/TodoItem";
+import TodoItem from "./../utils/TodoItem";
 
 export default function TaskCalender() {
-  const todoList = useSelector((state: RootState) => state);
-  const unFinishedTasks = todoList.filter((todo) => todo.completed === false);
-  const unDoneSortedByDate = unFinishedTasks.sort((a, b) =>
+  const todoList = useSelector((state: RootState) => state.todoReducer);
+  const unFinishedTasks = todoList.filter(
+    (todo: Todo) => todo.completed === false
+  );
+  const unDoneSortedByDate = unFinishedTasks.sort((a: Todo, b: Todo) =>
     dayjs(a.dueDate).diff(dayjs(b.dueDate))
   );
 
@@ -16,7 +18,7 @@ export default function TaskCalender() {
     [key: string]: Todo[];
   } = {};
 
-  unDoneSortedByDate.forEach((toDo) => {
+  unDoneSortedByDate.forEach((toDo: Todo) => {
     const date = dayjs(toDo.dueDate).format("DD-MM-YYYY");
     if (calenderTodos[date]) {
       calenderTodos[date].push(toDo);
