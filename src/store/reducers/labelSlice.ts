@@ -9,9 +9,16 @@ export const labelSlice = createSlice({
     reducers: {
         addNewLabel: (state, action: PayloadAction<string>) => {
             state.push(action.payload);
+        },
+        removeLabel: (state, action: PayloadAction<string>) => {
+            const updatedLabelArray = state.filter((label: string) => label !== action.payload);
+            return updatedLabelArray;
+        },
+        editLabel: (state) => {
+            return state;
         }
     }
 });
 
-export const { addNewLabel } = labelSlice.actions;
+export const { addNewLabel, removeLabel, editLabel } = labelSlice.actions;
 export default labelSlice.reducer;
