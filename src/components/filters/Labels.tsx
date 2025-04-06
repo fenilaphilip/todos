@@ -4,7 +4,7 @@ import Dashboard from "../utils/Dashboard";
 import { useParams } from "react-router-dom";
 
 export default function Labels() {
-  const todolist = useSelector((state: RootState) => state.todoReducer);
+  const todolist = useSelector((state: RootState) => state.TODOS);
   const { labelName } = useParams();
 
   const catergoryTodo = todolist.filter((todo) =>

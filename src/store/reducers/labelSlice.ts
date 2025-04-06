@@ -9,9 +9,22 @@ export const labelSlice = createSlice({
     reducers: {
         addNewLabel: (state, action: PayloadAction<string>) => {
             state.push(action.payload);
+        },
+        removeLabel: (state, action: PayloadAction<string>) => {
+            const updatedLabelArray = state.filter((label: string) => label !== action.payload);
+            return updatedLabelArray;
+        },
+        editLabel: (state, action: PayloadAction<{
+            oldLabel: string;
+            newLabel: string;
+        }>) => {
+            const { oldLabel, newLabel } = action.payload;
+            const index = state.findIndex((label) => label === oldLabel);
+            state[index] = newLabel;
+            return state;
         }
     }
 });
 
-export const { addNewLabel } = labelSlice.actions;
+export const { addNewLabel, removeLabel, editLabel } = labelSlice.actions;
 export default labelSlice.reducer;

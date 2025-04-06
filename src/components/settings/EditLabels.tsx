@@ -1,54 +1,109 @@
-import React from "react";
+import { useRef } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/todoStore";
+import { useDispatch } from "react-redux";
 import {
-  Button,
+  addNewLabel,
+  removeLabel,
+  editLabel,
+} from "../../store/reducers/labelSlice";
+import {
+  IconButton,
+  Input,
+  InputAdornment,
   Paper,
   Table,
   TableBody,
   TableCell,
-  TableContainer,
   TableHead,
   TableRow,
   TextField,
 } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { loadLabels } from "../../store/localStorage";
+import AddIcon from "@mui/icons-material/Add";
+import useKey from "@rooks/use-key";
 
-const EditLabels: React.FC = () => {
+export default function EditLabels() {
+  const labelsArray = useSelector((state: RootState) => state.LABELS);
+  const newlabel = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
+
+  useKey(["Enter"], windowEnter, {
+    target: newlabel,
+  });
+
+  function windowEnter() {
+    handleAddLabel();
+  }
+  const handleAddLabel = () => {
+    const label = newlabel.current!.value;
+    if (label.trim().length === 0) {
+      alert("Please enter a label");
+      return;
+    }
+    const labelCalled = label.charAt(0).toUpperCase() + label.slice(1);
+    dispatch(addNewLabel(labelCalled));
+    newlabel.current!.value = "";
+  };
+
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="left">Label Name</TableCell>
-            <TableCell align="right" width={1}>
-              Edit
-            </TableCell>
-            <TableCell align="right" width={1}>
-              Remove
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {loadLabels().map((label) => (
-            <TableRow key={label}>
-              <TableCell>{label}</TableCell>
-              <TableCell>
-                <EditIcon />
-              </TableCell>
-              <TableCell>
-                <DeleteIcon />
+    <>
+      <Paper>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="left">Label Name</TableCell>
+              <TableCell align="center" width={1}>
+                Remove
               </TableCell>
             </TableRow>
-          ))}
-          <TableCell align="center">
-            <TextField label="Enter new label" variant="outlined" />
-            <Button variant="outlined"> ADD </Button>
-          </TableCell>
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {labelsArray.map((label: string, index: number) => (
+              <LabelRow key={index} label={label} />
+            ))}
+          </TableBody>
+        </Table>
+        <TextField
+          fullWidth
+          placeholder="Enter a new label"
+          inputRef={newlabel}
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <IconButton onClick={handleAddLabel}>
+                    <AddIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            },
+          }}
+        />
+      </Paper>
+    </>
+  );
+}
+
+const LabelRow: React.FC<{ label: string }> = ({ label }) => {
+  const dispatch = useDispatch();
+
+  return (
+    <TableRow>
+      <TableCell>
+        <Input
+          fullWidth
+          value={label}
+          onChange={(e) => {
+            dispatch(editLabel({ oldLabel: label, newLabel: e.target.value }));
+          }}
+        />
+      </TableCell>
+      <TableCell>
+        <IconButton onClick={() => dispatch(removeLabel(label))}>
+          <DeleteIcon />
+        </IconButton>
+      </TableCell>
+    </TableRow>
   );
 };
-
-export default EditLabels;

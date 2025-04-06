@@ -6,7 +6,7 @@ import { Priority } from "../../dataModel/todo";
 export const LabelsActiveTaskCount: React.FC<{ labelName: string }> = ({
   labelName,
 }) => {
-  const todolist = useSelector((state: RootState) => state.todoReducer);
+  const todolist = useSelector((state: RootState) => state.TODOS);
   const catergoryTodo = todolist.filter((todo) =>
     todo.labels?.includes(`${labelName}`)
   );
@@ -20,7 +20,7 @@ export const LabelsActiveTaskCount: React.FC<{ labelName: string }> = ({
 export const PriorityActiveTaskCount: React.FC<{ level: string }> = ({
   level,
 }) => {
-  const todolist = useSelector((state: RootState) => state.todoReducer);
+  const todolist = useSelector((state: RootState) => state.TODOS);
 
   let priority: Priority;
   if (level === "High") priority = Priority.High;

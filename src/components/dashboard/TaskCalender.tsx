@@ -6,7 +6,7 @@ import { Stack, Typography } from "@mui/material";
 import TodoItem from "./../utils/TodoItem";
 
 export default function TaskCalender() {
-  const todoList = useSelector((state: RootState) => state.todoReducer);
+  const todoList = useSelector((state: RootState) => state.TODOS);
   const unFinishedTasks = todoList.filter(
     (todo: Todo) => todo.completed === false
   );
