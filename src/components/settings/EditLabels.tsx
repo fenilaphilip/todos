@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/todoStore";
 import { useDispatch } from "react-redux";
@@ -9,6 +9,7 @@ import {
 } from "../../store/reducers/labelSlice";
 import {
   IconButton,
+  Input,
   InputAdornment,
   Paper,
   Table,
@@ -18,12 +19,11 @@ import {
   TableRow,
   TextField,
 } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import useKey from "@rooks/use-key";
 
-const EditLabels: React.FC = () => {
+export default function EditLabels() {
   const labelsArray = useSelector((state: RootState) => state.LABELS);
   const newlabel = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
@@ -35,7 +35,6 @@ const EditLabels: React.FC = () => {
   function windowEnter() {
     handleAddLabel();
   }
-
   const handleAddLabel = () => {
     const label = newlabel.current!.value;
     if (label.trim().length === 0) {
@@ -55,28 +54,13 @@ const EditLabels: React.FC = () => {
             <TableRow>
               <TableCell align="left">Label Name</TableCell>
               <TableCell align="center" width={1}>
-                Edit
-              </TableCell>
-              <TableCell align="center" width={1}>
                 Remove
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {labelsArray.map((label: string) => (
-              <TableRow key={label}>
-                <TableCell>{label}</TableCell>
-                <TableCell>
-                  <IconButton onClick={() => dispatch(editLabel())}>
-                    <EditIcon />
-                  </IconButton>
-                </TableCell>
-                <TableCell>
-                  <IconButton onClick={() => dispatch(removeLabel(label))}>
-                    <DeleteIcon />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
+            {labelsArray.map((label: string, index: number) => (
+              <LabelRow key={index} label={label} />
             ))}
           </TableBody>
         </Table>
@@ -99,6 +83,27 @@ const EditLabels: React.FC = () => {
       </Paper>
     </>
   );
-};
+}
 
-export default EditLabels;
+const LabelRow: React.FC<{ label: string }> = ({ label }) => {
+  const dispatch = useDispatch();
+
+  return (
+    <TableRow>
+      <TableCell>
+        <Input
+          fullWidth
+          value={label}
+          onChange={(e) => {
+            dispatch(editLabel({ oldLabel: label, newLabel: e.target.value }));
+          }}
+        />
+      </TableCell>
+      <TableCell>
+        <IconButton onClick={() => dispatch(removeLabel(label))}>
+          <DeleteIcon />
+        </IconButton>
+      </TableCell>
+    </TableRow>
+  );
+};

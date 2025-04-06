@@ -14,7 +14,13 @@ export const labelSlice = createSlice({
             const updatedLabelArray = state.filter((label: string) => label !== action.payload);
             return updatedLabelArray;
         },
-        editLabel: (state) => {
+        editLabel: (state, action: PayloadAction<{
+            oldLabel: string;
+            newLabel: string;
+        }>) => {
+            const { oldLabel, newLabel } = action.payload;
+            const index = state.findIndex((label) => label === oldLabel);
+            state[index] = newLabel;
             return state;
         }
     }
