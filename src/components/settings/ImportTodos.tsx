@@ -23,7 +23,7 @@ const ImportTodos: React.FC = () => {
       reader.onload = function (e) {
         try {
           const jsonData = JSON.parse(e.target?.result as string);
-          console.log(jsonData);
+          console.log(`from Import todos`, jsonData);
           setSnackbarMessage("File imported successfully!");
         } catch (error) {
           console.error("Error parsing JSON:", error);
@@ -56,7 +56,7 @@ const ImportTodos: React.FC = () => {
           }}
         />
         <Button variant="outlined" onClick={handleImport}>
-          <SystemUpdateAltIcon />{" "}
+          <SystemUpdateAltIcon />
           <Typography marginLeft={1}> IMPORT</Typography>
         </Button>
       </Stack>
