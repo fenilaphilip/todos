@@ -2,7 +2,7 @@
 
 Todos application built using React, Redux Toolkit, React Router and Material UI. These powerful combination of technologies offers a seamless and intuitive user experience, allowing you to efficiently manage your tasks.
 
-[![Live](https://img.shields.io/badge/-Live-blue?&style=flat)](https://deploy-preview-2--stellular-manatee-0253a4.netlify.app/)
+[![Live](https://img.shields.io/badge/-Live-blue?&style=flat)](https://todosplanner.netlify.app/)
 
 ## Features
 
@@ -31,18 +31,20 @@ To install `Todos`, follow these steps:
 1. Clone the repository: **`git clone https://github.com/fenilaphilip/todos.git`**
 2. Navigate to the project directory: **`cd todos`**
 3. Install dependencies: **`npm install`**
-4. Start the project: **`npm start`**
-5. Go to **`http://localhost:3000`**
+4. Start the project: **`npm run dev`**
+5. Go to **`http://localhost:5173`**
 
 ## Test Automation
 
 For doing end-2-end application testing using cypress.
 
-1. Start local development server `npm run start`
+1. Start local development server `npm run dev`
 2. In another terminal `npm run cy:open`
 3. Select `e2e` testing
 4. Select browser `chrome` / `edge`/ `firefox`
 5. Open file `todos.cy.js`
+
+NOTE: The end to end tests can be executed directly using `npm test` as well.
 
 ## **Contribute**
 
