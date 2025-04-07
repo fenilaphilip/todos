@@ -55,5 +55,8 @@
     "start-server-and-test": "^2.0.10",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.39.0"
   }
 }
