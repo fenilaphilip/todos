@@ -5,11 +5,15 @@ import SystemUpdateAltIcon from "@mui/icons-material/SystemUpdateAlt";
 import CloseIcon from "@mui/icons-material/Close";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import { useDispatch } from "react-redux";
+import { setLabel } from "../../store/reducers/labelSlice";
+import { setTodos } from "../../store/reducers/todoSlice";
 
 const ImportTodos: React.FC = () => {
   const [file, setFile] = React.useState<File | null>(null);
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);
   const [snackbarMessage, setSnackbarMessage] = React.useState("");
+  const dispatch = useDispatch();
 
   const handleImport = () => {
     if (file === null) {
@@ -23,8 +27,10 @@ const ImportTodos: React.FC = () => {
       reader.onload = function (e) {
         try {
           const jsonData = JSON.parse(e.target?.result as string);
-          console.log(`from Import todos`, jsonData);
+          console.log(`from Import todos jsonData=${jsonData}`);
           setSnackbarMessage("File imported successfully!");
+          if (jsonData["LABELS"]) dispatch(setLabel(jsonData["LABELS"]));
+          if (jsonData["TODOS"]) dispatch(setTodos(jsonData["TODOS"]));
         } catch (error) {
           console.error("Error parsing JSON:", error);
           setSnackbarMessage("Error parsing JSON file.");
