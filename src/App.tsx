@@ -16,9 +16,10 @@ import {
 } from "./components/filters/ActiveTaskCount";
 import { useSelector } from "react-redux";
 import { RootState } from "./store/todoStore";
+import Logo from "./assets/todosIcon.png";
 
 const BRAND: Branding = {
-  logo: <img src="todosIcon.png" alt="Todos logo" />,
+  logo: <img src={Logo} alt="Todos logo" />,
   title: "TODOS",
 };
 
