@@ -26,7 +26,7 @@ const Dashboard: React.FC<{
 
   return (
     <>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} marginTop={2}>
         <Grid size={{ xs: 12, sm: 9, md: 10 }}>
           <CreateTodo taskCreateLabel={labelName} />
         </Grid>

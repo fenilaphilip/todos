@@ -12,7 +12,7 @@ export const store = configureStore({
 
 store.subscribe(() => {
     const data = store.getState();
-    console.debug(`Inside subscribe state=${JSON.stringify(data)}`);
+    // console.debug(`Inside subscribe state=${JSON.stringify(data)}`);
     storeTodoList(data.TODOS);
     storeLabels(data.LABELS);
 })
