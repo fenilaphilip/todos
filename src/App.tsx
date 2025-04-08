@@ -17,7 +17,10 @@ import {
 import { useSelector } from "react-redux";
 import { RootState } from "./store/todoStore";
 
-const BRAND: Branding = { logo: "", title: "TODOS" };
+const BRAND: Branding = {
+  logo: <img src="todosIcon.png" alt="Todos logo" />,
+  title: "TODOS",
+};
 
 export default function App() {
   const Labels = useSelector((state: RootState) => state.LABELS);
