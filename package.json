@@ -18,7 +18,7 @@
     "@emotion/styled": "^11.14.0",
     "@fontsource/roboto": "^5.2.5",
     "@mui/icons-material": "^6.4.6",
-    "@mui/material": "^6.4.6",
+    "@mui/material": "^6.4.10",
     "@mui/styled-engine-sc": "^6.4.6",
     "@mui/x-date-pickers": "^7.27.1",
     "@reduxjs/toolkit": "^2.6.0",
@@ -26,6 +26,7 @@
     "@tailwindcss/vite": "^4.0.8",
     "@toolpad/core": "^0.12.1",
     "dayjs": "^1.11.13",
+    "mui-file-input": "^7.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.2.0",
@@ -52,6 +53,11 @@
     "eslint-plugin-react-refresh": "^0.4.6",
     "start-server-and-test": "^2.0.10",
     "typescript": "^5.2.2",
-    "vite": "^5.2.0"
+    "vite": "^5.2.0",
+    "vite-plugin-pwa": "^1.0.0"
+  },
+  "optionalDependencies": {
+    "@esbuild/linux-x64": "^0.25.2",
+    "@rollup/rollup-linux-x64-gnu": "4.39.0"
   }
 }

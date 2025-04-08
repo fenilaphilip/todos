@@ -22,9 +22,13 @@ export const labelSlice = createSlice({
             const index = state.findIndex((label) => label === oldLabel);
             state[index] = newLabel;
             return state;
+        },
+        setLabel: (state, action: PayloadAction<string[]>) => { //handle import
+            state = action.payload;
+            return state;
         }
     }
 });
 
-export const { addNewLabel, removeLabel, editLabel } = labelSlice.actions;
+export const { addNewLabel, removeLabel, editLabel, setLabel } = labelSlice.actions;
 export default labelSlice.reducer;

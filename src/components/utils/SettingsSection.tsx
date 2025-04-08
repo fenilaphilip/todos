@@ -16,7 +16,7 @@ const SettingsSection: React.FC<{
     <Paper elevation={2}>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography variant="body1">{heading}</Typography>
+          <Typography variant="h6">{heading}</Typography>
         </AccordionSummary>
         <AccordionDetails>{children}</AccordionDetails>
       </Accordion>
