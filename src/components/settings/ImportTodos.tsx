@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Grid2, Stack, Typography } from "@mui/material";
 import { MuiFileInput } from "mui-file-input";
 import SystemUpdateAltIcon from "@mui/icons-material/SystemUpdateAlt";
 import CloseIcon from "@mui/icons-material/Close";
@@ -46,7 +46,7 @@ const ImportTodos: React.FC = () => {
 
   return (
     <Box>
-      <Stack gap={2} direction="row">
+      <Grid2>
         <MuiFileInput
           value={file}
           onChange={(newFile: File | null) => {
@@ -60,12 +60,24 @@ const ImportTodos: React.FC = () => {
             title: "Remove",
             children: <CloseIcon fontSize="small" />,
           }}
+          sx={{
+            margin: "2px",
+          }}
         />
-        <Button variant="outlined" onClick={handleImport}>
+        <Button
+          variant="outlined"
+          onClick={handleImport}
+          sx={{
+            margin: "2px",
+          }}
+        >
           <SystemUpdateAltIcon />
-          <Typography marginLeft={1}> IMPORT</Typography>
+          <Typography marginLeft={1} padding={0.2}>
+            {" "}
+            IMPORT
+          </Typography>
         </Button>
-      </Stack>
+      </Grid2>
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={6000}
