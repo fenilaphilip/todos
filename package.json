@@ -25,7 +25,6 @@
     "@rooks/use-key": "^4.11.2",
     "@tailwindcss/vite": "^4.0.8",
     "@toolpad/core": "^0.12.1",
-    "axios": "^1.8.4",
     "dayjs": "^1.11.13",
     "mui-file-input": "^7.0.0",
     "react": "^18.2.0",
