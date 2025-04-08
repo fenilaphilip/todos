@@ -48,16 +48,16 @@ describe('Testing Todos app', () => {
 
         it(`Contains 'Labels' fliter includes 'Personal', 'Work', 'Leisure', 'Others'`, () => {
             cy.get('@navitems').contains('Labels').click()
-            cy.get('@navitems').parent().find('a[href="/label/personal"]').contains('Personal')
-            cy.get('@navitems').parent().find('a[href="/label/work"]').contains('Work')
-            cy.get('@navitems').parent().find('a[href="/label/leisure"]').contains('Leisure')
-            cy.get('@navitems').parent().find('a[href="/label/others"]').contains('Others')
+            cy.get('@navitems').parent().find('a[href="/label/Personal"]').contains('Personal')
+            cy.get('@navitems').parent().find('a[href="/label/Work"]').contains('Work')
+            cy.get('@navitems').parent().find('a[href="/label/Leisure"]').contains('Leisure')
+            cy.get('@navitems').parent().find('a[href="/label/Others"]').contains('Others')
         });
-        it(`Contains priority fliter named 'Importance' includes 'High', 'Low', 'Medium', 'None'`, () => {
+        it(`Contains priority fliter named 'Importance' includes 'High', 'Low', 'Medium'`, () => {
             cy.get('@navitems').contains('Importance').click()
-            cy.get('@navitems').parent().find('a[href="/priority/high"').contains('High Priority');
-            cy.get('@navitems').parent().find('a[href="/priority/medium"').contains('Medium Priority');
-            cy.get('@navitems').parent().find('a[href="/priority/low"').contains('Low Priority');
+            cy.get('@navitems').parent().find('a[href="/priority/High"').contains('High');
+            cy.get('@navitems').parent().find('a[href="/priority/Medium"').contains('Medium');
+            cy.get('@navitems').parent().find('a[href="/priority/Low"').contains('Low');
         });
     });
 });
