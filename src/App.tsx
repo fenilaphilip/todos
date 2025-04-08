@@ -20,7 +20,7 @@ import Logo from "./assets/todosIcon.png";
 import { Container } from "@mui/material";
 
 const BRAND: Branding = {
-  logo: <img src={Logo} alt="Todos logo" />,
+  logo: <img src={Logo} />,
   title: "TODOS",
 };
 
@@ -31,7 +31,7 @@ export default function App() {
       return {
         segment: label,
         title: label,
-        action: <LabelsActiveTaskCount labelName={label} />,
+        action: <LabelsActiveTaskCount key={label} labelName={label} />,
       };
     });
     return labelsArrayForNav;
@@ -43,7 +43,7 @@ export default function App() {
       return {
         segment: level,
         title: level,
-        action: <PriorityActiveTaskCount level={level} />,
+        action: <PriorityActiveTaskCount key={level} level={level} />,
       };
     });
     return priorityArrayForNav;

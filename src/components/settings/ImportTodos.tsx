@@ -27,7 +27,7 @@ const ImportTodos: React.FC = () => {
       reader.onload = function (e) {
         try {
           const jsonData = JSON.parse(e.target?.result as string);
-          console.log(`from Import todos jsonData=${jsonData}`);
+          // console.log(`from Import todos jsonData=${jsonData}`);
           setSnackbarMessage("File imported successfully!");
           if (jsonData["LABELS"]) dispatch(setLabel(jsonData["LABELS"]));
           if (jsonData["TODOS"]) dispatch(setTodos(jsonData["TODOS"]));
