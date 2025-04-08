@@ -30,6 +30,9 @@ export default function TaskCompeleted() {
               startIcon={<DeleteIcon />}
               size="medium"
               onClick={() => dispatch(clearCompleted())}
+              sx={{
+                marginTop: "20px",
+              }}
             >
               Clear All
             </Button>

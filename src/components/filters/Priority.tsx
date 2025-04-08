@@ -21,10 +21,12 @@ export default function PriorityLevel() {
   return (
     <>
       {todolist.length === 0 && (
-        <Typography variant="h6">Your Task Bucket is empty!</Typography>
+        <Typography variant="h6" margin={2}>
+          Your Task Bucket is empty!
+        </Typography>
       )}
       {todolist.length !== 0 && priorityTaskCount === 0 && (
-        <Typography variant="h6">
+        <Typography variant="h6" margin={2}>
           There is nothing assigned to {priorityLevel} priority !
         </Typography>
       )}

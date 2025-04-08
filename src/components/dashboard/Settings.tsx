@@ -6,7 +6,7 @@ import EditLabels from "../settings/EditLabels";
 
 export default function Settings() {
   return (
-    <Stack direction="column" gap={2}>
+    <Stack direction="column" gap={2} marginTop={2}>
       <SettingsSection heading="Export Todos JSON">
         <ExportTodos />
       </SettingsSection>

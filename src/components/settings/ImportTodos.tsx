@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Grid2, Stack, Typography } from "@mui/material";
+import { Box, Button, Grid2, Typography } from "@mui/material";
 import { MuiFileInput } from "mui-file-input";
 import SystemUpdateAltIcon from "@mui/icons-material/SystemUpdateAlt";
 import CloseIcon from "@mui/icons-material/Close";
@@ -73,7 +73,6 @@ const ImportTodos: React.FC = () => {
         >
           <SystemUpdateAltIcon />
           <Typography marginLeft={1} padding={0.2}>
-            {" "}
             IMPORT
           </Typography>
         </Button>
