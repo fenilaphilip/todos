@@ -16,11 +16,10 @@ import {
 } from "./components/filters/ActiveTaskCount";
 import { useSelector } from "react-redux";
 import { RootState } from "./store/todoStore";
-import Logo from "./assets/todosIcon.png";
 import { Container } from "@mui/material";
 
 const BRAND: Branding = {
-  logo: <img src={Logo} />,
+  logo: <img src="android-chrome-192x192.png" alt="logo" />,
   title: "TODOS",
 };
 
