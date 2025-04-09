@@ -11,6 +11,7 @@ Todos application built using React, Redux Toolkit, React Router and Material UI
 - Seamless integration of Redux with React components for enhanced functionality.
 - Users can navigate smoothly between pages by React Router, making this app feel intuitive and responsive.
 - Material UI's sleek and responsive design enhances the beauty of this app.
+- PWA allows for offline access, resulting in a more native app-like experience for users.
 
 ## Technologies
 
