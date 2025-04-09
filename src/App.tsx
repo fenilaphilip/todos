@@ -10,6 +10,7 @@ import LabelIcon from "@mui/icons-material/Label";
 import SettingsIcon from "@mui/icons-material/Settings";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import StarIcon from "@mui/icons-material/Star";
+import InfoIcon from "@mui/icons-material/Info";
 import {
   LabelsActiveTaskCount,
   PriorityActiveTaskCount,
@@ -57,7 +58,6 @@ export default function App() {
       segment: "allTasks",
       title: "Task Bucket",
       icon: <BallotIcon />,
-      pattern: "test-pattern",
     },
     {
       segment: "calenderView",
@@ -73,6 +73,11 @@ export default function App() {
       segment: "settings",
       title: "Settings",
       icon: <SettingsIcon />,
+    },
+    {
+      segment: "Info",
+      title: "Info",
+      icon: <InfoIcon />,
     },
     {
       kind: "divider",

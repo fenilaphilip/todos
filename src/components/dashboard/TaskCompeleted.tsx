@@ -17,10 +17,14 @@ export default function TaskCompeleted() {
   return (
     <Box>
       {todolist.length === 0 && (
-        <Typography variant="h6">Your Task Bucket is empty!</Typography>
+        <Typography variant="h6" marginTop={2}>
+          Your Task Bucket is empty!
+        </Typography>
       )}
       {todolist.length !== 0 && completedTasklist.length === 0 && (
-        <Typography variant="h6">No Task is completed yet!</Typography>
+        <Typography variant="h6" marginTop={2}>
+          No Task is completed yet!
+        </Typography>
       )}
       {completedTasklist.length !== 0 && (
         <>
