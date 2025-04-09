@@ -6,6 +6,7 @@ import TaskCompeleted from "./components/dashboard/TaskCompeleted.tsx";
 import Settings from "./components/dashboard/Settings.tsx";
 import Labels from "./components/filters/Labels.tsx";
 import Priority from "./components/filters/Priority.tsx";
+import Info from "./components/dashboard/Info.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: "/settings",
         Component: Settings,
+      },
+      {
+        path: "/Info",
+        Component: Info,
       },
       {
         path: "/label/:labelName",

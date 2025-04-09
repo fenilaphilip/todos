@@ -32,7 +32,9 @@ export default function TaskCalender() {
   return (
     <>
       {todoList.length === 0 && (
-        <Typography variant="h6">Your Task Bucket is empty!</Typography>
+        <Typography variant="h6" marginTop={2}>
+          Your Task Bucket is empty!
+        </Typography>
       )}
       {Object.entries(calenderTodos).map(([key, value]) => {
         return (
