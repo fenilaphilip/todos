@@ -37,11 +37,11 @@ export default function Info() {
           </Typography>
           <Typography variant="body1" gutterBottom>
             Welcome to Todos, your ultimate companion for task management!
-            <p>
+            <div>
               In today's fast-paced world, staying organized is essential. The
               Todos app is here to help you manage your tasks effectively and
               achieve your goals.
-            </p>
+            </div>
           </Typography>
           <Typography variant="h5" gutterBottom>
             Key Features
@@ -78,7 +78,7 @@ export default function Info() {
           <Typography variant="body1" gutterBottom>
             Your thoughts matter! Share your feedback with us to help improve
             your experience and make Todos even better.
-            <p>
+            <div>
               <a href="https://github.com/fenilaphilip/todos">
                 <StyledChip
                   label="Github"
@@ -86,7 +86,7 @@ export default function Info() {
                   icon={<GitHubIcon />}
                 />
               </a>
-            </p>
+            </div>
           </Typography>
         </CardContent>
       </Card>
