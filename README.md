@@ -2,7 +2,7 @@
 
 Todos application built using React, Redux Toolkit, React Router and Material UI. These powerful combination of technologies offers a seamless and intuitive user experience, allowing you to efficiently manage your tasks.
 
-[![Live](https://img.shields.io/badge/-Live-blue?&style=flat)](https://todosplanner.netlify.app/)
+[![Live](https://img.shields.io/badge/-Live-blue?&style=flat)](https://todos.fenilas.com)
 
 ## Features
 
@@ -14,13 +14,14 @@ Todos application built using React, Redux Toolkit, React Router and Material UI
 
 ## Technologies
 
+![PWA](https://img.shields.io/badge/-Progressive%20Web%20App-purple?logo=PWA&logoColor=white&style=flat)
 ![Typescript](https://img.shields.io/badge/-Typescript-blue?logo=Typescript&logoColor=white&style=flat)
 ![React](https://img.shields.io/badge/-ReactJS-lightyellow?logo=react&logoColor=blue&style=flat)
 ![React Router](https://img.shields.io/badge/-React%20Router-black?logo=reactRouter&logoColor=blue&style=flat)
 ![Redux](https://img.shields.io/badge/-Redux-darkgreen?logo=Redux&logoColor=white&style=flat)
 ![ReduxToolkit](https://img.shields.io/badge/-ReduxToolkit-violet?logo=Redux&logoColor=black&style=flat)
 ![Cypress](https://img.shields.io/badge/-Cypress-98FB98?logo=Cypress&logoColor=black&style=flat)
-![Material UI](https://img.shields.io/badge/-MUI-black?logo=MUI&logoColor=blue&style=flat)
+![Material UI](https://img.shields.io/badge/-Material%20UI-black?logo=MUI&logoColor=blue&style=flat)
 
 ## Getting started
 
