@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../store/todoStore";
 import { getTasksSortedByDate } from "./TaskSortByDate";
 import { Box, Button, Grid2 } from "@mui/material";
@@ -10,7 +10,8 @@ const tabsNamed = ["Today", "Upcoming", "Overdue", "Unscheduled"];
 
 export default function TaskCalender() {
   const todoList = useSelector((state: RootState) => state.TODOS);
-  const [activeTab, setActiveTab] = useState("Today");
+  const navigate = useNavigate();
+  const { catergory } = useParams();
 
   const { unscheduledTasks, todaysTasks, upcomingTasks, tasksOverdued } =
     getTasksSortedByDate(todoList);
@@ -20,9 +21,8 @@ export default function TaskCalender() {
     date: string;
     tasks: Todo[];
   }[] = upcomingTasks;
-  if (activeTab === "Upcoming") taskslist = upcomingTasks;
-  if (activeTab === "Overdue") taskslist = tasksOverdued;
-  if (activeTab === "Unscheduled") tasksArray = unscheduledTasks;
+  if (catergory === "Overdue") taskslist = tasksOverdued;
+  if (catergory === "Unscheduled") tasksArray = unscheduledTasks;
 
   return (
     <Box sx={{ textAlign: "center", margin: "20px" }}>
@@ -32,7 +32,7 @@ export default function TaskCalender() {
             <Button
               variant="outlined"
               onClick={() => {
-                setActiveTab(tab);
+                navigate(`/calenderView/${tab}`);
               }}
               sx={{ margin: "5px" }}
             >
@@ -41,10 +41,10 @@ export default function TaskCalender() {
           );
         })}
       </Grid2>
-      {activeTab === "Today" || activeTab === "Unscheduled" ? (
-        <ViewTasks tab={activeTab} taskslist={tasksArray} />
+      {catergory === "Today" || catergory === "Unscheduled" ? (
+        <ViewTasks taskslist={tasksArray} />
       ) : (
-        <TasksView tab={activeTab} taskslist={taskslist} />
+        <TasksView taskslist={taskslist} />
       )}
     </Box>
   );
