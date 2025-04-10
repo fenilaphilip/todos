@@ -7,11 +7,11 @@ export const getTasksSortedByDate = (todoList: Todo[]) => {
     let unscheduledTasks: Todo[] = [];
     let scheduledTasks: { [key: string]: Todo[] } = {};
     let todaysTasks: Todo[] = [];
-    // let tasksOverdue: { [key: string]: Todo[] } = {};
+
+    const todaysDate = dayjs().format("DD-MM-YYYY");
 
     unDoneTasks.forEach((todo: Todo) => {
         const date = dayjs(todo.dueDate).format("DD-MM-YYYY");
-        const todaysDate = dayjs().format("DD-MM-YYYY");
         if (date === "Invalid Date") {
             unscheduledTasks.push(todo);
             return;
@@ -27,18 +27,33 @@ export const getTasksSortedByDate = (todoList: Todo[]) => {
         }
     });
 
+    const scheduledSorted = Object.entries(scheduledTasks).map(
+        ([date, tasks]) => ({ date, tasks })).sort(
+            (a, b) => dayjs(a.date, "DD-MM-YYYY").valueOf() - dayjs(b.date, "DD-MM-YYYY").valueOf());
 
-    const scheduledTasksSortedByDate = Object.entries(scheduledTasks).map(([date, tasks]) => ({
-        date,
-        tasks
-    })).sort((a, b) => dayjs(a.date, "DD-MM-YYYY").valueOf() - dayjs(b.date, "DD-MM-YYYY").valueOf());
+    console.log(`from calender ${JSON.stringify(scheduledSorted)}`);
 
+    let tasksOverdued: {
+        date: string;
+        tasks: Todo[];
+    }[] = [];
+    let upcomingTasks: {
+        date: string;
+        tasks: Todo[];
+    }[] = [];
 
+    scheduledSorted.map((item) => {
+        if (dayjs(item.date).valueOf() < dayjs(todaysDate).valueOf()) {
+            tasksOverdued.push(item);
+        } else {
+            upcomingTasks.push(item);
+        }
+    });
 
     return {
-        unscheduledTasks: unscheduledTasks,
-        scheduledTasks,
-        tasksCalender: scheduledTasksSortedByDate,
-        todaysTasks: todaysTasks,
+        todaysTasks,
+        upcomingTasks,
+        tasksOverdued,
+        unscheduledTasks
     };
 };

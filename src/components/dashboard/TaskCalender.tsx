@@ -1,60 +1,51 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/todoStore";
-import dayjs from "dayjs";
+import { getTasksSortedByDate } from "./TaskSortByDate";
+import { Box, Button, Grid2 } from "@mui/material";
+import { ViewTasks, TasksView } from "../utils/ViewTasks";
 import Todo from "../../dataModel/todo";
-import { Stack, Typography } from "@mui/material";
-import TodoItem from "./../utils/TodoItem";
+
+const tabsNamed = ["Today", "Upcoming", "Overdue", "Unscheduled"];
 
 export default function TaskCalender() {
   const todoList = useSelector((state: RootState) => state.TODOS);
-  const unFinishedTasks = todoList.filter(
-    (todo: Todo) => todo.completed === false
-  );
-  const unDoneSortedByDate = unFinishedTasks.sort((a: Todo, b: Todo) =>
-    dayjs(a.dueDate).diff(dayjs(b.dueDate))
-  );
+  const [activeTab, setActiveTab] = useState("Today");
 
-  let calenderTodos: {
-    [key: string]: Todo[];
-  } = {};
+  const { unscheduledTasks, todaysTasks, upcomingTasks, tasksOverdued } =
+    getTasksSortedByDate(todoList);
 
-  unDoneSortedByDate.forEach((toDo: Todo) => {
-    const date = dayjs(toDo.dueDate).format("DD-MM-YYYY");
-    if (calenderTodos[date]) {
-      calenderTodos[date].push(toDo);
-    } else {
-      calenderTodos[date] = [toDo];
-    }
-  });
-
-  // console.info(calenderTodos);
+  let tasksArray: Todo[] = todaysTasks;
+  let taskslist: {
+    date: string;
+    tasks: Todo[];
+  }[] = upcomingTasks;
+  if (activeTab === "Upcoming") taskslist = upcomingTasks;
+  if (activeTab === "Overdue") taskslist = tasksOverdued;
+  if (activeTab === "Unscheduled") tasksArray = unscheduledTasks;
 
   return (
-    <>
-      {todoList.length === 0 && (
-        <Typography variant="h6" marginTop={2}>
-          Your Task Bucket is empty!
-        </Typography>
+    <Box sx={{ textAlign: "center", margin: "20px" }}>
+      <Grid2>
+        {tabsNamed.map((tab) => {
+          return (
+            <Button
+              variant="outlined"
+              onClick={() => {
+                setActiveTab(tab);
+              }}
+              sx={{ margin: "5px" }}
+            >
+              {tab}
+            </Button>
+          );
+        })}
+      </Grid2>
+      {activeTab === "Today" || activeTab === "Unscheduled" ? (
+        <ViewTasks tab={activeTab} taskslist={tasksArray} />
+      ) : (
+        <TasksView tab={activeTab} taskslist={taskslist} />
       )}
-      {Object.entries(calenderTodos).map(([key, value]) => {
-        return (
-          <Stack marginTop={2} key={key} className={`date-${key} dateGroup`}>
-            <Typography variant="h5">
-              {key !== "Invalid Date" ? key : "Unscheduled"}
-            </Typography>
-            {value.map((todo) => {
-              return (
-                <TodoItem
-                  key={todo.id}
-                  todo={todo}
-                  showDuedate={false}
-                  showLabel={true}
-                />
-              );
-            })}
-          </Stack>
-        );
-      })}
-    </>
+    </Box>
   );
 }
