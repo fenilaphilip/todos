@@ -26,6 +26,7 @@ const BRAND: Branding = {
 
 export default function App() {
   const Labels = useSelector((state: RootState) => state.LABELS);
+
   const labelNav = () => {
     const labelsArrayForNav = Labels.map((label) => {
       return {
