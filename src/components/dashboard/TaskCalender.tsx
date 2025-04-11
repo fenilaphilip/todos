@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../store/todoStore";
 import { getTasksSortedByDate } from "./TaskSortByDate";
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Card, Chip, Tab, Tabs, Typography } from "@mui/material";
 import { ViewTasks, TasksView } from "../utils/ViewTasks";
 import Todo from "../../dataModel/todo";
 
@@ -14,6 +14,8 @@ export default function TaskCalender() {
   const navigate = useNavigate();
   const { category } = useParams();
   const currentCategory = category ?? "Upcoming";
+
+  console.log(`current category ${currentCategory}`);
 
   const { unscheduledTasks, todaysTasks, upcomingTasks, tasksOverdued } =
     getTasksSortedByDate(todoList);
@@ -41,7 +43,16 @@ export default function TaskCalender() {
   }
 
   const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
+    console.debug(`switched tab ${tabsNamed[newValue]}`);
     navigate(`/calenderView/${tabsNamed[newValue]}`);
+  };
+
+  const haveTasks: {
+    [key: string]: number;
+  } = {
+    Upcoming: todaysTasks.length + upcomingTasks.length,
+    Overdue: tasksOverdued.length,
+    Unscheduled: unscheduledTasks.length,
   };
 
   if (!todoList.length) {
@@ -55,6 +66,7 @@ export default function TaskCalender() {
   return (
     <Box sx={{ width: "100%" }}>
       <Tabs
+        component={Card}
         value={tabsNamed.indexOf(currentCategory)}
         onChange={handleTabChange}
         variant="fullWidth"
@@ -62,7 +74,11 @@ export default function TaskCalender() {
         textColor="primary"
       >
         {tabsNamed.map((tab) => (
-          <Tab key={tab} label={tab} />
+          <Tab
+            key={tab}
+            label={tab}
+            icon={<Chip label={haveTasks[tab]} size="small" color="primary" />}
+          />
         ))}
       </Tabs>
       {currentCategory === "Unscheduled" ? (
