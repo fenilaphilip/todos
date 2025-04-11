@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../store/todoStore";
 import { getTasksSortedByDate } from "./TaskSortByDate";
-import { Box, Button, Grid2, Typography } from "@mui/material";
+import { Box, Tab, Tabs, Typography } from "@mui/material";
 import { ViewTasks, TasksView } from "../utils/ViewTasks";
 import Todo from "../../dataModel/todo";
 
@@ -10,14 +10,6 @@ const tabsNamed = ["Today", "Upcoming", "Overdue", "Unscheduled"];
 
 export default function TaskCalender() {
   const todoList = useSelector((state: RootState) => state.TODOS);
-
-  if (!todoList.length) {
-    return (
-      <Box sx={{ textAlign: "center", mt: 5 }}>
-        <Typography variant="h6">No tasks available!</Typography>
-      </Box>
-    );
-  }
 
   const navigate = useNavigate();
   const { category } = useParams();
@@ -47,26 +39,31 @@ export default function TaskCalender() {
       break;
   }
 
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
+    navigate(`/calenderView/${tabsNamed[newValue]}`);
+  };
+
+  if (!todoList.length) {
+    return (
+      <Box sx={{ textAlign: "center", mt: 5 }}>
+        <Typography variant="h6">No tasks available!</Typography>
+      </Box>
+    );
+  }
+
   return (
-    <Box sx={{ textAlign: "center", margin: "20px" }}>
-      <Grid2>
-        {tabsNamed.map((tab) => {
-          const isActive = tab === currentCategory;
-          return (
-            <Button
-              key={tab}
-              variant={isActive ? "contained" : "outlined"}
-              color={isActive ? "primary" : "inherit"}
-              onClick={() => {
-                navigate(`/calenderView/${tab}`);
-              }}
-              sx={{ margin: "5px" }}
-            >
-              {tab}
-            </Button>
-          );
-        })}
-      </Grid2>
+    <Box sx={{ width: "100%" }}>
+      <Tabs
+        value={tabsNamed.indexOf(currentCategory)}
+        onChange={handleTabChange}
+        variant="fullWidth"
+        indicatorColor="primary"
+        textColor="primary"
+      >
+        {tabsNamed.map((tab) => (
+          <Tab key={tab} label={tab} />
+        ))}
+      </Tabs>
       {currentCategory === "Today" || currentCategory === "Unscheduled" ? (
         <ViewTasks taskslist={tasksArray} />
       ) : (
