@@ -2,21 +2,31 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../store/todoStore";
 import { getTasksSortedByDate } from "./TaskSortByDate";
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Card, Chip, Tab, Tabs, Typography } from "@mui/material";
 import { ViewTasks, TasksView } from "../utils/ViewTasks";
 import Todo from "../../dataModel/todo";
 
-const tabsNamed = ["Upcoming", "Overdue", "Unscheduled"];
+const calenderTabs = ["Upcoming", "Overdue", "Unscheduled"];
 
 export default function TaskCalender() {
   const todoList = useSelector((state: RootState) => state.TODOS);
 
   const navigate = useNavigate();
   const { category } = useParams();
-  const currentCategory = category ?? "Upcoming";
 
   const { unscheduledTasks, todaysTasks, upcomingTasks, tasksOverdued } =
     getTasksSortedByDate(todoList);
+
+  const taskCounts: {
+    [key: string]: number;
+  } = {
+    Upcoming: todaysTasks.length + upcomingTasks.length,
+    Overdue: tasksOverdued.length,
+    Unscheduled: unscheduledTasks.length,
+  };
+
+  const visibleTabs = calenderTabs.filter((tab) => taskCounts[tab] > 0);
+  const currentCategory = category ?? visibleTabs[0];
 
   let tasksArray: Todo[] = [];
   let taskArrayObj: {
@@ -41,7 +51,8 @@ export default function TaskCalender() {
   }
 
   const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
-    navigate(`/calenderView/${tabsNamed[newValue]}`);
+    // console.debug(`switched tab ${calenderTabs[newValue]}`);
+    navigate(`/calenderView/${visibleTabs[newValue]}`);
   };
 
   if (!todoList.length) {
@@ -55,14 +66,19 @@ export default function TaskCalender() {
   return (
     <Box sx={{ width: "100%" }}>
       <Tabs
-        value={tabsNamed.indexOf(currentCategory)}
+        component={Card}
+        value={visibleTabs.indexOf(currentCategory)}
         onChange={handleTabChange}
         variant="fullWidth"
         indicatorColor="primary"
         textColor="primary"
       >
-        {tabsNamed.map((tab) => (
-          <Tab key={tab} label={tab} />
+        {visibleTabs.map((tab) => (
+          <Tab
+            key={tab}
+            label={tab}
+            icon={<Chip label={taskCounts[tab]} size="small" color="primary" />}
+          />
         ))}
       </Tabs>
       {currentCategory === "Unscheduled" ? (

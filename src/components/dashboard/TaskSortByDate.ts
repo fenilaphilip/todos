@@ -33,7 +33,7 @@ export const getTasksSortedByDate = (todoList: Todo[]) => {
         ([date, tasks]) => ({ date, tasks })).sort(
             (a, b) => dayjs(a.date, "DD-MM-YYYY").valueOf() - dayjs(b.date, "DD-MM-YYYY").valueOf());
 
-    console.log(`from calender ${JSON.stringify(scheduledSorted)}`);
+    // console.log(`from calender ${JSON.stringify(scheduledSorted)}`);
 
     let tasksOverdued: {
         date: string;
