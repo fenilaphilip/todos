@@ -25,7 +25,7 @@ export const router = createBrowserRouter([
         Component: TaskCalender,
       },
       {
-        path: "/calenderView/:catergory",
+        path: "/calenderView/:category",
         Component: TaskCalender,
       },
       {
