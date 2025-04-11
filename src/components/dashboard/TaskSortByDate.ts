@@ -8,22 +8,24 @@ export const getTasksSortedByDate = (todoList: Todo[]) => {
     let scheduledTasks: { [key: string]: Todo[] } = {};
     let todaysTasks: Todo[] = [];
 
-    const todaysDate = dayjs().format("DD-MM-YYYY");
+    const todaysDate = dayjs();
 
     unDoneTasks.forEach((todo: Todo) => {
-        const date = dayjs(todo.dueDate).format("DD-MM-YYYY");
-        if (date === "Invalid Date") {
+        const duedate = dayjs(todo.dueDate);
+        if (!duedate.isValid()) {
             unscheduledTasks.push(todo);
             return;
         }
-        if (date === todaysDate) {
+        if (duedate.isSame(todaysDate, 'day')) {
             todaysTasks.push(todo);
             return;
         }
-        if (scheduledTasks[date]) {
-            scheduledTasks[date].push(todo);
+
+        const formattedDate = duedate.format('DD-MM-YYYY');
+        if (scheduledTasks[formattedDate]) {
+            scheduledTasks[formattedDate].push(todo);
         } else {
-            scheduledTasks[date] = [todo];
+            scheduledTasks[formattedDate] = [todo];
         }
     });
 
@@ -42,8 +44,8 @@ export const getTasksSortedByDate = (todoList: Todo[]) => {
         tasks: Todo[];
     }[] = [];
 
-    scheduledSorted.map((item) => {
-        if (dayjs(item.date).valueOf() < dayjs(todaysDate).valueOf()) {
+    scheduledSorted.forEach((item) => {
+        if (dayjs(item.date, "DD-MM-YYYY").isBefore(todaysDate, 'day')) {
             tasksOverdued.push(item);
         } else {
             upcomingTasks.push(item);
