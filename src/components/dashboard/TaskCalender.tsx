@@ -6,14 +6,14 @@ import { Box, Tab, Tabs, Typography } from "@mui/material";
 import { ViewTasks, TasksView } from "../utils/ViewTasks";
 import Todo from "../../dataModel/todo";
 
-const tabsNamed = ["Today", "Upcoming", "Overdue", "Unscheduled"];
+const tabsNamed = ["Upcoming", "Overdue", "Unscheduled"];
 
 export default function TaskCalender() {
   const todoList = useSelector((state: RootState) => state.TODOS);
 
   const navigate = useNavigate();
   const { category } = useParams();
-  const currentCategory = category ?? "Today";
+  const currentCategory = category ?? "Upcoming";
 
   const { unscheduledTasks, todaysTasks, upcomingTasks, tasksOverdued } =
     getTasksSortedByDate(todoList);
@@ -25,11 +25,12 @@ export default function TaskCalender() {
   }[] = [];
 
   switch (currentCategory) {
-    case "Today":
-      tasksArray = todaysTasks;
-      break;
     case "Upcoming":
-      taskArrayObj = upcomingTasks;
+      let mergedUpcoming = [...upcomingTasks];
+      if (todaysTasks.length) {
+        mergedUpcoming.unshift({ date: "Today", tasks: todaysTasks });
+      }
+      taskArrayObj = mergedUpcoming;
       break;
     case "Overdue":
       taskArrayObj = tasksOverdued;
@@ -64,7 +65,7 @@ export default function TaskCalender() {
           <Tab key={tab} label={tab} />
         ))}
       </Tabs>
-      {currentCategory === "Today" || currentCategory === "Unscheduled" ? (
+      {currentCategory === "Unscheduled" ? (
         <ViewTasks taskslist={tasksArray} />
       ) : (
         <TasksView taskslist={taskArrayObj} />
