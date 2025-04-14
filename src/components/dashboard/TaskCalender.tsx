@@ -63,6 +63,13 @@ export default function TaskCalender() {
     );
   }
 
+  if (todoList.length && !visibleTabs.length) {
+    return (
+      <Box sx={{ textAlign: "center", mt: 5 }}>
+        <Typography variant="h6">No active Tasks available!</Typography>
+      </Box>
+    );
+  }
   return (
     <Box sx={{ width: "100%" }}>
       <Tabs
