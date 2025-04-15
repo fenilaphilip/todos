@@ -6,14 +6,15 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import CreateTodo from "./CreateTodo";
 import Todo from "../../dataModel/todo";
 import TodoItem from "./TodoItem";
+import TaskList from "./TaskList";
 
 const Dashboard: React.FC<{
   labelName?: string;
   completedtaskCount: number;
   undoneTasks: Todo[];
   alltasks: Todo[];
-  showLabel: boolean;
-  showDuedate: boolean;
+  showLabel?: boolean;
+  showDuedate?: boolean;
 }> = ({
   labelName,
   completedtaskCount,
@@ -47,30 +48,20 @@ const Dashboard: React.FC<{
       </Grid>
       {hideCompletedTask && (
         <div data-cy="todo-items">
-          {undoneTasks.map((todo) => {
-            return (
-              <TodoItem
-                key={todo.id}
-                todo={todo}
-                showLabel={showLabel}
-                showDuedate={showDuedate}
-              />
-            );
-          })}
+          <TaskList
+            items={undoneTasks}
+            showLabel={showLabel}
+            showDuedate={showDuedate}
+          />
         </div>
       )}
       {!hideCompletedTask && (
         <div data-cy="todo-items">
-          {alltasks.map((todo) => {
-            return (
-              <TodoItem
-                key={todo.id}
-                todo={todo}
-                showLabel={showLabel}
-                showDuedate={showDuedate}
-              />
-            );
-          })}
+          <TaskList
+            items={alltasks}
+            showLabel={showLabel}
+            showDuedate={showDuedate}
+          />
         </div>
       )}
     </>

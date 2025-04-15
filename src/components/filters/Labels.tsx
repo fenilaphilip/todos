@@ -21,8 +21,7 @@ export default function Labels() {
       completedtaskCount={completedtaskCount}
       undoneTasks={taskUncompleted}
       alltasks={catergoryTodo}
-      showLabel={false}
-      showDuedate={true}
+      showDuedate
     />
   );
 }

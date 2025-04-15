@@ -10,10 +10,12 @@ import {
 
 const TaskList: React.FC<{
   items: Todo[];
-  heading?: string | undefined;
-  showPrint?: Boolean | undefined;
-  groupBy?: "DueDate" | "Priority" | undefined;
-}> = ({ items, heading, showPrint, groupBy }) => {
+  heading?: string;
+  showPrint?: boolean;
+  groupBy?: "DueDate" | "Priority";
+  showLabel?: boolean;
+  showDuedate?: boolean;
+}> = ({ items, heading, showPrint, groupBy, showDuedate, showLabel }) => {
   let groupedTodoItems;
   if (groupBy === "DueDate") {
     groupedTodoItems = groupByDueDate(items);
@@ -48,8 +50,8 @@ const TaskList: React.FC<{
                 <TodoItem
                   key={item.id}
                   todo={item}
-                  showLabel={true}
-                  showDuedate={false}
+                  showLabel={showLabel === true}
+                  showDuedate={showDuedate === true}
                 />
               );
             })}
