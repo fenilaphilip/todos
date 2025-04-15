@@ -2,9 +2,20 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../store/todoStore";
 import { getTasksSortedByDate } from "./TaskSortByDate";
-import { Box, Card, Chip, Tab, Tabs, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  Chip,
+  Grid2,
+  Stack,
+  Tab,
+  Tabs,
+  Typography,
+} from "@mui/material";
 import { ViewTasks, TasksView } from "../utils/ViewTasks";
 import Todo from "../../dataModel/todo";
+import PrintIcon from "@mui/icons-material/Print";
 
 const calenderTabs = ["Upcoming", "Overdue", "Unscheduled"];
 
@@ -36,11 +47,7 @@ export default function TaskCalender() {
 
   switch (currentCategory) {
     case "Upcoming":
-      let mergedUpcoming = [...upcomingTasks];
-      if (todaysTasks.length) {
-        mergedUpcoming.unshift({ date: "Today", tasks: todaysTasks });
-      }
-      taskArrayObj = mergedUpcoming;
+      taskArrayObj = upcomingTasks;
       break;
     case "Overdue":
       taskArrayObj = tasksOverdued;
@@ -54,6 +61,8 @@ export default function TaskCalender() {
     // console.debug(`switched tab ${calenderTabs[newValue]}`);
     navigate(`/calenderView/${visibleTabs[newValue]}`);
   };
+
+  const handlePrint = () => {};
 
   if (!todoList.length) {
     return (
@@ -88,11 +97,34 @@ export default function TaskCalender() {
           />
         ))}
       </Tabs>
-      {currentCategory === "Unscheduled" ? (
-        <ViewTasks taskslist={tasksArray} />
-      ) : (
-        <TasksView taskslist={taskArrayObj} />
+      {currentCategory === "Upcoming" && (
+        <Stack marginTop={2}>
+          {todaysTasks.length && (
+            <>
+              <Grid2 container justifyContent="space-between">
+                <Grid2>
+                  <Typography variant="h5">Today</Typography>
+                </Grid2>
+                <Grid2>
+                  <Button
+                    variant="outlined"
+                    onClick={handlePrint}
+                    startIcon={<PrintIcon />}
+                  >
+                    Print
+                  </Button>
+                </Grid2>
+              </Grid2>
+              <ViewTasks taskslist={todaysTasks} />
+            </>
+          )}
+          <TasksView taskslist={taskArrayObj} />
+        </Stack>
       )}
+      {currentCategory === "Unscheduled" && (
+        <ViewTasks taskslist={tasksArray} />
+      )}
+      {currentCategory === "Overdue" && <TasksView taskslist={taskArrayObj} />}
     </Box>
   );
 }
