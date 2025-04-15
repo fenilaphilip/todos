@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../store/todoStore";
@@ -16,11 +17,13 @@ import {
 import { ViewTasks, TasksView } from "../utils/ViewTasks";
 import Todo from "../../dataModel/todo";
 import PrintIcon from "@mui/icons-material/Print";
+import { useReactToPrint } from "react-to-print";
 
 const calenderTabs = ["Upcoming", "Overdue", "Unscheduled"];
 
 export default function TaskCalender() {
   const todoList = useSelector((state: RootState) => state.TODOS);
+  const printRef = useRef<HTMLDivElement>(null);
 
   const navigate = useNavigate();
   const { category } = useParams();
@@ -62,7 +65,10 @@ export default function TaskCalender() {
     navigate(`/calenderView/${visibleTabs[newValue]}`);
   };
 
-  const handlePrint = () => {};
+  const handlePrintFn = useReactToPrint({
+    contentRef: printRef,
+    documentTitle: "Tasks for Today",
+  });
 
   if (!todoList.length) {
     return (
@@ -108,14 +114,16 @@ export default function TaskCalender() {
                 <Grid2>
                   <Button
                     variant="outlined"
-                    onClick={handlePrint}
+                    onClick={() => handlePrintFn()}
                     startIcon={<PrintIcon />}
                   >
                     Print
                   </Button>
                 </Grid2>
               </Grid2>
-              <ViewTasks taskslist={todaysTasks} />
+              <div ref={printRef}>
+                <ViewTasks taskslist={todaysTasks} />
+              </div>
             </>
           )}
           <TasksView taskslist={taskArrayObj} />
