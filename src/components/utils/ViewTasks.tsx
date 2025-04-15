@@ -7,7 +7,7 @@ export const ViewTasks: React.FC<{
   taskslist: Todo[];
 }> = ({ taskslist }) => {
   return (
-    <Box marginTop={2} padding={2}>
+    <Box>
       {taskslist.map((todo) => {
         return (
           <TodoItem
@@ -29,7 +29,7 @@ export const TasksView: React.FC<{
   }[];
 }> = ({ taskslist }) => {
   return (
-    <Box marginTop={2} padding={2}>
+    <Box>
       {taskslist.map((item) => {
         return (
           <Stack marginTop={2} key={item.date}>
