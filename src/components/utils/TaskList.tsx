@@ -7,6 +7,7 @@ import {
   groupByDueDate,
   groupByPriority,
 } from "./GroupBySorting";
+import dayjs from "dayjs";
 
 const TaskList: React.FC<{
   items: Todo[];
@@ -25,15 +26,16 @@ const TaskList: React.FC<{
     groupedTodoItems = groupByNothing(items, "");
   }
 
+  const todayDate = dayjs().format("DD-MM-YYYY");
   return (
     <>
-      <Grid2 container justifyContent="space-between">
+      <Grid2 container justifyContent="space-between" margin={2}>
         <Grid2>
           <Typography variant="h5">{heading}</Typography>
         </Grid2>
         {showPrint && (
           <Grid2>
-            <Button>Print</Button>
+            <Button variant="outlined">Print</Button>
           </Grid2>
         )}
       </Grid2>
@@ -42,7 +44,9 @@ const TaskList: React.FC<{
           <Box key={index}>
             {groupedTodoItem.groupName && (
               <Typography variant="h6" marginTop={2}>
-                {groupedTodoItem.groupName}
+                {groupedTodoItem.groupName === todayDate
+                  ? "Today"
+                  : groupedTodoItem.groupName}
               </Typography>
             )}
             {groupedTodoItem.items.map((item) => {

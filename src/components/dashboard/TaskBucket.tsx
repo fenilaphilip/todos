@@ -17,6 +17,7 @@ export default function TaskBucket() {
       alltasks={allTodos}
       showLabel
       showDuedate
+      showPrint
     />
   );
 }

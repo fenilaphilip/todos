@@ -1,13 +1,5 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  Chip,
-  Paper,
-  Stack,
-  styled,
-  Typography,
-} from "@mui/material";
+import { Box, Card, CardContent } from "@mui/material";
+import { Chip, Paper, Stack, styled, Typography } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
 const StyledChip = styled(Chip)(({ theme }) => ({

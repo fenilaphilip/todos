@@ -1,6 +1,5 @@
 import type { RootState } from "../../store/todoStore";
 import { useSelector } from "react-redux";
-import TodoItem from "./../utils/TodoItem";
 import { Typography } from "@mui/material";
 import { Priority } from "../../dataModel/todo";
 import { useParams } from "react-router-dom";

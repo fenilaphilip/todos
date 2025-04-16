@@ -5,7 +5,6 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import CreateTodo from "./CreateTodo";
 import Todo from "../../dataModel/todo";
-import TodoItem from "./TodoItem";
 import TaskList from "./TaskList";
 
 const Dashboard: React.FC<{
@@ -15,6 +14,7 @@ const Dashboard: React.FC<{
   alltasks: Todo[];
   showLabel?: boolean;
   showDuedate?: boolean;
+  showPrint?: boolean;
 }> = ({
   labelName,
   completedtaskCount,
@@ -22,6 +22,7 @@ const Dashboard: React.FC<{
   alltasks,
   showLabel,
   showDuedate,
+  showPrint,
 }) => {
   const [hideCompletedTask, setHideCompletedTask] = useState(true);
 
@@ -46,24 +47,14 @@ const Dashboard: React.FC<{
           </Button>
         </Grid>
       </Grid>
-      {hideCompletedTask && (
-        <div data-cy="todo-items">
-          <TaskList
-            items={undoneTasks}
-            showLabel={showLabel}
-            showDuedate={showDuedate}
-          />
-        </div>
-      )}
-      {!hideCompletedTask && (
-        <div data-cy="todo-items">
-          <TaskList
-            items={alltasks}
-            showLabel={showLabel}
-            showDuedate={showDuedate}
-          />
-        </div>
-      )}
+      <div data-cy="todo-items">
+        <TaskList
+          items={hideCompletedTask ? undoneTasks : alltasks}
+          showLabel={showLabel}
+          showDuedate={showDuedate}
+          showPrint={showPrint}
+        />
+      </div>
     </>
   );
 };
