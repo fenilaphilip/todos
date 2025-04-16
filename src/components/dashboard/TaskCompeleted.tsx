@@ -2,10 +2,10 @@ import type { RootState } from "../../store/todoStore";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { clearCompleted } from "../../store/reducers/todoSlice";
-import TodoItem from "./../utils/TodoItem";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Todo from "../../dataModel/todo";
+import TaskList from "../utils/TaskList";
 
 export default function TaskCompeleted() {
   const todolist = useSelector((state: RootState) => state.TODOS);
@@ -41,16 +41,7 @@ export default function TaskCompeleted() {
               Clear All
             </Button>
           </Stack>
-          {completedTasklist.map((todo: Todo) => {
-            return (
-              <TodoItem
-                key={todo.id}
-                todo={todo}
-                showLabel={true}
-                showDuedate={false}
-              />
-            );
-          })}
+          <TaskList items={completedTasklist} showLabel />
         </>
       )}
     </Box>

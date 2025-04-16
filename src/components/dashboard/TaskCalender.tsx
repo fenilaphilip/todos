@@ -1,74 +1,36 @@
-import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../store/todoStore";
 import { getTasksSortedByDate } from "./TaskSortByDate";
-import {
-  Box,
-  Button,
-  Card,
-  Chip,
-  Grid2,
-  Stack,
-  Tab,
-  Tabs,
-  Typography,
-} from "@mui/material";
-import { ViewTasks, TasksView } from "../utils/ViewTasks";
-import Todo from "../../dataModel/todo";
-import PrintIcon from "@mui/icons-material/Print";
-import { useReactToPrint } from "react-to-print";
+import { Box, Card, Chip, Tab, Tabs, Typography } from "@mui/material";
+import TaskList from "../utils/TaskList";
 
 const calenderTabs = ["Upcoming", "Overdue", "Unscheduled"];
 
 export default function TaskCalender() {
   const todoList = useSelector((state: RootState) => state.TODOS);
-  const printRef = useRef<HTMLDivElement>(null);
 
   const navigate = useNavigate();
   const { category } = useParams();
 
-  const { unscheduledTasks, todaysTasks, upcomingTasks, tasksOverdued } =
+  const { unscheduledTasks, upcomingTasks, overDuedTasks } =
     getTasksSortedByDate(todoList);
 
   const taskCounts: {
     [key: string]: number;
   } = {
-    Upcoming: todaysTasks.length + upcomingTasks.length,
-    Overdue: tasksOverdued.length,
+    Upcoming: upcomingTasks.length,
+    Overdue: overDuedTasks.length,
     Unscheduled: unscheduledTasks.length,
   };
 
   const visibleTabs = calenderTabs.filter((tab) => taskCounts[tab] > 0);
   const currentCategory = category ?? visibleTabs[0];
 
-  let tasksArray: Todo[] = [];
-  let taskArrayObj: {
-    date: string;
-    tasks: Todo[];
-  }[] = [];
-
-  switch (currentCategory) {
-    case "Upcoming":
-      taskArrayObj = upcomingTasks;
-      break;
-    case "Overdue":
-      taskArrayObj = tasksOverdued;
-      break;
-    case "Unscheduled":
-      tasksArray = unscheduledTasks;
-      break;
-  }
-
   const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     // console.debug(`switched tab ${calenderTabs[newValue]}`);
     navigate(`/calenderView/${visibleTabs[newValue]}`);
   };
-
-  const handlePrintFn = useReactToPrint({
-    contentRef: printRef,
-    documentTitle: "Tasks for Today",
-  });
 
   if (!todoList.length) {
     return (
@@ -104,35 +66,31 @@ export default function TaskCalender() {
         ))}
       </Tabs>
       {currentCategory === "Upcoming" && (
-        <Stack marginTop={2}>
-          {todaysTasks.length && (
-            <>
-              <Grid2 container justifyContent="space-between">
-                <Grid2>
-                  <Typography variant="h5">Today</Typography>
-                </Grid2>
-                <Grid2>
-                  <Button
-                    variant="outlined"
-                    onClick={() => handlePrintFn()}
-                    startIcon={<PrintIcon />}
-                  >
-                    Print
-                  </Button>
-                </Grid2>
-              </Grid2>
-              <div ref={printRef}>
-                <ViewTasks taskslist={todaysTasks} />
-              </div>
-            </>
-          )}
-          <TasksView taskslist={taskArrayObj} />
-        </Stack>
+        <TaskList
+          items={upcomingTasks}
+          groupBy="DueDate"
+          showLabel
+          showPrint
+          heading="Upcoming Todos"
+        />
+      )}
+      {currentCategory === "Overdue" && (
+        <TaskList
+          items={overDuedTasks}
+          groupBy="DueDate"
+          showLabel
+          showPrint
+          heading="Overdue Todos"
+        />
       )}
       {currentCategory === "Unscheduled" && (
-        <ViewTasks taskslist={tasksArray} />
+        <TaskList
+          items={unscheduledTasks}
+          showLabel
+          showPrint
+          heading="Unscheduled Todos"
+        />
       )}
-      {currentCategory === "Overdue" && <TasksView taskslist={taskArrayObj} />}
     </Box>
   );
 }

@@ -1,9 +1,9 @@
 import type { RootState } from "../../store/todoStore";
 import { useSelector } from "react-redux";
-import TodoItem from "./../utils/TodoItem";
 import { Typography } from "@mui/material";
 import { Priority } from "../../dataModel/todo";
 import { useParams } from "react-router-dom";
+import TaskList from "../utils/TaskList";
 
 export default function PriorityLevel() {
   const todolist = useSelector((state: RootState) => state.TODOS);
@@ -30,17 +30,15 @@ export default function PriorityLevel() {
           There is nothing assigned to {priorityLevel} priority !
         </Typography>
       )}
-      {priorityTaskCount !== 0 &&
-        priorityTodo.map((todo) => {
-          return (
-            <TodoItem
-              key={todo.id}
-              todo={todo}
-              showLabel={false}
-              showDuedate={true}
-            />
-          );
-        })}
+      {priorityTaskCount !== 0 && (
+        <TaskList
+          items={priorityTodo}
+          showDuedate
+          showLabel
+          showPrint
+          heading={priorityLevel + " Priority Todos"}
+        />
+      )}
     </>
   );
 }
