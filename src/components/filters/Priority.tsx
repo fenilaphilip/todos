@@ -30,7 +30,15 @@ export default function PriorityLevel() {
           There is nothing assigned to {priorityLevel} priority !
         </Typography>
       )}
-      {priorityTaskCount !== 0 && <TaskList items={priorityTodo} showDuedate />}
+      {priorityTaskCount !== 0 && (
+        <TaskList
+          items={priorityTodo}
+          showDuedate
+          showLabel
+          showPrint
+          heading={priorityLevel + " Priority Todos"}
+        />
+      )}
     </>
   );
 }

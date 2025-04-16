@@ -44,7 +44,10 @@ const TaskList: React.FC<TasklistProps> = ({
 
   return (
     <>
-      <Grid2 container justifyContent="flex-end" margin={2}>
+      <Grid2 container justifyContent="space-between" margin={2}>
+        <Grid2>
+          <Typography variant="h6"> {heading}</Typography>
+        </Grid2>
         {showPrint && (
           <Grid2>
             <Button variant="outlined" onClick={() => handlePrint()}>

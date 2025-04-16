@@ -75,10 +75,21 @@ export default function TaskCalender() {
         />
       )}
       {currentCategory === "Overdue" && (
-        <TaskList items={overDuedTasks} groupBy="DueDate" showLabel />
+        <TaskList
+          items={overDuedTasks}
+          groupBy="DueDate"
+          showLabel
+          showPrint
+          heading="Overdue Todos"
+        />
       )}
       {currentCategory === "Unscheduled" && (
-        <TaskList items={unscheduledTasks} showLabel />
+        <TaskList
+          items={unscheduledTasks}
+          showLabel
+          showPrint
+          heading="Unscheduled Todos"
+        />
       )}
     </Box>
   );
