@@ -2,21 +2,25 @@ import React from "react";
 import Todo from "../../dataModel/todo";
 import { Box, Button, Grid2, Typography } from "@mui/material";
 import TodoItem from "./TodoItem";
-import {
-  groupByNothing,
-  groupByDueDate,
-  groupByPriority,
-} from "./GroupBySorting";
+import { groupByNothing, groupByDueDate } from "./GroupBySorting";
+import { groupByPriority } from "./GroupBySorting";
 import dayjs from "dayjs";
 
-const TaskList: React.FC<{
+interface TasklistProps {
   items: Todo[];
-  heading?: string;
   showPrint?: boolean;
   groupBy?: "DueDate" | "Priority";
   showLabel?: boolean;
   showDuedate?: boolean;
-}> = ({ items, heading, showPrint, groupBy, showDuedate, showLabel }) => {
+}
+
+const TaskList: React.FC<TasklistProps> = ({
+  items,
+  showPrint,
+  groupBy,
+  showDuedate,
+  showLabel,
+}) => {
   let groupedTodoItems;
   if (groupBy === "DueDate") {
     groupedTodoItems = groupByDueDate(items);
@@ -29,10 +33,7 @@ const TaskList: React.FC<{
   const todayDate = dayjs().format("DD-MM-YYYY");
   return (
     <>
-      <Grid2 container justifyContent="space-between" margin={2}>
-        <Grid2>
-          <Typography variant="h5">{heading}</Typography>
-        </Grid2>
+      <Grid2 container justifyContent="flex-end" margin={2}>
         {showPrint && (
           <Grid2>
             <Button variant="outlined">Print</Button>
