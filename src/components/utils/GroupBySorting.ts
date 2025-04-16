@@ -40,5 +40,6 @@ export function groupByDueDate(items: Todo[]): GroupedToDoItems[] {
 }
 
 export function groupByPriority(items: Todo[]): GroupedToDoItems[] {
+    console.log(items); //for future development
     return [];
 }
