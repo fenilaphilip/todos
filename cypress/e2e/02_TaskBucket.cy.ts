@@ -1,4 +1,4 @@
-import { loadApp, addTask } from "./customFunctions.cy";
+import { loadApp, addTask, setDueDate } from "./customFunctions.cy";
 
 describe('Task Bucket - Default page, when app loads', () => {
   beforeEach(loadApp);
@@ -59,13 +59,7 @@ describe('Task Bucket - Default page, when app loads', () => {
       const formatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
       const today = formatter.format(new Date());
 
-      cy.get('[data-cy="todo-items"]').children()
-        .find(`.todo-item-caption > input[value = "${task}"]`)
-        .parentsUntil('[data-cy="todo-items"]', '.todo-item')
-        .within(() => {
-          cy.get('.todo-item-expand').click();
-          cy.get('.dueDate').click().type(`${today}`);
-        });
+      setDueDate(task, today);
 
       cy.reload();
       cy.get('[data-cy="todo-items"]').children()
@@ -97,7 +91,7 @@ describe('Task Bucket - Default page, when app loads', () => {
         });
     });
 
-    it.only('User can update label', () => {
+    it('User can update label', () => {
       cy.get('[data-cy="todo-items"]').children()
         .find(`.todo-item-caption > input[value="${task}"]`)
         .parentsUntil('[data-cy="todo-items"]', '.todo-item')
