@@ -5,10 +5,12 @@ import TodoItem from "./TodoItem";
 import { groupByNothing, groupByDueDate } from "./GroupBySorting";
 import { groupByPriority } from "./GroupBySorting";
 import dayjs from "dayjs";
+import { useReactToPrint } from "react-to-print";
 
 interface TasklistProps {
   items: Todo[];
   showPrint?: boolean;
+  heading?: string;
   groupBy?: "DueDate" | "Priority";
   showLabel?: boolean;
   showDuedate?: boolean;
@@ -20,7 +22,10 @@ const TaskList: React.FC<TasklistProps> = ({
   groupBy,
   showDuedate,
   showLabel,
+  heading,
 }) => {
+  const printRef = React.useRef<HTMLDivElement>(null);
+
   let groupedTodoItems;
   if (groupBy === "DueDate") {
     groupedTodoItems = groupByDueDate(items);
@@ -31,38 +36,48 @@ const TaskList: React.FC<TasklistProps> = ({
   }
 
   const todayDate = dayjs().format("DD-MM-YYYY");
+
+  const handlePrint = useReactToPrint({
+    contentRef: printRef,
+    documentTitle: heading, // for pdf naming
+  });
+
   return (
     <>
       <Grid2 container justifyContent="flex-end" margin={2}>
         {showPrint && (
           <Grid2>
-            <Button variant="outlined">Print</Button>
+            <Button variant="outlined" onClick={() => handlePrint()}>
+              Print
+            </Button>
           </Grid2>
         )}
       </Grid2>
-      {groupedTodoItems.map((groupedTodoItem, index) => {
-        return (
-          <Box key={index}>
-            {groupedTodoItem.groupName && (
-              <Typography variant="h6" marginTop={2}>
-                {groupedTodoItem.groupName === todayDate
-                  ? "Today"
-                  : groupedTodoItem.groupName}
-              </Typography>
-            )}
-            {groupedTodoItem.items.map((item) => {
-              return (
-                <TodoItem
-                  key={item.id}
-                  todo={item}
-                  showLabel={showLabel === true}
-                  showDuedate={showDuedate === true}
-                />
-              );
-            })}
-          </Box>
-        );
-      })}
+      <div ref={printRef}>
+        {groupedTodoItems.map((groupedTodoItem, index) => {
+          return (
+            <Box key={index}>
+              {groupedTodoItem.groupName && (
+                <Typography variant="h6" marginTop={2}>
+                  {groupedTodoItem.groupName === todayDate
+                    ? "Today"
+                    : groupedTodoItem.groupName}
+                </Typography>
+              )}
+              {groupedTodoItem.items.map((item) => {
+                return (
+                  <TodoItem
+                    key={item.id}
+                    todo={item}
+                    showLabel={showLabel === true}
+                    showDuedate={showDuedate === true}
+                  />
+                );
+              })}
+            </Box>
+          );
+        })}
+      </div>
     </>
   );
 };

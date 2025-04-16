@@ -66,7 +66,13 @@ export default function TaskCalender() {
         ))}
       </Tabs>
       {currentCategory === "Upcoming" && (
-        <TaskList items={upcomingTasks} groupBy="DueDate" showLabel showPrint />
+        <TaskList
+          items={upcomingTasks}
+          groupBy="DueDate"
+          showLabel
+          showPrint
+          heading="Upcoming Todos"
+        />
       )}
       {currentCategory === "Overdue" && (
         <TaskList items={overDuedTasks} groupBy="DueDate" showLabel />

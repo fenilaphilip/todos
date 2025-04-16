@@ -18,7 +18,13 @@ export default function Labels() {
     <Box marginTop={2}>
       <CreateTodo labelName={labelName} />
       <div data-cy="todo-items">
-        <TaskList items={taskUncompleted} showLabel showDuedate showPrint />
+        <TaskList
+          items={taskUncompleted}
+          showLabel
+          showDuedate
+          showPrint
+          heading={"Todos_" + labelName}
+        />
       </div>
     </Box>
   );

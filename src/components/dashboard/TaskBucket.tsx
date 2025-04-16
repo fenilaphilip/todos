@@ -13,7 +13,13 @@ export default function TaskBucket() {
     <Box marginTop={2}>
       <CreateTodo />
       <div data-cy="todo-items">
-        <TaskList items={taskUncompleted} showLabel showDuedate showPrint />
+        <TaskList
+          items={taskUncompleted}
+          showLabel
+          showDuedate
+          showPrint
+          heading="Todos"
+        />
       </div>
     </Box>
   );
