@@ -128,7 +128,6 @@ describe('Task Calender page', () => {
     it('"Overdue tab" shows pending tasks with date as heading', () => {
         cy.visit('/calenderView/Overdue');
 
-
         cy.get(`[data-cy="Overdue Todos"]`).children().should('length', 4);
         cy.log('tasks-2 and 2 -date heading  gives 4 children');
 
@@ -145,6 +144,22 @@ describe('Task Calender page', () => {
         cy.get('[data-cy="Overdue Todos"]').children().eq(3)
             .find('.todo-item-caption> input')
             .should('have.value', overdueTasks[0]);
+    });
+
+    it('"Unscheduled tab" shows unscheduled tasks', () => {
+        cy.visit('/calenderView/Unscheduled');
+
+        cy.get(`[data-cy="Unscheduled Todos"]`).children().should('length', 2);
+        cy.log('tasks-2');
+
+        cy.get('[data-cy="Unscheduled Todos"]').children().eq(0)
+            .find('.todo-item-caption> input')
+            .should('have.value', unscheduledTasks[1])
+
+
+        cy.get('[data-cy="Unscheduled Todos"]').children().eq(1)
+            .find('.todo-item-caption> input')
+            .should('have.value', unscheduledTasks[0]);
     });
 
 })
