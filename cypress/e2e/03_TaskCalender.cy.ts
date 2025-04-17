@@ -1,3 +1,4 @@
+import { find } from 'cypress/types/lodash';
 import { loadApp, addTask, addTasks, setDueDate } from './customFunctions.cy';
 import * as dayjs from 'dayjs';
 
@@ -49,4 +50,79 @@ describe('Task Calender page', () => {
         cy.get(`[data-cy="Overdue"]`).contains(overdueTasksCount);
         cy.get(`[data-cy="Unscheduled"]`).contains(unscheduledTasksCount);
     });
+
+
+
+    it('"Upcoming" tab shows tasks for Today & upcoming dates in accending order', () => {
+        cy.get(`[data-cy="Upcoming Todos"]`).children().should('length', 9);
+        cy.log('tasks-6 and 3 -date heading  gives 9 children');
+
+        cy.get('[data-cy="Upcoming Todos"]').children().eq(0)
+            .contains("Today");
+
+        cy.get('[data-cy="Upcoming Todos"]').children().eq(1)
+            .find('.todo-item-caption> input')
+            .should($input => {
+                const val = $input.val();
+                expect([
+                    upcomingtasks[0][0],
+                    upcomingtasks[0][1]
+                ]).to.include(val);
+            });
+        cy.get('[data-cy="Upcoming Todos"]').children().eq(2)
+            .find('.todo-item-caption> input')
+            .should($input => {
+                const val = $input.val();
+                expect([
+                    upcomingtasks[0][0],
+                    upcomingtasks[0][1]
+                ]).to.include(val);
+            });
+
+        cy.get('[data-cy="Upcoming Todos"]').children().eq(3)
+            .contains(tomorrow);
+
+        cy.get('[data-cy="Upcoming Todos"]').children().eq(4)
+            .find('.todo-item-caption> input')
+            .should($input => {
+                const val = $input.val();
+                expect([
+                    upcomingtasks[1][0],
+                    upcomingtasks[1][1]
+                ]).to.include(val);
+            });
+        cy.get('[data-cy="Upcoming Todos"]').children().eq(5)
+            .find('.todo-item-caption> input')
+            .should($input => {
+                const val = $input.val();
+                expect([
+                    upcomingtasks[1][0],
+                    upcomingtasks[1][1]
+                ]).to.include(val);
+            });
+
+        cy.get('[data-cy="Upcoming Todos"]').children().eq(6)
+            .contains(dayAfterTomorrow);
+
+        cy.get('[data-cy="Upcoming Todos"]').children().eq(7)
+            .find('.todo-item-caption> input')
+            .should($input => {
+                const val = $input.val();
+                expect([
+                    upcomingtasks[2][0],
+                    upcomingtasks[2][1]
+                ]).to.include(val);
+            });
+        cy.get('[data-cy="Upcoming Todos"]').children().eq(8)
+            .find('.todo-item-caption> input')
+            .should($input => {
+                const val = $input.val();
+                expect([
+                    upcomingtasks[2][0],
+                    upcomingtasks[2][1]
+                ]).to.include(val);
+            });
+
+    });
+
 })
