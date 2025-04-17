@@ -14,8 +14,8 @@ const upcomingTasksCount = upcomingtasks.length * 2;
 const unscheduledTasksCount = unscheduledTasks.length;
 const overdueTasksCount = overdueTasks.length;
 
-const dayBeforeYesterday = dayjs().format('DD-MM-YYYY');
-const yesterday = dayjs().format('DD-MM-YYYY');
+const dayBeforeYesterday = dayjs().subtract(2, "day").format('DD-MM-YYYY');
+const yesterday = dayjs().subtract(1, "day").format('DD-MM-YYYY');
 const today = dayjs().format('DD-MM-YYYY');
 const tomorrow = dayjs().add(1, "day").format('DD-MM-YYYY');
 const dayAfterTomorrow = dayjs().add(2, "day").format('DD-MM-YYYY');
@@ -51,9 +51,9 @@ describe('Task Calender page', () => {
         cy.get(`[data-cy="Unscheduled"]`).contains(unscheduledTasksCount);
     });
 
+    it('"Upcoming tab" shows tasks for Today & upcoming dates in accending order', () => {
+        cy.visit('/calenderView/Upcoming');
 
-
-    it('"Upcoming" tab shows tasks for Today & upcoming dates in accending order', () => {
         cy.get(`[data-cy="Upcoming Todos"]`).children().should('length', 9);
         cy.log('tasks-6 and 3 -date heading  gives 9 children');
 
@@ -123,6 +123,28 @@ describe('Task Calender page', () => {
                 ]).to.include(val);
             });
 
+    });
+
+    it('"Overdue tab" shows pending tasks with date as heading', () => {
+        cy.visit('/calenderView/Overdue');
+
+
+        cy.get(`[data-cy="Overdue Todos"]`).children().should('length', 4);
+        cy.log('tasks-2 and 2 -date heading  gives 4 children');
+
+        cy.get('[data-cy="Overdue Todos"]').children().eq(0)
+            .contains(dayBeforeYesterday);
+
+        cy.get('[data-cy="Overdue Todos"]').children().eq(1)
+            .find('.todo-item-caption> input')
+            .should('have.value', overdueTasks[1])
+
+        cy.get('[data-cy="Overdue Todos"]').children().eq(2)
+            .contains(yesterday);
+
+        cy.get('[data-cy="Overdue Todos"]').children().eq(3)
+            .find('.todo-item-caption> input')
+            .should('have.value', overdueTasks[0]);
     });
 
 })

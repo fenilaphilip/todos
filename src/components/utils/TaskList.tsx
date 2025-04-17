@@ -65,11 +65,7 @@ const TaskList: React.FC<TasklistProps> = ({
           return (
             <Box key={index} data-cy={heading}>
               {groupedTodoItem.groupName && (
-                <Typography
-                  variant="h6"
-                  marginTop={2}
-                  data-cy={"dateHeading-" + groupedTodoItem.groupName}
-                >
+                <Typography variant="h6" marginTop={2}>
                   {groupedTodoItem.groupName === todayDate
                     ? "Today"
                     : groupedTodoItem.groupName}
