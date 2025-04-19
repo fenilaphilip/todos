@@ -44,13 +44,17 @@ const TaskList: React.FC<TasklistProps> = ({
 
   return (
     <>
-      <Grid2 container justifyContent="space-between" margin={2}>
+      <Grid2 container justifyContent="space-between" marginTop={2}>
         <Grid2>
-          <Typography variant="h6"> {heading}</Typography>
+          <Typography variant="h6">{heading}</Typography>
         </Grid2>
         {showPrint && (
           <Grid2>
-            <Button variant="outlined" onClick={() => handlePrint()}>
+            <Button
+              variant="outlined"
+              onClick={() => handlePrint()}
+              data-cy="printButton"
+            >
               Print
             </Button>
           </Grid2>
@@ -59,7 +63,7 @@ const TaskList: React.FC<TasklistProps> = ({
       <div ref={printRef}>
         {groupedTodoItems.map((groupedTodoItem, index) => {
           return (
-            <Box key={index}>
+            <Box key={index} data-cy={heading}>
               {groupedTodoItem.groupName && (
                 <Typography variant="h6" marginTop={2}>
                   {groupedTodoItem.groupName === todayDate

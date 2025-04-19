@@ -50,6 +50,7 @@ export default function TaskCalender() {
   return (
     <Box sx={{ width: "100%" }}>
       <Tabs
+        data-cy="calender-sub-division"
         component={Card}
         value={visibleTabs.indexOf(currentCategory)}
         onChange={handleTabChange}
@@ -59,6 +60,7 @@ export default function TaskCalender() {
       >
         {visibleTabs.map((tab) => (
           <Tab
+            data-cy={tab}
             key={tab}
             label={tab}
             icon={<Chip label={taskCounts[tab]} size="small" color="primary" />}
