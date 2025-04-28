@@ -18,9 +18,10 @@ import {
 import { useSelector } from "react-redux";
 import { RootState } from "./store/todoStore";
 import { Container } from "@mui/material";
+import TodosLogo from "./assets/todosIcon.png";
 
 const BRAND: Branding = {
-  logo: <img src="android-chrome-192x192.png" alt="logo" />,
+  logo: <img src={TodosLogo || "android-chrome-192x192.png"} alt="logo" />,
   title: "TODOS",
 };
 

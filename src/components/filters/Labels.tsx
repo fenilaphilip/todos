@@ -25,6 +25,7 @@ export default function Labels() {
             showDuedate
             showPrint
             heading={labelName + " Todos"}
+            showHeading
           />
         </div>
       )}

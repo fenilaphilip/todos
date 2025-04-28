@@ -14,6 +14,7 @@ interface TasklistProps {
   groupBy?: "DueDate" | "Priority";
   showLabel?: boolean;
   showDuedate?: boolean;
+  showHeading?: boolean;
 }
 
 const TaskList: React.FC<TasklistProps> = ({
@@ -23,6 +24,7 @@ const TaskList: React.FC<TasklistProps> = ({
   showDuedate,
   showLabel,
   heading,
+  showHeading,
 }) => {
   const printRef = React.useRef<HTMLDivElement>(null);
 
@@ -46,7 +48,7 @@ const TaskList: React.FC<TasklistProps> = ({
     <>
       <Grid2 container justifyContent="space-between" marginTop={2}>
         <Grid2>
-          <Typography variant="h6">{heading}</Typography>
+          {showHeading && <Typography variant="h6">{heading}</Typography>}
         </Grid2>
         {showPrint && (
           <Grid2>
