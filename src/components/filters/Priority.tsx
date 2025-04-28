@@ -37,6 +37,7 @@ export default function PriorityLevel() {
           showLabel
           showPrint
           heading={priorityLevel + " Priority Todos"}
+          showHeading
         />
       )}
     </>

@@ -61,7 +61,7 @@ export default function TaskCalender() {
   return (
     <Box sx={{ width: "100%" }}>
       {isMobile && (
-        <Select value={currentCategory} onChange={handleMenuChange}>
+        <Select fullWidth value={currentCategory} onChange={handleMenuChange}>
           {visibleTabs.map((tab) => (
             <MenuItem key={tab} value={tab}>
               {tab}
