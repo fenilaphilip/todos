@@ -9,7 +9,7 @@ import TaskList from "../utils/TaskList";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
-const calenderTabs = ["Upcoming", "Overdue", "Unscheduled"];
+const calenderTabs = ["Today", "Upcoming", "Overdue", "Unscheduled"];
 
 export default function TaskCalender() {
   const todoList = useSelector((state: RootState) => state.TODOS);
@@ -20,12 +20,13 @@ export default function TaskCalender() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const { unscheduledTasks, upcomingTasks, overDuedTasks } =
+  const { unscheduledTasks, todaysTasks, upcomingTasks, overDuedTasks } =
     getTasksSortedByDate(todoList);
 
   const taskCounts: {
     [key: string]: number;
   } = {
+    Today: todaysTasks.length,
     Upcoming: upcomingTasks.length,
     Overdue: overDuedTasks.length,
     Unscheduled: unscheduledTasks.length,
@@ -91,7 +92,14 @@ export default function TaskCalender() {
           ))}
         </Tabs>
       )}
-
+      {currentCategory === "Today" && (
+        <TaskList
+          items={todaysTasks}
+          showLabel
+          showPrint
+          heading="todays Todos"
+        />
+      )}
       {currentCategory === "Upcoming" && (
         <TaskList
           items={upcomingTasks}

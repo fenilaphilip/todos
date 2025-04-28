@@ -1,11 +1,11 @@
 import dayjs from "dayjs";
-import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 import Todo from "../../dataModel/todo";
 
 export const getTasksSortedByDate = (todoList: Todo[]) => {
     const unDoneTasks = todoList.filter((todo: Todo) => todo.completed === false);
 
     let unscheduledTasks: Todo[] = [];
+    let todaysTasks: Todo[] = [];
     let upcomingTasks: Todo[] = [];
     let overDuedTasks: Todo[] = [];
 
@@ -19,14 +19,16 @@ export const getTasksSortedByDate = (todoList: Todo[]) => {
         if (duedate.isBefore(todaysDate, 'day')) {
             overDuedTasks.push(todo);
         }
-
-        dayjs.extend(isSameOrAfter);
-        if (dayjs(duedate).isSameOrAfter(todaysDate, 'day')) {
+        if (duedate.isSame(todaysDate, 'day')) {
+            todaysTasks.push(todo);
+        }
+        if (duedate.isAfter(todaysDate, 'day')) {
             upcomingTasks.push(todo);
         }
     });
 
     return {
+        todaysTasks,
         upcomingTasks,
         overDuedTasks,
         unscheduledTasks
