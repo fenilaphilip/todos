@@ -3,7 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../store/todoStore";
 import { getTasksSortedByDate } from "./TaskSortByDate";
 import { Box, Card, Chip, Tab, Tabs, Typography } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import TaskList from "../utils/TaskList";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 const calenderTabs = ["Upcoming", "Overdue", "Unscheduled"];
 
@@ -12,6 +16,9 @@ export default function TaskCalender() {
 
   const navigate = useNavigate();
   const { category } = useParams();
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const { unscheduledTasks, upcomingTasks, overDuedTasks } =
     getTasksSortedByDate(todoList);
@@ -32,6 +39,10 @@ export default function TaskCalender() {
     navigate(`/calenderView/${visibleTabs[newValue]}`);
   };
 
+  const handleMenuChange = (event: SelectChangeEvent) => {
+    navigate(`/calenderView/${event.target.value}`);
+  };
+
   if (!todoList.length) {
     return (
       <Box sx={{ textAlign: "center", mt: 5 }}>
@@ -49,24 +60,38 @@ export default function TaskCalender() {
   }
   return (
     <Box sx={{ width: "100%" }}>
-      <Tabs
-        data-cy="calender-sub-division"
-        component={Card}
-        value={visibleTabs.indexOf(currentCategory)}
-        onChange={handleTabChange}
-        variant="fullWidth"
-        indicatorColor="primary"
-        textColor="primary"
-      >
-        {visibleTabs.map((tab) => (
-          <Tab
-            data-cy={tab}
-            key={tab}
-            label={tab}
-            icon={<Chip label={taskCounts[tab]} size="small" color="primary" />}
-          />
-        ))}
-      </Tabs>
+      {isMobile && (
+        <Select value={currentCategory} onChange={handleMenuChange}>
+          {visibleTabs.map((tab) => (
+            <MenuItem key={tab} value={tab}>
+              {tab}
+            </MenuItem>
+          ))}
+        </Select>
+      )}
+      {!isMobile && (
+        <Tabs
+          data-cy="calender-sub-division"
+          component={Card}
+          value={visibleTabs.indexOf(currentCategory)}
+          onChange={handleTabChange}
+          variant="fullWidth"
+          indicatorColor="primary"
+          textColor="primary"
+        >
+          {visibleTabs.map((tab) => (
+            <Tab
+              data-cy={tab}
+              key={tab}
+              label={tab}
+              icon={
+                <Chip label={taskCounts[tab]} size="small" color="primary" />
+              }
+            />
+          ))}
+        </Tabs>
+      )}
+
       {currentCategory === "Upcoming" && (
         <TaskList
           items={upcomingTasks}
