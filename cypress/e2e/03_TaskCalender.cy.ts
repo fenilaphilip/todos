@@ -1,4 +1,3 @@
-import { find } from 'cypress/types/lodash';
 import { loadApp, addTask, addTasks, setDueDate } from './customFunctions.cy';
 import * as dayjs from 'dayjs';
 
@@ -8,21 +7,28 @@ const upcomingtasks = [
 ];
 const unscheduledTasks = ['Go to Gym', "Learn Driving"];
 const overdueTasks = ['Replace water filter', 'Iron shirts'];
+const todaysTasks = ['Empty wastebin', 'Water Plants'];
 
 const upcomingTasksCount = upcomingtasks.length * 2;
 const unscheduledTasksCount = unscheduledTasks.length;
 const overdueTasksCount = overdueTasks.length;
+const todaysTasksCount = todaysTasks.length;
 
 const dayBeforeYesterday = dayjs().subtract(2, "day").format('DD-MM-YYYY');
 const yesterday = dayjs().subtract(1, "day").format('DD-MM-YYYY');
-const today = dayjs().format('DD-MM-YYYY');
+const today = dayjs().format(`MM/DD/YYYY`);
 const tomorrow = dayjs().add(1, "day").format('DD-MM-YYYY');
 const dayAfterTomorrow = dayjs().add(2, "day").format('DD-MM-YYYY');
 
 describe('Task Calender page', () => {
     beforeEach(loadApp);
     beforeEach(() => {
-        for (let i = 0; i < upcomingtasks.length; i++) {
+        for (let i = 0; i < todaysTasksCount; i++) {
+            addTask(todaysTasks[i]);
+            setDueDate(todaysTasks[i], today);
+        }
+
+        for (let i = 0; i < upcomingTasksCount / 2; i++) {
             const date = dayjs().add(i + 1, "day").format('MM/DD/YYYY');
             addTasks(upcomingtasks[i]);
             upcomingtasks[i].forEach((task) => setDueDate(task, date));
@@ -30,24 +36,49 @@ describe('Task Calender page', () => {
 
         unscheduledTasks.forEach((item) => addTask(item));
 
-        for (let i = 0; i < overdueTasks.length; i++) {
+        for (let i = 0; i < overdueTasksCount; i++) {
             const date = dayjs().subtract(i + 1, "day").format("MM/DD/YYYY");
             addTask(overdueTasks[i]);
-            setDueDate(overdueTasks[i], date)
+            setDueDate(overdueTasks[i], date);
         }
 
         cy.visit('/calenderView');
     });
 
-    it('Displays the tabs- upcoming, Overdue, Unscheduled and task count of each', () => {
+    it('Displays the tabs- Today, Upcoming, Overdue, Unscheduled and task count of each', () => {
         cy.get('[data-cy="calender-sub-division"]').children()
-            .should("contain", "Upcoming")
+            .should("contain", "Today")
+            .and("contain", "Upcoming")
             .and("contain", "Overdue")
             .and("contain", "Unscheduled");
 
         cy.get(`[data-cy="Upcoming"]`).contains(upcomingTasksCount);
         cy.get(`[data-cy="Overdue"]`).contains(overdueTasksCount);
         cy.get(`[data-cy="Unscheduled"]`).contains(unscheduledTasksCount);
+    });
+
+    it('"Today Tab" shows tasks for today', () => {
+        cy.visit('/calenderView/Today');
+        cy.get(`[data-cy="Todays Todos"]`).children().should('length', 2)
+
+        cy.get('[data-cy="Todays Todos"]').children().eq(0)
+            .find('.todo-item-caption> input')
+            .should($input => {
+                const val = $input.val();
+                expect([
+                    todaysTasks[0],
+                    todaysTasks[1]
+                ]).to.include(val);
+            });
+        cy.get('[data-cy="Todays Todos"]').children().eq(1)
+            .find('.todo-item-caption> input')
+            .should($input => {
+                const val = $input.val();
+                expect([
+                    todaysTasks[0],
+                    todaysTasks[1]
+                ]).to.include(val);
+            });
     });
 
     it('"Upcoming tab" shows tasks upcoming tasks, dates in accending order', () => {
