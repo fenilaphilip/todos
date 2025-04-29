@@ -5,7 +5,6 @@ import * as dayjs from 'dayjs';
 const upcomingtasks = [
     ['Do laundry', 'Buy Ticket for World cup Football'],
     ['Do grocery shopping', 'Wish birthday'],
-    ['Order birthday gift', 'Buy playstation']
 ];
 const unscheduledTasks = ['Go to Gym', "Learn Driving"];
 const overdueTasks = ['Replace water filter', 'Iron shirts'];
@@ -24,7 +23,7 @@ describe('Task Calender page', () => {
     beforeEach(loadApp);
     beforeEach(() => {
         for (let i = 0; i < upcomingtasks.length; i++) {
-            const date = dayjs().add(i, "day").format('MM/DD/YYYY');
+            const date = dayjs().add(i + 1, "day").format('MM/DD/YYYY');
             addTasks(upcomingtasks[i]);
             upcomingtasks[i].forEach((task) => setDueDate(task, date));
         }
@@ -51,14 +50,14 @@ describe('Task Calender page', () => {
         cy.get(`[data-cy="Unscheduled"]`).contains(unscheduledTasksCount);
     });
 
-    it('"Upcoming tab" shows tasks for Today & upcoming dates in accending order', () => {
+    it('"Upcoming tab" shows tasks upcoming tasks, dates in accending order', () => {
         cy.visit('/calenderView/Upcoming');
 
-        cy.get(`[data-cy="Upcoming Todos"]`).children().should('length', 9);
-        cy.log('tasks-6 and 3 -date heading  gives 9 children');
+        cy.get(`[data-cy="Upcoming Todos"]`).children().should('length', 6);
+        cy.log('tasks-4 and 2 -date heading  gives 6 children');
 
         cy.get('[data-cy="Upcoming Todos"]').children().eq(0)
-            .contains("Today");
+            .contains(tomorrow);
 
         cy.get('[data-cy="Upcoming Todos"]').children().eq(1)
             .find('.todo-item-caption> input')
@@ -80,7 +79,7 @@ describe('Task Calender page', () => {
             });
 
         cy.get('[data-cy="Upcoming Todos"]').children().eq(3)
-            .contains(tomorrow);
+            .contains(dayAfterTomorrow);
 
         cy.get('[data-cy="Upcoming Todos"]').children().eq(4)
             .find('.todo-item-caption> input')
@@ -98,28 +97,6 @@ describe('Task Calender page', () => {
                 expect([
                     upcomingtasks[1][0],
                     upcomingtasks[1][1]
-                ]).to.include(val);
-            });
-
-        cy.get('[data-cy="Upcoming Todos"]').children().eq(6)
-            .contains(dayAfterTomorrow);
-
-        cy.get('[data-cy="Upcoming Todos"]').children().eq(7)
-            .find('.todo-item-caption> input')
-            .should($input => {
-                const val = $input.val();
-                expect([
-                    upcomingtasks[2][0],
-                    upcomingtasks[2][1]
-                ]).to.include(val);
-            });
-        cy.get('[data-cy="Upcoming Todos"]').children().eq(8)
-            .find('.todo-item-caption> input')
-            .should($input => {
-                const val = $input.val();
-                expect([
-                    upcomingtasks[2][0],
-                    upcomingtasks[2][1]
                 ]).to.include(val);
             });
 
