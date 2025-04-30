@@ -12,6 +12,7 @@ import dayjs from "dayjs";
 import Todo, { Priority } from "../../dataModel/todo";
 import { deleteTodo, editTodo } from "../../store/reducers/todoSlice";
 import LabelInput from "./LabelInput";
+import TaskRepeat from "./TaskRepeat";
 
 const TodoItem: React.FC<{
   todo: Todo;
@@ -116,7 +117,7 @@ const TodoItem: React.FC<{
                   label="Notes"
                   className="todo-item-notes"
                   multiline
-                  rows={8}
+                  rows={12}
                   value={todoUpdate.description}
                   onChange={(e) => {
                     const updatedTodo = {
@@ -184,6 +185,9 @@ const TodoItem: React.FC<{
                       todoUpdate={todoUpdate}
                       setTodoUpdate={setTodoUpdate}
                     />
+                  </Grid>
+                  <Grid size={{ xs: 12, sm: 12, md: 12 }}>
+                    <TaskRepeat />
                   </Grid>
                   <Grid size={{ xs: 12, sm: 12, md: 12 }}>
                     <Button
