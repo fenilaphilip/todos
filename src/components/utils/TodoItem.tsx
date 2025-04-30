@@ -187,7 +187,10 @@ const TodoItem: React.FC<{
                     />
                   </Grid>
                   <Grid size={{ xs: 12, sm: 12, md: 12 }}>
-                    <TaskRepeat />
+                    <TaskRepeat
+                      todoUpdate={todoUpdate}
+                      setTodoUpdate={setTodoUpdate}
+                    />
                   </Grid>
                   <Grid size={{ xs: 12, sm: 12, md: 12 }}>
                     <Button

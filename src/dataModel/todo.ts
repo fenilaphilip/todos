@@ -13,6 +13,7 @@ interface Todo {
     priority: Priority;
     labels?: string[];
     dueDate?: Dayjs | null;
+    repeats?: string[];
     completed: boolean;
 }
 
