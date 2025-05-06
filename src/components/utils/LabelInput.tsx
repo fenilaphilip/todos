@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { editTodo } from "../../store/reducers/todoSlice";
 import {
   InputLabel,
   OutlinedInput,
@@ -21,8 +19,6 @@ const LabelInput: React.FC<{
     todoUpdate.labels ? todoUpdate.labels : []
   );
 
-  const dispatch = useDispatch();
-
   const handleLabelChange = (event: SelectChangeEvent<typeof labels>) => {
     const {
       target: { value },
@@ -36,9 +32,8 @@ const LabelInput: React.FC<{
       labels: labels,
     };
     setTodoUpdate(UpdateTodo);
-    dispatch(editTodo(UpdateTodo));
     // console.debug(`from label input`, UpdateTodo);
-  }, [labels]);
+  }, [labels, setLabels]);
 
   return (
     <FormControl fullWidth>

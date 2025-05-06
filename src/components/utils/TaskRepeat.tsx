@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormControl, FormControlLabel, FormGroup } from "@mui/material";
 import { Box, Checkbox, Typography } from "@mui/material";
 import Todo from "../../dataModel/todo";
-import { useDispatch } from "react-redux";
-import { editTodo } from "../../store/reducers/todoSlice";
 
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -16,9 +14,9 @@ const TaskRepeat: React.FC<{
       ? todoUpdate.repeats
       : [false, false, false, false, false, false, false]
   );
-  const dispatch = useDispatch();
 
   const handleCheckboxChange = (index: number) => {
+    console.info(`got clicked ${repeats[index]}`);
     setRepeats((prev) => {
       const newRepeats = [...prev];
       newRepeats[index] = !newRepeats[index];
@@ -26,14 +24,13 @@ const TaskRepeat: React.FC<{
     });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const updateTodo = {
       ...todoUpdate,
       repeats: repeats,
     };
     setTodoUpdate(updateTodo);
-    dispatch(editTodo(updateTodo));
-  }, [repeats]);
+  }, [repeats, setRepeats]);
 
   return (
     <Box>
@@ -47,10 +44,7 @@ const TaskRepeat: React.FC<{
               control={
                 <Checkbox
                   checked={repeats[index]}
-                  onChange={() => {
-                    handleCheckboxChange(index);
-                    console.log(repeats[index]);
-                  }}
+                  onChange={() => handleCheckboxChange(index)}
                 />
               }
               label={day}

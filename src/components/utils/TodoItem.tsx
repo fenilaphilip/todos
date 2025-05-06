@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
 import { Checkbox, Input, TextField, MenuItem, Button } from "@mui/material";
@@ -33,6 +33,10 @@ const TodoItem: React.FC<{
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(editTodo(todoUpdate));
+  }, [todoUpdate, setTodoUpdate]);
+
   return (
     <Box marginTop={2} className="todo-item">
       <Paper elevation={1}>
@@ -58,7 +62,6 @@ const TodoItem: React.FC<{
                       completed: !todoUpdate.completed,
                     };
                     setTodoUpdate(updatedTodo);
-                    dispatch(editTodo(updatedTodo));
                   }}
                 />
               }
@@ -74,7 +77,6 @@ const TodoItem: React.FC<{
                   caption: e.target.value,
                 };
                 setTodoUpdate(updatedTodo);
-                dispatch(editTodo(updatedTodo));
               }}
             />
             {!accordionOpen && (
@@ -125,7 +127,6 @@ const TodoItem: React.FC<{
                       description: e.target.value,
                     };
                     setTodoUpdate(updatedTodo);
-                    dispatch(editTodo(updatedTodo));
                   }}
                 />
               </Grid>
@@ -147,7 +148,6 @@ const TodoItem: React.FC<{
                             dueDate: newValue,
                           };
                           setTodoUpdate(updatedTodo);
-                          dispatch(editTodo(updatedTodo));
                         }}
                         slotProps={{ textField: { fullWidth: true } }}
                       />
@@ -166,7 +166,6 @@ const TodoItem: React.FC<{
                           priority: parseInt(e.target.value),
                         };
                         setTodoUpdate(updatedTodo);
-                        dispatch(editTodo(updatedTodo));
                       }}
                     >
                       <MenuItem className="todo-ipl" value={Priority.Low}>
