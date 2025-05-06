@@ -24,7 +24,8 @@ export const todoSlice = createSlice({
                         dueDate: action.payload.dueDate,
                         labels: action.payload.labels,
                         priority: action.payload.priority,
-                        completed: action.payload.completed
+                        completed: action.payload.completed,
+                        repeats: action.payload.repeats
                     }
 
                 }
@@ -39,7 +40,8 @@ export const todoSlice = createSlice({
         setTodos: (state, action: PayloadAction<Todo[]>) => { //handle import
             state = action.payload;
             return state;
-        }
+        },
+
     },
 
 });
