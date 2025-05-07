@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
 import Todo from '../../dataModel/todo';
 import { loadTodoList } from './../localStorage';
+import dayjs from 'dayjs';
 
 export const todoSlice = createSlice({
     name: 'todos',
@@ -27,13 +28,31 @@ export const todoSlice = createSlice({
                         completed: action.payload.completed,
                         repeats: action.payload.repeats
                     }
-
                 }
                 return todo;
             });
             console.debug(`updatedTodos after editing ${JSON.stringify(updatedTodos)}`);
             return updatedTodos;
         },
+        createRepeats: (state, action) => {
+            let newTodos = [...state];
+            let todo = action.payload;
+            const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+            const today = dayjs();
+            let dayToday = today.format("ddd");
+            let dayIndex = DAYS.findIndex((day) => day === dayToday);
+            let firstRepeatIndex = todo.repeats.findIndex((element: boolean) => element == true);
+            let indexDiff = Math.abs(firstRepeatIndex - dayIndex);
+            if (todo.dueDate === null || todo.duedate.isBefore(today, 'day')) {
+                todo = {
+                    ...todo,
+                    dueDate: dayjs().add(indexDiff, "day")
+                }
+            }
+
+            return newTodos;
+        }
+        ,
         clearCompleted: (state) => {
             const updatedTodos = state.filter((todo) => todo.completed === false);
             return updatedTodos;
