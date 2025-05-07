@@ -31,6 +31,7 @@ export const todoSlice = createSlice({
                 }
                 return todo;
             });
+            console.debug(`updatedTodos after editing ${JSON.stringify(updatedTodos)}`);
             return updatedTodos;
         },
         clearCompleted: (state) => {

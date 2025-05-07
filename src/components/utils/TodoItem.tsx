@@ -21,21 +21,13 @@ const TodoItem: React.FC<{
 }> = ({ todo, showLabel, showDuedate }) => {
   const [accordionOpen, setAccordionOpen] = React.useState(false);
 
-  const [todoUpdate, setTodoUpdate] = useState<Todo>({
-    id: todo.id,
-    description: todo.description,
-    dueDate: todo.dueDate,
-    completed: todo.completed,
-    caption: todo.caption,
-    priority: todo.priority,
-    labels: todo.labels,
-  });
+  const [todoUpdate, setTodoUpdate] = useState<Todo>(todo);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(editTodo(todoUpdate));
-  }, [todoUpdate, setTodoUpdate]);
+  }, [todoUpdate]);
 
   return (
     <Box marginTop={2} className="todo-item">

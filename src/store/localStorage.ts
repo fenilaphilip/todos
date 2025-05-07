@@ -8,7 +8,7 @@ export function storeTodoList(todos: Todo[]) {
 
 export function loadTodoList(): Todo[] {
     const todoList = JSON.parse(localStorage.getItem("Todos") || "[]");
-    // console.debug(`loadTodoList returning  ${todoList}`);
+    //  console.debug(`loadTodoList returning  ${JSON.stringify(todoList)}`);
     return todoList;
 }
 export function storeLabels(labels: string[]) {

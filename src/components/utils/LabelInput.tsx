@@ -33,7 +33,7 @@ const LabelInput: React.FC<{
     };
     setTodoUpdate(UpdateTodo);
     // console.debug(`from label input`, UpdateTodo);
-  }, [labels, setLabels]);
+  }, [labels]);
 
   return (
     <FormControl fullWidth>

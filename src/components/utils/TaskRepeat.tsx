@@ -12,11 +12,11 @@ const TaskRepeat: React.FC<{
   const [repeats, setRepeats] = React.useState<boolean[]>(
     todoUpdate.repeats
       ? todoUpdate.repeats
-      : [false, false, false, false, false, false, false]
+      : [false, false, false, false, false, false, false] // repeats[index] == days[index]
   );
 
   const handleCheckboxChange = (index: number) => {
-    console.info(`got clicked ${repeats[index]}`);
+    console.info(`got clicked ${DAYS[index]}`);
     setRepeats((prev) => {
       const newRepeats = [...prev];
       newRepeats[index] = !newRepeats[index];
@@ -30,7 +30,7 @@ const TaskRepeat: React.FC<{
       repeats: repeats,
     };
     setTodoUpdate(updateTodo);
-  }, [repeats, setRepeats]);
+  }, [repeats]);
 
   return (
     <Box>
