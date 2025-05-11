@@ -10,9 +10,11 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import Todo, { Priority } from "../../dataModel/todo";
-import { deleteTodo, editTodo } from "../../store/reducers/todoSlice";
+import { deleteTodo, editTodo, addTodo } from "../../store/reducers/todoSlice";
 import LabelInput from "./LabelInput";
 import TaskRepeat from "./TaskRepeat";
+import { findNextDueDate } from "./repeats";
+import uniqid from "uniqid";
 
 const TodoItem: React.FC<{
   todo: Todo;
@@ -28,6 +30,25 @@ const TodoItem: React.FC<{
   useEffect(() => {
     dispatch(editTodo(todoUpdate));
   }, [todoUpdate]);
+
+  const taskStatusChanged = () => {
+    const updatedTodo = {
+      ...todoUpdate,
+      completed: !todoUpdate.completed,
+    };
+    if (updatedTodo.completed) {
+      const nextDueDate = findNextDueDate(updatedTodo);
+      if (nextDueDate) {
+        let newTodo = {
+          ...todoUpdate,
+          id: uniqid(),
+          dueDate: nextDueDate,
+        };
+        dispatch(addTodo(newTodo));
+      }
+    }
+    setTodoUpdate(updatedTodo);
+  };
 
   return (
     <Box marginTop={2} className="todo-item">
@@ -48,13 +69,7 @@ const TodoItem: React.FC<{
               control={
                 <Checkbox
                   checked={todoUpdate.completed}
-                  onChange={() => {
-                    const updatedTodo = {
-                      ...todoUpdate,
-                      completed: !todoUpdate.completed,
-                    };
-                    setTodoUpdate(updatedTodo);
-                  }}
+                  onChange={taskStatusChanged}
                 />
               }
               label=""
