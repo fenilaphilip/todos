@@ -97,7 +97,7 @@ export default function TaskCalender() {
           items={todaysTasks}
           showLabel
           showPrint
-          heading="todays Todos"
+          heading="Todays Todos"
         />
       )}
       {currentCategory === "Upcoming" && (

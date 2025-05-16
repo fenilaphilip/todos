@@ -36,6 +36,7 @@ const CreateTodo: React.FC<{ labelName?: string }> = ({ labelName }) => {
       caption: taskCalled,
       labels: labelUpdate,
       priority: Priority.Medium,
+      repeats: [false, false, false, false, false, false, false],
     };
 
     dispatch(addTodo(newTask));

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
 import { Checkbox, Input, TextField, MenuItem, Button } from "@mui/material";
@@ -10,8 +10,11 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import Todo, { Priority } from "../../dataModel/todo";
-import { deleteTodo, editTodo } from "../../store/reducers/todoSlice";
+import { deleteTodo, editTodo, addTodo } from "../../store/reducers/todoSlice";
 import LabelInput from "./LabelInput";
+import TaskRepeat from "./TaskRepeat";
+import { findNextDueDate } from "./repeats";
+import uniqid from "uniqid";
 
 const TodoItem: React.FC<{
   todo: Todo;
@@ -20,17 +23,32 @@ const TodoItem: React.FC<{
 }> = ({ todo, showLabel, showDuedate }) => {
   const [accordionOpen, setAccordionOpen] = React.useState(false);
 
-  const [todoUpdate, setTodoUpdate] = useState<Todo>({
-    id: todo.id,
-    description: todo.description,
-    dueDate: todo.dueDate,
-    completed: todo.completed,
-    caption: todo.caption,
-    priority: todo.priority,
-    labels: todo.labels,
-  });
+  const [todoUpdate, setTodoUpdate] = useState<Todo>(todo);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(editTodo(todoUpdate));
+  }, [todoUpdate]);
+
+  const taskStatusChanged = () => {
+    const updatedTodo = {
+      ...todoUpdate,
+      completed: !todoUpdate.completed,
+    };
+    if (updatedTodo.completed) {
+      const nextDueDate = findNextDueDate(updatedTodo);
+      if (nextDueDate) {
+        let newTodo = {
+          ...todoUpdate,
+          id: uniqid(),
+          dueDate: nextDueDate,
+        };
+        dispatch(addTodo(newTodo));
+      }
+    }
+    setTodoUpdate(updatedTodo);
+  };
 
   return (
     <Box marginTop={2} className="todo-item">
@@ -51,14 +69,7 @@ const TodoItem: React.FC<{
               control={
                 <Checkbox
                   checked={todoUpdate.completed}
-                  onChange={() => {
-                    const updatedTodo = {
-                      ...todoUpdate,
-                      completed: !todoUpdate.completed,
-                    };
-                    setTodoUpdate(updatedTodo);
-                    dispatch(editTodo(updatedTodo));
-                  }}
+                  onChange={taskStatusChanged}
                 />
               }
               label=""
@@ -73,7 +84,6 @@ const TodoItem: React.FC<{
                   caption: e.target.value,
                 };
                 setTodoUpdate(updatedTodo);
-                dispatch(editTodo(updatedTodo));
               }}
             />
             {!accordionOpen && (
@@ -116,7 +126,7 @@ const TodoItem: React.FC<{
                   label="Notes"
                   className="todo-item-notes"
                   multiline
-                  rows={8}
+                  rows={12}
                   value={todoUpdate.description}
                   onChange={(e) => {
                     const updatedTodo = {
@@ -124,7 +134,6 @@ const TodoItem: React.FC<{
                       description: e.target.value,
                     };
                     setTodoUpdate(updatedTodo);
-                    dispatch(editTodo(updatedTodo));
                   }}
                 />
               </Grid>
@@ -146,7 +155,6 @@ const TodoItem: React.FC<{
                             dueDate: newValue,
                           };
                           setTodoUpdate(updatedTodo);
-                          dispatch(editTodo(updatedTodo));
                         }}
                         slotProps={{ textField: { fullWidth: true } }}
                       />
@@ -165,7 +173,6 @@ const TodoItem: React.FC<{
                           priority: parseInt(e.target.value),
                         };
                         setTodoUpdate(updatedTodo);
-                        dispatch(editTodo(updatedTodo));
                       }}
                     >
                       <MenuItem className="todo-ipl" value={Priority.Low}>
@@ -181,6 +188,12 @@ const TodoItem: React.FC<{
                   </Grid>
                   <Grid size={{ xs: 12, sm: 12, md: 12 }}>
                     <LabelInput
+                      todoUpdate={todoUpdate}
+                      setTodoUpdate={setTodoUpdate}
+                    />
+                  </Grid>
+                  <Grid size={{ xs: 12, sm: 12, md: 12 }}>
+                    <TaskRepeat
                       todoUpdate={todoUpdate}
                       setTodoUpdate={setTodoUpdate}
                     />
