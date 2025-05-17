@@ -70,6 +70,7 @@ const TodoItem: React.FC<{
                 <Checkbox
                   checked={todoUpdate.completed}
                   onChange={taskStatusChanged}
+                  data-cy="taskCheckDone"
                 />
               }
               label=""
