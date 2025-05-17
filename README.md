@@ -6,12 +6,14 @@ Todos application built using React, Redux Toolkit, React Router and Material UI
 
 ## Features
 
-- User-friendly interface for creating, editing, updating and deleting todos.
+- User-friendly interface for creating, updating and deleting todos.
 - Real-time updates with Redux Toolkit's efficient state management.
+- Progressive Web Application(PWA) allows for offline access, resulting in a more native app-like experience for users.
+- User can do Import or Export of data and also customize task labels.
+- Able to set the task repeats and display's automatically.
 - Seamless integration of Redux with React components for enhanced functionality.
 - Users can navigate smoothly between pages by React Router, making this app feel intuitive and responsive.
 - Material UI's sleek and responsive design enhances the beauty of this app.
-- Progressive Web Application(PWA) allows for offline access, resulting in a more native app-like experience for users.
 
 ## Technologies
 
@@ -21,13 +23,14 @@ Todos application built using React, Redux Toolkit, React Router and Material UI
 ![React Router](https://img.shields.io/badge/-React%20Router-black?logo=reactRouter&logoColor=blue&style=flat)
 ![Redux](https://img.shields.io/badge/-Redux-darkgreen?logo=Redux&logoColor=white&style=flat)
 ![ReduxToolkit](https://img.shields.io/badge/-ReduxToolkit-violet?logo=Redux&logoColor=black&style=flat)
+![vitest](https://img.shields.io/badge/-Vitest-lightyellow?logo=Vitest&style=flat)
 ![Cypress](https://img.shields.io/badge/-Cypress-98FB98?logo=Cypress&logoColor=black&style=flat)
 ![Material UI](https://img.shields.io/badge/-Material%20UI-black?logo=MUI&logoColor=blue&style=flat)
 ![vite](https://img.shields.io/badge/-Vite-white?logo=Vite&style=flat)
 
-## Upcoming features
+## Upcoming Features
 
-- Repeating tasks
+- Rich text editor for notes
 
 ## Getting started
 
