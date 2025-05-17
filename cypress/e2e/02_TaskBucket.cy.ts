@@ -18,7 +18,7 @@ describe('Task Bucket - Default page, when app loads', () => {
       cy.get('[data-cy="todo-items"]').children()
         .find(`.todo-item-caption > input[value="${task}"]`)
         .parentsUntil('[data-cy="todo-items"]', '.todo-item')
-        .find('input[type="checkbox"]').click();
+        .find('[data-cy= "taskCheckDone"]').click();
       cy.visit('/completedTasks');
       cy.get('body').find(`input[value="${task}"]`).should('exist');
     });
