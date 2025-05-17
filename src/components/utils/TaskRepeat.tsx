@@ -22,10 +22,16 @@ const TaskRepeat: React.FC<{
   };
 
   useEffect(() => {
-    const updateTodo = {
+    let updateTodo = {
       ...todoUpdate,
       repeats: repeats,
     };
+    if (todoUpdate.dueDate == null) {
+      updateTodo = {
+        ...updateTodo,
+        dueDate: findNextDueDate(updateTodo),
+      };
+    }
     setTodoUpdate(updateTodo);
   }, [repeats]);
 
