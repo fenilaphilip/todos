@@ -4,6 +4,6 @@ import TaskBucket from "../../src/components/dashboard/TaskBucket.tsx";
 
 describe("TaskBucket.cy.tsx", () => {
   it("playground", () => {
-    // cy.mount()
+    // cy.mount(<TaskBucket />);
   });
 });
