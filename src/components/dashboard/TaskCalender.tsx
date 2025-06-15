@@ -19,7 +19,7 @@ import {
 import TaskList from "../utils/TaskList";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import SegmentIcon from "@mui/icons-material/segment";
+import SegmentIcon from "@mui/icons-material/Segment";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 
