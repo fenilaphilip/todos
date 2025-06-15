@@ -2,12 +2,26 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../store/todoStore";
 import { getTasksSortedByDate } from "./TaskSortByDate";
-import { Box, Card, Chip, Tab, Tabs, Typography } from "@mui/material";
-import MenuItem from "@mui/material/MenuItem";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import {
+  Badge,
+  Box,
+  Card,
+  Chip,
+  Collapse,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Tab,
+  Tabs,
+  Typography,
+} from "@mui/material";
 import TaskList from "../utils/TaskList";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import SegmentIcon from "@mui/icons-material/Segment";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 
 const calenderTabs = ["Today", "Upcoming", "Overdue", "Unscheduled"];
 
@@ -40,8 +54,53 @@ export default function TaskCalender() {
     navigate(`/calenderView/${visibleTabs[newValue]}`);
   };
 
-  const handleMenuChange = (event: SelectChangeEvent) => {
-    navigate(`/calenderView/${event.target.value}`);
+  const switchToTab = (tab: string) => {
+    console.info(`Switching to tab ${tab}`);
+    navigate(`/calenderView/${tab}`);
+  };
+
+  const taskListByCategory = (tab: string) => {
+    switch (tab) {
+      case "Today":
+        return (
+          <TaskList
+            items={todaysTasks}
+            showLabel
+            showPrint
+            heading="Todays Todos"
+          />
+        );
+      case "Upcoming":
+        return (
+          <TaskList
+            items={upcomingTasks}
+            showLabel
+            showPrint
+            groupBy="DueDate"
+            heading="Upcoming Todos"
+          />
+        );
+      case "Overdue":
+        return (
+          <TaskList
+            items={overDuedTasks}
+            showLabel
+            showPrint
+            groupBy="DueDate"
+            heading="Overdue Todos"
+          />
+        );
+      case "Unscheduled":
+        return (
+          <TaskList
+            items={unscheduledTasks}
+            showLabel
+            showPrint
+            heading="Unscheduled Todos"
+          />
+        );
+    }
+    return <h1>Unknown category {tab}</h1>;
   };
 
   if (!todoList.length) {
@@ -62,69 +121,53 @@ export default function TaskCalender() {
   return (
     <Box sx={{ width: "100%" }}>
       {isMobile && (
-        <Select fullWidth value={currentCategory} onChange={handleMenuChange}>
+        <List sx={{ widows: "100%" }}>
           {visibleTabs.map((tab) => (
-            <MenuItem key={tab} value={tab}>
-              {tab}
-            </MenuItem>
+            <>
+              <ListItemButton onClick={() => switchToTab(tab)}>
+                <ListItemIcon>
+                  <Badge badgeContent={taskCounts[tab]} color="primary">
+                    <SegmentIcon />
+                  </Badge>
+                </ListItemIcon>
+                <ListItemText primary={tab} />
+                {currentCategory === tab ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+              <Collapse
+                in={currentCategory === tab}
+                timeout="auto"
+                unmountOnExit
+              >
+                {taskListByCategory(tab)}
+              </Collapse>
+            </>
           ))}
-        </Select>
+        </List>
       )}
       {!isMobile && (
-        <Tabs
-          data-cy="calender-sub-division"
-          component={Card}
-          value={visibleTabs.indexOf(currentCategory)}
-          onChange={handleTabChange}
-          variant="fullWidth"
-          indicatorColor="primary"
-          textColor="primary"
-        >
-          {visibleTabs.map((tab) => (
-            <Tab
-              data-cy={tab}
-              key={tab}
-              label={tab}
-              icon={
-                <Chip label={taskCounts[tab]} size="small" color="primary" />
-              }
-            />
-          ))}
-        </Tabs>
-      )}
-      {currentCategory === "Today" && (
-        <TaskList
-          items={todaysTasks}
-          showLabel
-          showPrint
-          heading="Todays Todos"
-        />
-      )}
-      {currentCategory === "Upcoming" && (
-        <TaskList
-          items={upcomingTasks}
-          groupBy="DueDate"
-          showLabel
-          showPrint
-          heading="Upcoming Todos"
-        />
-      )}
-      {currentCategory === "Overdue" && (
-        <TaskList
-          items={overDuedTasks}
-          groupBy="DueDate"
-          showLabel
-          showPrint
-          heading="Overdue Todos"
-        />
-      )}
-      {currentCategory === "Unscheduled" && (
-        <TaskList
-          items={unscheduledTasks}
-          showLabel
-          showPrint
-          heading="Unscheduled Todos"
-        />
+        <>
+          <Tabs
+            data-cy="calender-sub-division"
+            component={Card}
+            value={visibleTabs.indexOf(currentCategory)}
+            onChange={handleTabChange}
+            variant="fullWidth"
+            indicatorColor="primary"
+            textColor="primary"
+          >
+            {visibleTabs.map((tab) => (
+              <Tab
+                data-cy={tab}
+                key={tab}
+                label={tab}
+                icon={
+                  <Chip label={taskCounts[tab]} size="small" color="primary" />
+                }
+              />
+            ))}
+          </Tabs>
+          {taskListByCategory(currentCategory)}
+        </>
       )}
     </Box>
   );
